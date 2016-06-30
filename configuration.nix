@@ -15,17 +15,28 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices = [
-    { 
-      name = "nixos"; 
-      device = "/dev/VolGroup/nixos"; 
-      preLVM = false; 
+    {
+      name = "nixos";
+      device = "/dev/VolGroup/nixos";
+      preLVM = false;
     }
   ];
 
   environment.variables = {
     EDITOR = "nvim";
   };
-  
+
+  fonts = {
+    enableFontDir = true;
+    enableGhostscriptFonts = true;
+    fonts = with pkgs; [
+      corefonts  # Micrsoft free fonts
+      inconsolata  # monospaced
+      powerline-fonts
+      ubuntu_font_family  # Ubuntu fonts
+      unifont # some international languages
+    ];
+  };
   networking.hostName = "nicknix";
 
   # Select internationalisation properties.
@@ -41,7 +52,9 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    ack
     chromium
+    dmenu
     git
     gnupg
     gnupg1compat
@@ -70,15 +83,10 @@
     packageOverrides = pkgs: rec {
       neovim = pkgs.neovim.override {
         vimAlias = true;
-	configure = {
+        configure = {
           customRC = ''
-            set colorcolumn=100 
-            
-            " For vim-colors-solarized
             syntax enable
-            set background=dark " or light
-            colorscheme solarized
-            
+
             """ My settings:
             " tab with two spaces
             set nobackup
@@ -92,26 +100,26 @@
             set nostartofline
             set hlsearch      " highlight search terms
             set incsearch     " show search matches as you type
-            
+
             set mouse=a
             set cmdheight=2
-            
+
             set wildmenu
             set showcmd
-            
+
             set number
             set ruler
             set backspace=indent,eol,start " Allows backspace on these character
-            set clipboard=unnamed " Allows copy and paste from iterm2
+            set clipboard+=unnamedplus " Allows copy and paste from nvim
             set pastetoggle=<F2> " Press F2 to enter paste mode, for pasting from outside vim
-            
+
             " php
             autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
-            
+
             " ruby
             autocmd FileType ruby compiler ruby
             filetype plugin on    " Enable filetype-specific plugins
-            
+
             " Those types
             if has("user_commands")
               command! -bang -nargs=? -complete=file E e<bang> <args>
@@ -124,28 +132,53 @@
               command! -bang QA qa<bang>
               command! -bang Qa qa<bang>
             endif
+
+            " Relative numbering
+            function! NumberToggle()
+              if(&relativenumber == 1)
+                set nornu
+                set number
+              else
+                set rnu
+              endif
+            endfunc
+
+            " Toggle between normal and relative numbering.
+            nnoremap <leader>r :call NumberToggle()<cr>
+
+            " airline settings
+            let g:airline_theme= 'solarized dark'
+
+            " gitgutter settings
+            let g:gitgutter_max_signs = 2000
+
+            " vim-multiple-cursors settings
+            nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+            vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
           '';
+
           vam.knownPlugins = pkgs.vimPlugins; # optional
           vam.pluginDictionaries = [
             # load always
-            { 
-	      # todo: Add the commented out plugins as packages
-              names = [ 
+            {
+              # todo: Add the commented out plugins as packages
+              names = [
+                "airline"
+                "ctrlp"
+                "fugitive"
                 "surround"
                 "Solarized"
-                "vim-multiple-cursors"
-                "fugitive"
-                # "github:ctrlpvim/ctrlp.vim"
-                # "ack"
-                "Syntastic"
+                "multiple-cursors"
+                "syntastic"
                 # "camelcasemotion"
-                # "numbers"
-                "vim-gitgutter"
+                "gitgutter"
                 # "github:elixir-lang/vim-elixir"
-                # "github:tpope/vim-markdown"
                 # "github:vim-ruby/vim-ruby"
                 # "github:ajf/puppet-vim"
                 # "github:elzr/vim-json"
+                "vim2nix"
+                "vim-nix"
+                "pluginnames2nix"
               ];
             }
           ];
@@ -173,7 +206,7 @@
       windowManager.default = "i3";
       displayManager.slim = {
         enable = true;
-	defaultUser = "nick";
+        defaultUser = "nick";
         theme = pkgs.fetchurl {
           url    = "https://github.com/nickjanus/nixos-slim-theme/archive/2.1.tar.gz";
           sha256 = "8b587bd6a3621b0f0bc2d653be4e2c1947ac2d64443935af32384bf1312841d7";
