@@ -68,6 +68,7 @@ pkgs.neovim.override {
       " airline settings
       let g:airline_theme = 'solarized dark'
       let g:airline_powerline_fonts = 1
+      let g:airline#extensions#tabline#enabled = 1
 
       " gitgutter settings
       let g:gitgutter_max_signs = 2000
@@ -84,6 +85,7 @@ pkgs.neovim.override {
         # todo: Add the commented out plugins as packages
         names = [
           "airline"
+          # "vim-airline-themes"
           "ctrlp"
           "fugitive"
           "surround"
