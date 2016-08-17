@@ -28,6 +28,8 @@ in {
 
   environment.variables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+    PAGER = "less -R";
   };
 
   fonts = {
