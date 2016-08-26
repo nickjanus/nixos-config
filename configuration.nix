@@ -18,6 +18,11 @@ let
       };
     };
   };
+
+  zsh_config = import ./zsh.nix {
+    inherit (pkgs) writeText zsh-prezto;
+  };
+
 in {
   imports =
     [ # Include the results of the hardware scan.
@@ -26,10 +31,13 @@ in {
       ( import ./machine.nix { inherit lib; inherit pkgs; inherit default_services; } )
     ];
 
+  environment.etc = zsh_config.environment_etc;
+
   environment.variables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
     PAGER = "less -R";
+    PATH = "$PATH:/home/nick/.gem/ruby/2.1.6/bin"; # todo remove once bundler works
   };
 
   fonts = {
@@ -73,6 +81,12 @@ in {
     terminator
     wget
     zsh
+    zsh-prezto
+
+    # Development dependencies
+    ruby_2_1
+    bundix
+    bundler # Does not work, manage a copy manually in ~/.gem
   ];
 
   nixpkgs.config = {
@@ -114,6 +128,7 @@ in {
     isNormalUser = true;
     uid = 1000;
   };
+  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.03";
