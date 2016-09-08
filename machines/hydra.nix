@@ -16,6 +16,9 @@
 
   networking.hostName = "nicknix";
 
+  environment.systemPackages = with pkgs; [
+  ] ++ base_packages;
+
   services = lib.recursiveUpdate default_services {
     xserver = {
       videoDrivers = [ "nvidia" ];

@@ -57,7 +57,6 @@ let
       # Set the window title format.
       zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
       # Auto start screen sessions locally and in ssh sessions
-      zstyle ':prezto:module:screen:auto-start' local 'yes'
       zstyle ':prezto:module:screen:auto-start' remote 'yes'
       # Auto convert .... to ../..
       zstyle ':prezto:module:editor' dot-expansion 'yes'
