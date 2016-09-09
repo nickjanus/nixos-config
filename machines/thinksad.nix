@@ -1,6 +1,6 @@
 # This file is symlinked to ../machine.nix on my desktop
 
-{ lib, pkgs, default_services, base_packages}:
+{ lib, pkgs, default_services, base_packages }:
 
 {
   boot.loader.systemd-boot.enable = true;
