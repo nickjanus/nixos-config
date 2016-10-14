@@ -20,7 +20,7 @@
     bundix
     bundler
     php
-    mysql55
+    mysql
     pdsh
     awscli
     hipchat
