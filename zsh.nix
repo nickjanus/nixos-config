@@ -43,7 +43,7 @@ let
       # Set the prompt theme to load.
       # Setting it to 'random' loads a random theme.
       # Auto set to 'off' on dumb terminals.
-      zstyle ':prezto:module:prompt' theme 'kylewest'
+      zstyle ':prezto:module:prompt' theme 'paradox'
 
       # Set the SSH identities to load into the agent.
       zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa'
