@@ -35,6 +35,7 @@ let
     screen
     terminator
     wget
+    xsel
     zsh
     zsh-prezto
   ];
