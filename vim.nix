@@ -31,6 +31,9 @@ pkgs.neovim.override {
       set backspace=indent,eol,start " Allows backspace on these character
       set clipboard=unnamedplus
 
+      " Map esc to exit terminal mode
+      :tnoremap <Esc> <C-\><C-n>
+
       " php
       autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
 

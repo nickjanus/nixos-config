@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto }:
+{ writeText, zsh-prezto, neovim, less }:
 
 let
   self = writeText "zsh-config"
@@ -23,22 +23,22 @@ let
         'fasd' \
         'ssh' \
         'screen' \
-        'nix'
+        'nix' \
+        'ruby'
 
       # Set the key mapping style to 'emacs' or 'vi'.
       zstyle ':prezto:module:editor' key-bindings 'vi'
 
       # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-      zstyle ':prezto:module:git:status:ignore' submodules 'all'
+      #zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
+      # History Substring Search
+      #
+      zstyle ‘:prezto:module:history-substring-search’ color ‘yes’
       # Set the query found color.
-      zstyle ':prezto:module:history-substring-search:color' found '''
-
+      zstyle ‘:prezto:module:history-substring-search:color’ found ‘bg=green,fg=white,bold’
       # Set the query not found color.
-      zstyle ':prezto:module:history-substring-search:color' not-found '''
-
-      # Set the search globbing flags.
-      zstyle ':prezto:module:history-substring-search' globbing-flags '''
+      zstyle ‘:prezto:module:history-substring-search:color’ not-found ‘bg=red,fg=white,bold’
 
       # Set the prompt theme to load.
       # Setting it to 'random' loads a random theme.
@@ -77,6 +77,9 @@ let
 
       # -------------------------------------------------
 
+      export EDITOR='${neovim}/bin/nvim'
+      export VISUAL='${neovim}/bin/nvim'
+      export PAGER='${less}/bin/less -R'
       export KEYTIMEOUT=1
     '';
 in {

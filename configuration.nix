@@ -41,7 +41,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto;
+    inherit (pkgs) writeText zsh-prezto neovim less;
   };
 
 in {
@@ -54,17 +54,12 @@ in {
 
   environment.etc = zsh_config.environment_etc;
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    PAGER = "less -R";
-  };
-
   fonts = {
     enableFontDir = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       corefonts  # Micrsoft free fonts
+      fira # monospaced
       inconsolata  # monospaced
       powerline-fonts
       ubuntu_font_family  # Ubuntu fonts
@@ -122,6 +117,8 @@ in {
     uid = 1000;
   };
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+
+  sound.enableMediaKeys = true;
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.03";
