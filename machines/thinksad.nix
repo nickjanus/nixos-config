@@ -34,6 +34,10 @@
 
   hardware = {
     trackpoint.enable = false;
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+    };
   };
 
   services = lib.recursiveUpdate default_services {
