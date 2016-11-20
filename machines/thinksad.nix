@@ -5,6 +5,7 @@
 {
   boot = {
     blacklistedKernelModules = [ "pcspkr" ];
+    kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
