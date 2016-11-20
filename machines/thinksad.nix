@@ -28,6 +28,7 @@
     pdsh
     awscli
     hipchat
+    xorg.xbacklight
   ] ++ base_packages;
 
   networking.hostName = "thinksad"; # Define your hostname.
@@ -43,6 +44,10 @@
 
   services = lib.recursiveUpdate default_services {
     tlp.enable = true; # Linux advanced power management
+    thinkfan = {
+      enable = true;
+      sensor = "/sys/devices/virtual/thermal/thermal_zone0/temp";
+    };
     xserver = {
       synaptics = {
         enable = true;
