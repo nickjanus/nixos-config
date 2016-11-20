@@ -46,7 +46,9 @@
       synaptics = {
         enable = true;
         twoFingerScroll = true;
-        maxSpeed = "2.0";
+        accelFactor = "0.020";
+        minSpeed = "1.0";
+        maxSpeed = "5.0";
         palmDetect = true;
         tapButtons = false;
         vertEdgeScroll = false;
