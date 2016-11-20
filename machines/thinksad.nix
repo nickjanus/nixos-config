@@ -41,7 +41,6 @@
   };
 
   services = lib.recursiveUpdate default_services {
-    thinkfan.enable = true;
     tlp.enable = true; # Linux advanced power management
     xserver = {
       synaptics = {
