@@ -63,6 +63,7 @@
           Option "EmulateMidButtonTime" "0"
         '';
       };
+      # windowManager.i3.configFile = import ./i3config.nix pkgs;
     };
   };
 }

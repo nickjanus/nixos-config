@@ -26,8 +26,10 @@ let
     git
     gnupg
     gnupg1compat
+    hexchat
     htop
     i3
+    i3status
     imagemagick
     neovim
     nix-repl # repl for the nix language
