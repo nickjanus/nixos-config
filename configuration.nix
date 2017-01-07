@@ -6,6 +6,7 @@
 
 let
   default_services = {
+    locate.enable = true;
     xserver = {
       autorun = true;
       enable = true;
