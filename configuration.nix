@@ -37,6 +37,7 @@ let
     openssh
     screen
     terminator
+    tmux
     wget
     xsel
     zsh
