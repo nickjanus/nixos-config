@@ -206,7 +206,7 @@ writeText "i3-config" ''
 
               battery 0 {
                 format = " Power: %status %percentage %remaining left "
-                path = "/sys/class/power_supply/BAT0/uevent"
+                path = "/sys/class/power_supply/BAT1/uevent"
                 low_threshold = 20
               }
 
