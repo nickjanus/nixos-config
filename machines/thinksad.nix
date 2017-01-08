@@ -29,6 +29,7 @@
     awscli
     hipchat
     xorg.xbacklight
+    vagrant # because bundix :-(
   ] ++ base_packages;
 
   networking.hostName = "thinksad"; # Define your hostname.
@@ -65,5 +66,10 @@
       };
       # windowManager.i3.configFile = import ./i3config.nix pkgs;
     };
+  };
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    headless = true;
   };
 }
