@@ -49,6 +49,7 @@
       enable = true;
       sensor = "/sys/devices/virtual/thermal/thermal_zone0/temp";
     };
+    vmwareGuest.enable = true;
     xserver = {
       synaptics = {
         enable = true;
