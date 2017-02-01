@@ -19,6 +19,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    arandr
     # Development dependencies
     ruby_2_1
     bundix
@@ -29,7 +30,7 @@
     awscli
     hipchat
     xorg.xbacklight
-    vagrant # because bundix :-(
+    vagrant # because bundix is a :-(
   ] ++ base_packages;
 
   networking.hostName = "thinksad"; # Define your hostname.
