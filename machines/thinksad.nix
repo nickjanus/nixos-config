@@ -31,6 +31,7 @@
     hipchat
     xorg.xbacklight
     vagrant # because bundix is a :-(
+    zoom-us
   ] ++ base_packages;
 
   networking.hostName = "thinksad"; # Define your hostname.
