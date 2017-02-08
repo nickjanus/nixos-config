@@ -54,19 +54,19 @@
     xserver = {
       synaptics = {
         enable = true;
+        horizontalScroll = false;
+        vertEdgeScroll = false;
         twoFingerScroll = true;
         accelFactor = "0.020";
         minSpeed = "1.0";
         maxSpeed = "5.0";
-        palmDetect = true;
         tapButtons = false;
-        vertEdgeScroll = false;
         additionalOptions = ''
           Option "ClickPad" "true"
-          Option "EmulateMidButtonTime" "0"
         '';
       };
       # windowManager.i3.configFile = import ./i3config.nix pkgs;
+      xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
 
