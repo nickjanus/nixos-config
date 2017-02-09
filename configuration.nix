@@ -23,6 +23,7 @@ let
   base_packages = with pkgs; [
     ack
     chromium
+    cmus
     dmenu
     git
     gnupg
