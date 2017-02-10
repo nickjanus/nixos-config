@@ -14,6 +14,7 @@ let
       enable = true;
       layout = "us";
       windowManager.i3.enable = true;
+      windowManager.i3.configFile = import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; };
       windowManager.default = "i3";
       displayManager.slim = {
         enable = true;
@@ -56,7 +57,15 @@ in {
     [ # Include the results of the hardware scan.
       (./hardware-configurations + "/${parameters.machine}.nix")
       # Machine specific config
-      ( import (./machines + "/${parameters.machine}.nix") { inherit lib; inherit config; inherit pkgs; inherit default_services; inherit base_packages; } )
+      (
+        import (./machines + "/${parameters.machine}.nix") {
+          inherit lib;
+          inherit config;
+          inherit pkgs;
+          inherit default_services;
+          inherit base_packages;
+        } 
+      )
     ];
 
   environment.etc = zsh_config.environment_etc;
