@@ -3,7 +3,7 @@ This repo houses all of my nixos configuration for a work laptop and my home des
 
 ### Setup
 - Install nixos
-- Backup `hardware-configuration.nix`
+- Backup `./hardware-configuration.nix`
 - Clone this repo into /etc/nixos
 - Decide on a name for the machine you're setting up and enter it in `./parameters.nix` like so:
 ```nix
@@ -11,5 +11,5 @@ This repo houses all of my nixos configuration for a work laptop and my home des
   machineName = "thinksad";
 }
 ```
-- Move `hardware-configuration.nix` to ./hardware-configurations/<machineName>.nix 
-- Add any other machine specific config to machines/<machineName>.nix
+- Move `hardware-configuration.nix` to ./hardware-configurations/`machineName`.nix 
+- Add any other machine specific config to machines/`machineName`.nix
