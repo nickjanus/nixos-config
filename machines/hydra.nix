@@ -1,6 +1,6 @@
 # This file is symlinked to ../machine.nix on my desktop
 
-{ lib, pkgs, default_services }:
+{ lib, pkgs, baseServices }:
 
 {
   boot.loader.systemd-boot.enable = true;
@@ -17,9 +17,9 @@
   networking.hostName = "nicknix";
 
   environment.systemPackages = with pkgs; [
-  ] ++ base_packages;
+  ] ++ basePackages;
 
-  services = lib.recursiveUpdate default_services {
+  services = lib.recursiveUpdate baseServices {
     xserver = {
       videoDrivers = [ "nvidia" ];
       displayManager.slim = {

@@ -7,7 +7,7 @@
 let
   parameters = import ./parameters.nix;
 
-  default_services = {
+  baseServices = {
     locate.enable = true;
     xserver = {
       autorun = true;
@@ -23,7 +23,7 @@ let
     };
   };
 
-  base_packages = with pkgs; [
+  basePackages = with pkgs; [
     ack
     chromium
     cmus
@@ -62,8 +62,8 @@ in {
           inherit lib;
           inherit config;
           inherit pkgs;
-          inherit default_services;
-          inherit base_packages;
+          inherit baseServices;
+          inherit basePackages;
         } 
       )
     ];

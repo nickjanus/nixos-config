@@ -1,6 +1,6 @@
 # This file is symlinked to ../machine.nix on my desktop
 
-{ lib, config, pkgs, default_services, base_packages}:
+{ lib, config, pkgs, baseServices, basePackages}:
 
 {
   boot = {
@@ -32,7 +32,7 @@
     xorg.xbacklight
     vagrant # because bundix is a :-(
     zoom-us
-  ] ++ base_packages;
+  ] ++ basePackages;
 
   networking.hostName = "thinksad"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -45,7 +45,7 @@
     };
   };
 
-  services = lib.recursiveUpdate default_services {
+  services = lib.recursiveUpdate baseServices {
     tlp.enable = true; # Linux advanced power management
     thinkfan = {
       enable = true;
