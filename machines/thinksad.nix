@@ -1,6 +1,6 @@
 # This file is symlinked to ../machine.nix on my desktop
 
-{ lib, pkgs, default_services, base_packages}:
+{ lib, config, pkgs, default_services, base_packages}:
 
 {
   boot = {
@@ -41,7 +41,7 @@
     trackpoint.enable = false;
     pulseaudio = {
       enable = true;
-      support32Bit = true;
+        support32Bit = true;
     };
   };
 
@@ -65,7 +65,7 @@
           Option "ClickPad" "true"
         '';
       };
-      # windowManager.i3.configFile = import ./i3config.nix pkgs;
+      windowManager.i3.configFile = import ./i3config.nix { inherit config; inherit pkgs; };
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
