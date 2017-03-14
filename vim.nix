@@ -29,8 +29,10 @@ pkgs.neovim.override {
       set number
       set ruler
       set backspace=indent,eol,start " Allows backspace on these character
-      set clipboard+=unnamedplus " Allows copy and paste from nvim
-      set pastetoggle=<F2> " Press F2 to enter paste mode, for pasting from outside vim
+      set clipboard=unnamedplus
+
+      " Map esc to exit terminal mode
+      :tnoremap <Esc> <C-\><C-n>
 
       " php
       autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
@@ -66,7 +68,7 @@ pkgs.neovim.override {
       nnoremap <leader>r :call NumberToggle()<cr>
 
       " airline settings
-      let g:airline_theme = 'solarized dark'
+      let g:airline_theme = 'solarized'
       let g:airline_powerline_fonts = 1
       let g:airline#extensions#tabline#enabled = 1
 
@@ -85,7 +87,7 @@ pkgs.neovim.override {
         # todo: Add the commented out plugins as packages
         names = [
           "airline"
-          # "vim-airline-themes"
+          "vim-airline-themes"
           "ctrlp"
           "fugitive"
           "surround"
