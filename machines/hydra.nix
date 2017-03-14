@@ -1,5 +1,3 @@
-# This file is symlinked to ../machine.nix on my desktop
-
 { lib, config, pkgs, baseServices, basePackages}:
 
 {
