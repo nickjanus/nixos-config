@@ -8,7 +8,7 @@ This repo houses all of my nixos configuration for a work laptop and my home des
 - Decide on a name for the machine you're setting up and enter it in `./parameters.nix` like so:
 ```nix
 {
-  machineName = "thinksad";
+  machine = "thinksad";
 }
 ```
 - Move `hardware-configuration.nix` to ./hardware-configurations/`machineName`.nix 
