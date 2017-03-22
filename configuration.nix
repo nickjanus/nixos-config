@@ -99,7 +99,6 @@ in {
     chromium = {
       jre = false;
       enableGoogleTalkPlugin = true;
-      enablePepperFlash = true;
       enablePepperPDF = true;
     };
 
