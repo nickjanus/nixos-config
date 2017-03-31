@@ -43,6 +43,7 @@ let
     screen
     terminator
     tmux
+    unzip
     wget
     xsel
     zsh
