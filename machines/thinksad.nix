@@ -22,6 +22,7 @@
     ruby_2_1
     bundix
     bundler
+    graphviz
     php
     mysql
     pdsh
