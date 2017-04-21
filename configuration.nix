@@ -28,6 +28,7 @@ let
     chromium
     cmus
     dmenu
+    exercism # coding exercises
     git
     gnupg
     gnupg1compat
