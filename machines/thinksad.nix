@@ -17,7 +17,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    arandr
     # Development dependencies
     ruby_2_1
     bundix

@@ -25,6 +25,7 @@ let
 
   basePackages = with pkgs; [
     ack
+    arandr
     chromium
     cmus
     dmenu
