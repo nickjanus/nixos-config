@@ -67,7 +67,7 @@ in {
           inherit pkgs;
           inherit baseServices;
           inherit basePackages;
-        } 
+        }
       )
     ];
 
@@ -126,6 +126,15 @@ in {
     uid = 1000;
   };
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+
+  systemd.services.lockOnClose = {
+    description = "Lock X session using slimlock";
+    wantedBy = [ "sleep.target" ];
+    serviceConfig = {
+      User = "nick";
+      ExecStart = "${pkgs.slim}/bin/slimlock";
+    };
+  };
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.03";
