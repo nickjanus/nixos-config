@@ -50,6 +50,14 @@
 
   services = lib.recursiveUpdate baseServices {
     tlp.enable = true; # Linux advanced power management
+    acpid = {
+      enable = true;
+      lidEventCommands = ''
+        if grep -q closed /proc/acpi/button/lid/LID/state; then
+          ${pkgs.slim}/bin/slimlock &> /dev/null
+        fi
+      '';
+    };
     thinkfan = {
       enable = true;
       sensor = "/sys/devices/virtual/thermal/thermal_zone0/temp";
