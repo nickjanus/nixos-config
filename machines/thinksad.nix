@@ -54,7 +54,9 @@
       enable = true;
       lidEventCommands = ''
         if grep -q closed /proc/acpi/button/lid/LID/state; then
-          ${pkgs.slim}/bin/slimlock &> /dev/null
+          export SLIM_THEMESDIR=/nix/store/2nv38fqrs4by7rzqqmvi1pv6ansyxmlq-slim-theme
+          /run/current-system/sw/bin/runuser -u nick /run/current-system/sw/bin/slimlock &>> /home/nick/slimlock
+          echo $? >> /home/nick/slimlock
         fi
       '';
     };
