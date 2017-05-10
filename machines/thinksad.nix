@@ -55,7 +55,7 @@
       lidEventCommands = ''
         if grep -q closed /proc/acpi/button/lid/LID/state; then
           export SLIM_THEMESDIR=/nix/store/2nv38fqrs4by7rzqqmvi1pv6ansyxmlq-slim-theme
-          /run/current-system/sw/bin/runuser -u nick /run/current-system/sw/bin/slimlock &>> /home/nick/slimlock
+          ${pkgs.eject}/bin/runuser -u nick ${pkgs.slim}/bin/slimlock &>> /home/nick/slimlock
           echo $? >> /home/nick/slimlock
         fi
       '';
