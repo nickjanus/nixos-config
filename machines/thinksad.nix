@@ -17,15 +17,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # Development dependencies
-    ruby_2_1
-    bundix
-    bundler
-    graphviz
-    php
-    mysql
-    pdsh
-    awscli
+    arandr
     hipchat
     xorg.xbacklight
     vagrant # because bundix is a :-(
