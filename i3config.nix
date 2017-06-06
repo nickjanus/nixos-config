@@ -184,9 +184,9 @@ writeText "i3-config" ''
 
   # Pulse Audio controls
   # run pactl list sinks
-  bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume 1 +5% #increase sound volume
-  bindsym XF86AudioLowerVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume 1 -5% #decrease sound volume
-  bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute 1 toggle # mute sound
+  bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+  bindsym XF86AudioLowerVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+  bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
   # Sreen brightness controls
   bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness
