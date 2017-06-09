@@ -78,6 +78,10 @@ pkgs.neovim.override {
       " vim-multiple-cursors settings
       nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
       vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
+
+      " ctrl-p settings
+      let g:ctrlp_max_files = 100000
+      let g:ctrlp_max_depth = 40
     '';
 
     vam.knownPlugins = pkgs.vimPlugins; # optional
