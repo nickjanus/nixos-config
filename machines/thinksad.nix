@@ -19,6 +19,7 @@
   environment.systemPackages = with pkgs; [
     arandr
     hipchat
+    nmap
     xorg.xbacklight
     vagrant # because bundix is a :-(
     zoom-us
