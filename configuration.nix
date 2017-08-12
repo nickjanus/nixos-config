@@ -42,6 +42,7 @@ let
     nix-repl # repl for the nix language
     openssh
     screen
+    sysstat
     terminator
     tmux
     unzip
