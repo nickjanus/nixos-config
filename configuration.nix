@@ -30,6 +30,7 @@ let
     cmus
     dmenu
     exercism # coding exercises
+    firefox
     git
     gnupg
     gnupg1compat
