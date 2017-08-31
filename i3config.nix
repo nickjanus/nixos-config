@@ -39,7 +39,8 @@ let
     }
 
     volume master {
-      format = " Vol: %volume "
+      format = "♪: %volume"
+      format_muted = "♪: muted"
       device = "default"
       mixer = "Master"
       mixer_idx = 0
@@ -223,7 +224,7 @@ writeText "i3-config" (
     # Start i3bar to display a workspace bar (plus the system information i3status
     # finds out, if available)
     bar {
-            font termsyn:monospace 8
+            font pango:Fira Mono 9
             status_command ${i3status}/bin/i3status -c ${
               writeText "i3status-config" i3StatusBarConfig
             }
