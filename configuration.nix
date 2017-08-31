@@ -48,6 +48,7 @@ let
     tmux
     unzip
     wget
+    xlibs.xev
     xsel
     zsh
     zsh-prezto

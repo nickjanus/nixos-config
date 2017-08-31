@@ -14,6 +14,13 @@
 
   networking.hostName = "nicknix";
 
+  hardware = {
+    pulseaudio = {
+      enable = true;
+        support32Bit = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
   ] ++ basePackages;
 
