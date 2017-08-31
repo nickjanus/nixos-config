@@ -2,7 +2,7 @@
 
 with pkgs;
 
-let
+let 
   i3StatusBarConfig = ''
     general {
       colors = true
@@ -57,7 +57,7 @@ let
         low_threshold = 20
       }
     ''
-    else
+    else 
     ""
   );
 in
@@ -158,27 +158,16 @@ writeText "i3-config" ''
   bindsym $mod+Shift+8 move container to workspace 8
   bindsym $mod+Shift+9 move container to workspace 9
   bindsym $mod+Shift+0 move container to workspace 10
-  '' + (
-    if (parameters.machine == "thinksad") then ''
-      # Pulse Audio controls
-      # run pactl list sinks
-      bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-      bindsym XF86AudioLowerVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
-      bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-      # Sreen brightness controls
-      bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness
-      bindsym XF86MonBrightnessDown exec ${xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness
-      }
-    ''
-    else ''
-      # Pulse Audio controls
-      # run pactl list sinks
-      bindcode 115 exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-      bindcode 114 exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
-      bindcode 113 exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
-    ''
-  ) + ''
+  # Pulse Audio controls
+  # run pactl list sinks
+  bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+  bindsym XF86AudioLowerVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+  bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+
+  # Sreen brightness controls
+  bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness
+  bindsym XF86MonBrightnessDown exec ${xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness
 
   # multimedia keys
   #bindsym XF86AudioPlay  exec "mpc toggle"
