@@ -20,8 +20,9 @@
     arandr
     hipchat
     nmap
-    xorg.xbacklight
+    slack
     vagrant # because bundix is a :-(
+    xorg.xbacklight
     zoom-us
   ] ++ basePackages;
 
