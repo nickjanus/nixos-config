@@ -100,16 +100,16 @@ writeText "i3-config" (
     bindsym $mod+Right focus right
 
     # move focused window
-    bindsym $mod+Shift+j move left
-    bindsym $mod+Shift+k move down
-    bindsym $mod+Shift+l move up
-    bindsym $mod+Shift+semicolon move right
-
-    # alternatively, you can use the cursor keys:
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+    # move focused workspace
+    bindsym $mod+Shift+Left move workspace to output left
+    bindsym $mod+Shift+Down move workspace to output down
+    bindsym $mod+Shift+Up move workspace to output up
+    bindsym $mod+Shift+Right move workspace to output right
 
     # split in horizontal orientation
     bindsym $mod+h split h
