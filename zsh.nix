@@ -81,6 +81,8 @@ let
       export VISUAL='${neovim}/bin/nvim'
       export PAGER='${less}/bin/less -R'
       export KEYTIMEOUT=1
+
+      alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus'
     '';
 in {
   environment_etc =

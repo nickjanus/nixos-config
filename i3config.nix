@@ -14,10 +14,20 @@ let
     }
 
     order += "disk /"
-    order += "wireless wlp3s0"
-    order += "ethernet enp0s25"
+    order += "wireless wlp4s0"
+  '' + (
+    if (parameters.machine == "hydra") then ''
+      order += "ethernet enp0s25"
+    ''
+    else ""
+  ) + ''
     order += "cpu_usage"
-    order += "battery 0"
+  '' + (
+    if (parameters.machine == "janusX1") then ''
+      order += "battery 0"
+    ''
+    else ""
+  ) + ''
     order += "volume master"
     order += "tztime local"
 
@@ -46,15 +56,15 @@ let
       mixer_idx = 0
     }
   '' + (
-    if (parameters.machine == "thinksad") then ''
-      wireless wlp3s0 {
+    if (parameters.machine == "janusX1") then ''
+      wireless wlp4s0 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
 
       battery 0 {
         format = " Power: %status %percentage %remaining left "
-        path = "/sys/class/power_supply/BAT1/uevent"
+        path = "/sys/class/power_supply/BAT0/uevent"
         low_threshold = 20
       }
     ''
@@ -106,10 +116,10 @@ writeText "i3-config" (
     bindsym $mod+Shift+Right move right
 
     # move focused workspace
-    bindsym $mod+Shift+Left move workspace to output left
-    bindsym $mod+Shift+Down move workspace to output down
-    bindsym $mod+Shift+Up move workspace to output up
-    bindsym $mod+Shift+Right move workspace to output right
+    bindsym $mod+Shift+j move workspace to output left
+    bindsym $mod+Shift+k move workspace to output down
+    bindsym $mod+Shift+l move workspace to output up
+    bindsym $mod+Shift+semicolon move workspace to output right
 
     # split in horizontal orientation
     bindsym $mod+h split h
@@ -161,7 +171,7 @@ writeText "i3-config" (
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
     '' + (
-      if (parameters.machine == "thinksad") then ''
+      if (parameters.machine == "janusX1") then ''
         # Pulse Audio controls
         # run pactl list sinks
         bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
