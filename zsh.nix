@@ -82,7 +82,7 @@ let
       export PAGER='${less}/bin/less -R'
       export KEYTIMEOUT=1
 
-      alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --background --pid /var/run/openconnect.pid'
+      alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --no-dtls --background --pid /var/run/openconnect.pid'
     '';
 in {
   environment_etc =
