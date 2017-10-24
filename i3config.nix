@@ -14,20 +14,17 @@ let
     }
 
     order += "disk /"
-    order += "wireless wlp4s0"
   '' + (
     if (parameters.machine == "hydra") then ''
       order += "ethernet enp0s25"
     ''
-    else ""
-  ) + ''
-    order += "cpu_usage"
-  '' + (
-    if (parameters.machine == "janusX1") then ''
+    else ''
+      order += "wireless wlp4s0"
+      order += "run_watch VPN"
       order += "battery 0"
     ''
-    else ""
   ) + ''
+    order += "cpu_usage"
     order += "volume master"
     order += "tztime local"
 
@@ -66,6 +63,11 @@ let
         format = " Power: %status %percentage %remaining left "
         path = "/sys/class/power_supply/BAT0/uevent"
         low_threshold = 20
+      }
+
+      run_watch VPN {
+        # file containing the PID of a vpnc process
+        pidfile = "/var/run/openconnect.pid"
       }
     ''
     else

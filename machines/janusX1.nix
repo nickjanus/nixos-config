@@ -18,6 +18,7 @@
   environment.systemPackages = with pkgs; [
     arandr
     nmap
+    networkmanager_openconnect
     openconnect
     slack
     vagrant
@@ -27,7 +28,8 @@
   ] ++ basePackages;
 
   networking.hostName = "janusX1";
-  networking.wireless.enable = true;
+  # Use network manager for vpn access
+  networking.networkmanager.enable = true;
 
   hardware = {
     pulseaudio = {
