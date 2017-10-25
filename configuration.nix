@@ -35,6 +35,7 @@ let
     git
     gnupg
     gnupg1compat
+    go
     htop
     i3
     i3status
@@ -56,7 +57,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto neovim less;
+    inherit (pkgs) writeText zsh-prezto neovim less go;
   };
 
 in {

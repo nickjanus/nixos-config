@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto, neovim, less }:
+{ writeText, zsh-prezto, neovim, less, go }:
 
 let
   self = writeText "zsh-config"
@@ -83,6 +83,8 @@ let
       export KEYTIMEOUT=1
 
       alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --no-dtls --background --pid /var/run/openconnect.pid'
+      export GOROOT='${go.out}/share/go'
+      export GOPATH='/home/nick/Code/go'
     '';
 in {
   environment_etc =
