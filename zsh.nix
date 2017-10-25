@@ -85,6 +85,7 @@ let
       alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --no-dtls --background --pid /var/run/openconnect.pid'
       export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/Code/go'
+      export PATH=$PATH':/home/nick/Code/go/bin'
     '';
 in {
   environment_etc =
