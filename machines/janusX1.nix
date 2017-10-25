@@ -19,7 +19,6 @@
     arandr
     docker_compose
     nmap
-    networkmanager_openconnect
     openconnect
     slack
     vagrant
@@ -29,8 +28,7 @@
   ] ++ basePackages;
 
   networking.hostName = "janusX1";
-  # Use network manager for vpn access
-  networking.networkmanager.enable = true;
+  networking.wireless.enable = true;
 
   hardware = {
     pulseaudio = {
