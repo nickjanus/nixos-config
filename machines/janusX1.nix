@@ -37,6 +37,9 @@
       enable = true;
         support32Bit = true;
     };
+
+    # Enable gpu support
+    opengl.extraPackages = with pkgs;[ vaapiIntel ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -61,6 +64,7 @@
         export GDK_SCALE=2
         export GDK_DPI_SCALE=0.625
       '';
+
       # Enable touchpad support.
       libinput = {
         enable = true;
