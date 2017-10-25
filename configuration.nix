@@ -44,6 +44,7 @@ let
     neovim
     nix-repl # repl for the nix language
     openssh
+    pavucontrol
     screen
     sysstat
     terminator
