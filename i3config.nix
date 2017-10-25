@@ -16,7 +16,7 @@ let
     order += "disk /"
   '' + (
     if (parameters.machine == "hydra") then ''
-      order += "ethernet enp0s25"
+      order += "ethernet enp11s0"
     ''
     else ''
       order += "wireless wlp4s0"
@@ -28,7 +28,7 @@ let
     order += "volume master"
     order += "tztime local"
 
-    ethernet enp0s25 {
+    ethernet enp11s0 {
       format_up = " LAN: %ip %speed "
       format_down = " LAN: (/) "
     }
