@@ -17,6 +17,7 @@
 
   environment.systemPackages = with pkgs; [
     arandr
+    docker_compose
     nmap
     networkmanager_openconnect
     openconnect
