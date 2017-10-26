@@ -21,6 +21,7 @@
     docker_compose
     nmap
     openconnect
+    ruby
     slack
     vagrant
     xorg.xdpyinfo
