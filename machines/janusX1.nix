@@ -16,6 +16,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    awscli
     arandr
     docker_compose
     nmap
