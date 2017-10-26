@@ -29,6 +29,7 @@ let
     bind
     chromium
     cmus
+    direnv
     dmenu
     exercism # coding exercises
     firefox
