@@ -42,6 +42,7 @@ let
     i3status
     imagemagick
     irssi
+    jq
     neovim
     nix-repl # repl for the nix language
     openssh
