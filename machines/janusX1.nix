@@ -3,8 +3,8 @@
 let 
   pulseFix =  pkgs.fetchgit {
     url = "git://github.com/nickjanus/pulseaudio-x1";
-    rev = "b5786dc5d820becd3d5b2703147044cc7be4477e";
-    sha256 = "0m2np9gwxp2g9f4s7nq40r0qgfh35xnj3j06k1k9sckrv2kzqwr0";
+    rev = "9e7722f61dd09285b309968bae36a17cad5231bc";
+    sha256 = "1jfnvvq134py223iyzsminvq7gbiz71qgdknmyg9xaiiqjwmbq4q";
   };
 in
 {
