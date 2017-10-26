@@ -86,6 +86,9 @@ let
       export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/Code/go'
       export PATH=$PATH':/home/nick/Code/go/bin'
+
+      # Use workaround for pulse audio that depends on path currently in review: https://github.com/NixOS/nixpkgs/pull/16834
+      export NIX_PATH=nixpkgs=/home/nick/Code/nixpkgs:$NIX_PATH 
     '';
 in {
   environment_etc =
