@@ -1,5 +1,12 @@
 { lib, config, pkgs, baseServices, basePackages}:
 
+let 
+  pulseFix =  pkgs.fetchgit {
+    url = "git://github.com/nickjanus/pulseaudio-x1";
+    rev = "b5786dc5d820becd3d5b2703147044cc7be4477e";
+    sha256 = "0m2np9gwxp2g9f4s7nq40r0qgfh35xnj3j06k1k9sckrv2kzqwr0";
+  };
+in
 {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
@@ -33,7 +40,8 @@
   hardware = {
     pulseaudio = {
       enable = true;
-        support32Bit = true;
+      support32Bit = true;
+      packages = [ pulseFix.outPath ];
     };
 
     # Enable gpu support
