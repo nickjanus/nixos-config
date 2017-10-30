@@ -20,7 +20,8 @@ let
     ''
     else ''
       order += "wireless wlp4s0"
-      order += "path_exists VPN"
+      order += "wireless wwp0s20f0u6i12"
+      order += "run_watch VPN"
       order += "battery 0"
     ''
   ) + ''
@@ -55,6 +56,11 @@ let
   '' + (
     if (parameters.machine == "janusX1") then ''
       wireless wlp4s0 {
+        format_up = " WiFi: %ip %quality %essid %bitrate "
+        format_down = " WiFi: (/) "
+      }
+
+      wireless wwp0s20f0u6i12 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }

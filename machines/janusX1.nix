@@ -2,7 +2,12 @@
 
 {
   boot = {
-    kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
+    kernelModules = [
+      "kvm-intel"
+      "thinkpad_acpi"
+      "thinkpad_hwmon"
+      "qmi_wwan"
+    ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     kernelParams = ["psmouse.synaptics_intertouch=0"];
@@ -37,6 +42,7 @@
     ruby
     slack
     tcpdump
+    uqmi
     xorg.xdpyinfo
     xorg.xbacklight
     zoom-us
