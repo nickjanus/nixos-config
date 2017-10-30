@@ -31,6 +31,9 @@
 
   networking.hostName = "janusX1";
   networking.wireless.enable = true;
+  networking.extraHosts = ''
+    10.42.0.10 hargw bucket01.hargw
+  '';
 
   hardware = {
     pulseaudio = {
