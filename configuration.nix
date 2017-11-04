@@ -47,6 +47,7 @@ let
     nix-repl # repl for the nix language
     openssh
     pavucontrol
+    s3cmd
     screen
     sysstat
     terminator
