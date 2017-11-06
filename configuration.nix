@@ -34,6 +34,7 @@ let
     exercism # coding exercises
     firefox
     git
+    gnumake
     gnupg
     gnupg1compat
     go
