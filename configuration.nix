@@ -44,6 +44,7 @@ let
     imagemagick
     irssi
     jq
+    lsof
     neovim
     nix-repl # repl for the nix language
     openssh
