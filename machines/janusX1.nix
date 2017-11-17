@@ -33,6 +33,7 @@
   networking.wireless.enable = true;
   networking.extraHosts = ''
     10.42.0.10 hargw bucket01.hargw
+    10.42.0.10 hargwwebsite bucket01.hargwwebsite
   '';
 
   hardware = {
