@@ -19,6 +19,7 @@
     awscli
     arandr
     confd
+    cmake
     docker_compose
     etcd
     nmap
