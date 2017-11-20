@@ -18,7 +18,9 @@
   environment.systemPackages = with pkgs; [
     awscli
     arandr
+    confd
     docker_compose
+    etcd
     nmap
     openconnect
     ruby
