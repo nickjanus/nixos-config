@@ -82,6 +82,10 @@ let
       export PAGER='${less}/bin/less -R'
       export KEYTIMEOUT=1
 
+      # Setup direnv
+      eval "$(direnv hook zsh)"
+
+      # Work
       alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --no-dtls --background --pid /var/run/openconnect.pid'
       export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/Code/go'
