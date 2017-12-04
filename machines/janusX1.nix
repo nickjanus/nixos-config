@@ -90,7 +90,6 @@
         Option "SuspendTime" "20"
         Option "OffTime" "0"
       '';
-
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
