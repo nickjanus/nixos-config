@@ -23,6 +23,7 @@
     docker_compose
     etcd
     nmap
+    networkmanagerapplet
     openconnect
     ruby
     slack
@@ -32,12 +33,17 @@
     zoom-us
   ] ++ basePackages;
 
-  networking.hostName = "janusX1";
-  networking.wireless.enable = true;
-  networking.extraHosts = ''
-    10.42.0.10 hargw bucket01.hargw
-    10.42.0.10 hargwwebsite bucket01.hargwwebsite
-  '';
+  networking = {
+    hostName = "janusX1";
+    networkmanager = {
+      enable = true;
+      useDnsmasq = true;
+    };
+    extraHosts = ''
+      10.42.0.10 hargw bucket01.hargw
+      10.42.0.10 hargwwebsite bucket01.hargwwebsite
+    '';
+  };
 
   hardware = {
     pulseaudio = {
@@ -56,11 +62,6 @@
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   services = lib.recursiveUpdate baseServices {
-    # tlp.enable = true; # Linux advanced power management
-    # thinkfan = {
-    #   enable = true;
-    #   sensor = "/sys/devices/virtual/thermal/thermal_zone0/temp";
-    # };
     xserver = {
       dpi = 120;
       monitorSection = ''
@@ -81,17 +82,6 @@
         naturalScrolling = true;
         tapping = false;
       };
-      # synaptics = {
-      #   enable = true;
-      #   horizontalScroll = false;
-      #   vertEdgeScroll = false;
-      #   twoFingerScroll = false;
-      #   accelFactor = "0.10";
-      #   minSpeed = "1.0";
-      #   maxSpeed = "4.0";
-      #   tapButtons = false;
-      #   palmDetect = true;
-      # };
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };

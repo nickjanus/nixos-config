@@ -65,9 +65,9 @@ let
         low_threshold = 20
       }
 
-      run_watch VPN {
-        # file containing the PID of a vpnc process
-        pidfile = "/var/run/openconnect.pid"
+      path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
       }
     ''
     else

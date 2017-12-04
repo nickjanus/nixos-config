@@ -86,7 +86,8 @@ let
       eval "$(direnv hook zsh)"
 
       # Work
-      alias vpn='sudo openconnect --juniper vpn-nyc2.digitalocean.com/ops -u njanus --no-dtls --background --pid /var/run/openconnect.pid'
+      alias vpnup='nmcli connection up digitalocean'
+      alias vpndown='nmcli connection down digitalocean'
       export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/Code/go'
       export PATH=$PATH':/home/nick/Code/go/bin'
