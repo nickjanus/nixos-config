@@ -32,6 +32,7 @@
     etcd
     git-crypt
     mysql57
+    modemmanager #adds wwan modem support to network manager
     nmap
     networkmanagerapplet
     openconnect
