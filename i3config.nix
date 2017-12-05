@@ -20,7 +20,7 @@ let
     ''
     else ''
       order += "wireless wlp4s0"
-      order += "run_watch VPN"
+      order += "path_exists VPN"
       order += "battery 0"
     ''
   ) + ''
