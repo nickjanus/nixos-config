@@ -26,6 +26,7 @@
     nmap
     networkmanagerapplet
     openconnect
+    openssl
     ruby
     slack
     tcpdump
