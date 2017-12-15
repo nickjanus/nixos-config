@@ -22,11 +22,13 @@
     cmake
     docker_compose
     etcd
+    git-crypt
     nmap
     networkmanagerapplet
     openconnect
     ruby
     slack
+    tcpdump
     vagrant
     xorg.xdpyinfo
     xorg.xbacklight
