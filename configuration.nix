@@ -46,6 +46,7 @@ let
     irssi
     jq
     lsof
+    maim # screenshot tool
     neovim
     nix-repl # repl for the nix language
     openssh
