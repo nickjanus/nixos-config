@@ -42,7 +42,7 @@ let
     htop
     i3
     i3status
-    imagemagick
+    imagemagick7
     irssi
     jq
     lsof
