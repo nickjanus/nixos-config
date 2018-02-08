@@ -13,7 +13,6 @@ let
         'terminal' \
         'editor' \
         'history' \
-        'history-substring-search'\
         'directory' \
         'spectrum' \
         'utility' \
@@ -23,8 +22,8 @@ let
         'fasd' \
         'ssh' \
         'screen' \
-        'nix' \
-        'ruby'
+        'syntax-highlighting'\
+        'history-substring-search'
 
       # Set the key mapping style to 'emacs' or 'vi'.
       zstyle ':prezto:module:editor' key-bindings 'vi'
@@ -54,14 +53,15 @@ let
         'main' \
         'brackets' \
         'pattern' \
+        'line' \
         'cursor' \
         'root'
 
       # Set syntax highlighting styles.
-      zstyle ':prezto:module:syntax-highlighting' styles \
-        'builtin' 'bg=blue' \
-        'command' 'bg=blue' \
-        'function' 'bg=blue'
+      # zstyle ':prezto:module:syntax-highlighting' styles \
+      #   'builtin' 'bg=blue' \
+      #   'command' 'bg=blue' \
+      #   'function' 'bg=blue'
 
       # Auto set the tab and window titles.
       zstyle ':prezto:module:terminal' auto-title 'yes'

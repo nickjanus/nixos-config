@@ -39,6 +39,10 @@ pkgs.neovim.override {
 
       " ruby
       autocmd FileType ruby compiler ruby
+
+      " go
+      autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
       filetype plugin on    " Enable filetype-specific plugins
 
       " Those types
@@ -102,6 +106,7 @@ pkgs.neovim.override {
           # "github:elzr/vim-json"
           "vim-jinja"
           "vim-nix"
+          "vim-go"
           #"vim2nix"
           #"pluginnames2nix"
         ];
