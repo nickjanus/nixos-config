@@ -145,7 +145,7 @@ in {
     wantedBy = [ "sleep.target" ];
     serviceConfig = {
       User = "nick";
-      ExecStart = "${pkgs.slim}/bin/slimlock";
+      ExecStart = "pgrep slimlock || ${pkgs.slim}/bin/slimlock";
     };
   };
 
