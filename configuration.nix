@@ -31,6 +31,7 @@ let
     cmus
     direnv
     dmenu
+    efibootmgr
     exercism # coding exercises
     firefox
     git
@@ -39,6 +40,7 @@ let
     gnupg
     gnupg1compat
     go
+    gptfdisk
     htop
     i3
     i3status
