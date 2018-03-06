@@ -26,6 +26,7 @@
     nmap
     networkmanagerapplet
     openconnect
+    openjdk
     openssl
     plantuml
     ruby
