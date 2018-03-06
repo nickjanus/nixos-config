@@ -27,6 +27,7 @@
     networkmanagerapplet
     openconnect
     openssl
+    plantuml
     ruby
     slack
     tcpdump
