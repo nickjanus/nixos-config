@@ -31,6 +31,7 @@ let
     cmus
     direnv
     dmenu
+    efibootmgr
     firefox
     git
     git-lfs
@@ -38,6 +39,7 @@ let
     gnupg
     gnupg1compat
     go
+    gptfdisk
     htop
     i3
     i3status

@@ -26,7 +26,9 @@
     nmap
     networkmanagerapplet
     openconnect
+    openjdk
     openssl
+    plantuml
     ruby
     slack
     tcpdump

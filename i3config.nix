@@ -183,6 +183,9 @@ writeText "i3-config" (
         # Sreen brightness controls
         bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness
         bindsym XF86MonBrightnessDown exec ${xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness
+
+        # Start nm-applet
+        exec --no-startup-id nm-applet --sm-disable
       ''
       else ''
         # Pulse Audio controls
