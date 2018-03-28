@@ -30,7 +30,6 @@
     ruby
     slack
     tcpdump
-    vagrant
     xorg.xdpyinfo
     xorg.xbacklight
     zoom-us

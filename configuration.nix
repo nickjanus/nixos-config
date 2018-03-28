@@ -31,7 +31,6 @@ let
     cmus
     direnv
     dmenu
-    exercism # coding exercises
     firefox
     git
     git-lfs
@@ -57,6 +56,7 @@ let
     terminator
     tmux
     unzip
+    vagrant
     wget
     xlibs.xev
     xsel
