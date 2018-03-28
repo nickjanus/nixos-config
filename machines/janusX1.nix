@@ -89,10 +89,4 @@
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
-
-  virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host = {
-    enable = true;
-    headless = true;
-  };
 }
