@@ -45,6 +45,7 @@ let
     i3
     i3status
     imagemagick7
+    inotify-tools # used by phoenix
     irssi
     jq
     lsof
