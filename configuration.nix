@@ -32,6 +32,7 @@ let
     direnv
     dmenu
     efibootmgr
+    elixir
     firefox
     git
     git-lfs

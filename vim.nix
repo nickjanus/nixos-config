@@ -90,12 +90,10 @@ pkgs.neovim.override {
 
     vam.knownPlugins = pkgs.vimPlugins; # optional
     vam.pluginDictionaries = [
-      # load always
       {
-        # todo: Add the commented out plugins as packages
         names = [
           "airline"
-          "vim-airline-themes"
+          "alchemist-vim"
           "ctrlp"
           "fugitive"
           "surround"
@@ -103,12 +101,12 @@ pkgs.neovim.override {
           "multiple-cursors"
           "syntastic"
           "gitgutter"
-          # "github:elzr/vim-json"
+          #"vim-json" uncomment when this makes it into stable
+          "vim-airline-themes"
+          "vim-elixir"
           "vim-jinja"
           "vim-nix"
           "vim-go"
-          #"vim2nix"
-          #"pluginnames2nix"
         ];
       }
     ];
