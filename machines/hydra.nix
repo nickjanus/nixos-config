@@ -22,6 +22,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    abcde
   ] ++ basePackages;
 
   services = lib.recursiveUpdate baseServices {
