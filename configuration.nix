@@ -59,6 +59,7 @@ let
     sysstat
     terminator
     tmux
+    tree
     unzip
     vagrant
     wget
