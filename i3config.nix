@@ -92,7 +92,7 @@ writeText "i3-config" (
     bindsym $mod+Shift+q kill
 
     # start dmenu (a program launcher)
-    bindsym $mod+d exec ${dmenu}/bin/dmenu_run
+    bindsym $mod+d exec ${dmenu}/bin/dmenu_run -i
 
     # There also is the (new) i3-dmenu-desktop which only displays applications
     # shipping a .desktop file. It is a wrapper around dmenu, so you need that
