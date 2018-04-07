@@ -23,6 +23,7 @@
 
   environment.systemPackages = with pkgs; [
     abcde
+    discord
   ] ++ basePackages;
 
   services = lib.recursiveUpdate baseServices {
