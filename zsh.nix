@@ -89,7 +89,7 @@ let
       alias vpnup='nmcli connection up digitalocean'
       alias vpndown='nmcli connection down digitalocean'
       export GOROOT='${go.out}/share/go'
-      export GOPATH='/home/nick/Code/go'
+      export GOPATH='/home/nick/code/go'
       export PATH=$PATH':/home/nick/Code/go/bin'
     '';
 in {
