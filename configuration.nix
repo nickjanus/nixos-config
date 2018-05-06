@@ -24,11 +24,11 @@ let
   };
 
   basePackages = with pkgs; [
+    # General
     ack
     arandr
     bind
     chromium
-    cmus
     direnv
     dmenu
     efibootmgr
@@ -67,6 +67,15 @@ let
     xsel
     zsh
     zsh-prezto
+
+    # Music
+    cddiscid
+    cdparanoia
+    cmus
+    ffmpeg
+    flac
+    glyr
+    perlPackages.MusicBrainzDiscID
   ];
 
   zsh_config = import ./zsh.nix {
@@ -89,7 +98,14 @@ in {
       )
     ];
 
-  environment.etc = zsh_config.environment_etc;
+    environment.etc = zsh_config.environment_etc ++ [
+      { 
+        target = "abcde.conf";
+        source = import ./abcde.nix {
+          inherit (pkgs) writeText abcde cddiscid cdparanoia ffmpeg flac glyr;
+        };
+      }
+    ];
 
   fonts = {
     enableFontDir = true;
