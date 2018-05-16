@@ -82,7 +82,7 @@ let
       export PAGER='${less}/bin/less -R'
       export KEYTIMEOUT=1
 
-      alias ergodox-update='teensy-loader-cli -v -mmcu=atmega32u4'
+      alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
 
       ### Work
       alias vpnup='nmcli connection up digitalocean'
