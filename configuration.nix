@@ -57,6 +57,7 @@ let
     s3cmd
     screen
     sysstat
+    teensy-loader-cli
     terminator
     tmux
     tree
