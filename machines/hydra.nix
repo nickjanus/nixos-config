@@ -35,6 +35,17 @@
           sha256 = "8b587bd6a3621b0f0bc2d653be4e2c1947ac2d64443935af32384bf1312841d7";
         };
       };
+      xrandrHeads = [
+        {
+          output = "DVI-D-0";
+          primary = true;
+          monitorConfig = '' Option "LeftOf" "DVI-I-1" '';
+        }
+        {
+          output = "DVI-I-1";
+          monitorConfig = '' Option "RightOf" "DVI-D-0" '';
+        }
+      ];
     };
   };
 }
