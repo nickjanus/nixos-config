@@ -59,6 +59,7 @@ let
     sysstat
     teensy-loader-cli
     terminator
+    terraform
     tmux
     tree
     unzip
