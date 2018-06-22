@@ -68,9 +68,6 @@
   services = lib.recursiveUpdate baseServices {
     xserver = {
       dpi = 120;
-      monitorSection = ''
-        DisplaySize 309 174
-      '';
       displayManager.sessionCommands = ''
         # HiDPI
         export GDK_SCALE=2

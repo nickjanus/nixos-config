@@ -89,7 +89,7 @@ let
       alias vpndown='nmcli connection down digitalocean'
       export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/code/go'
-      export PATH=$PATH':/home/nick/Code/go/bin'
+      export PATH=$PATH':/home/nick/code/go/bin'
 
       # Setup direnv
       eval "$(direnv hook zsh)"
