@@ -23,6 +23,7 @@
     docker_compose
     etcd
     git-crypt
+    mysql57
     nmap
     networkmanagerapplet
     openconnect
