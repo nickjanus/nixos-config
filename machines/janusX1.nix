@@ -69,11 +69,6 @@
   services = lib.recursiveUpdate baseServices {
     xserver = {
       dpi = 120;
-      displayManager.sessionCommands = ''
-        # HiDPI
-        export GDK_SCALE=2
-        export GDK_DPI_SCALE=0.625
-      '';
 
       # Enable touchpad support.
       libinput = {
