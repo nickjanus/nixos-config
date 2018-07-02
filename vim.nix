@@ -91,6 +91,9 @@ pkgs.neovim.override {
       " ctrl-p settings
       let g:ctrlp_max_files = 100000
       let g:ctrlp_max_depth = 40
+
+      " Clean up artifacts in neovim, see https://github.com/neovim/neovim/issues/5990
+      let $VTE_VERSION="100"
     '';
 
     vam.knownPlugins = pkgs.vimPlugins; # optional
