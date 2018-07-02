@@ -45,6 +45,10 @@ pkgs.neovim.override {
 
       filetype plugin on    " Enable filetype-specific plugins
 
+      " vim-colors-solarized
+      set background=light
+      colorscheme solarized
+
       " Those types
       if has("user_commands")
         command! -bang -nargs=? -complete=file E e<bang> <args>
@@ -73,6 +77,7 @@ pkgs.neovim.override {
 
       " airline settings
       let g:airline_theme = 'solarized'
+      let g:airline_solarized_bg='light'
       let g:airline_powerline_fonts = 1
       let g:airline#extensions#tabline#enabled = 1
 
