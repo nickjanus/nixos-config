@@ -31,6 +31,7 @@
     openjdk
     openssl
     plantuml
+    powertop
     ruby
     slack
     tcpdump
@@ -80,6 +81,10 @@
         naturalScrolling = true;
         tapping = false;
       };
+      serverFlagsSection = ''
+        Option "BlankTime" "30"
+      '';
+
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
