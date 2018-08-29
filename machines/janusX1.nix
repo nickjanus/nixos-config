@@ -19,6 +19,7 @@
   environment.systemPackages = with pkgs; [
     awscli
     arandr
+    bluez # bluetoothctl
     confd
     cmake
     docker_compose
@@ -53,6 +54,7 @@
   };
 
   hardware = {
+    bluetooth.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;
