@@ -31,6 +31,15 @@ pkgs.neovim.override {
       set backspace=indent,eol,start " Allows backspace on these character
       set clipboard=unnamedplus
 
+      " Folding
+      set foldmethod=syntax
+
+      """ Keep all folds open when a file is opened
+      augroup OpenAllFoldsOnFileOpen
+          autocmd!
+          autocmd BufRead * normal zR
+      augroup END
+
       " Map esc to exit terminal mode
       :tnoremap <Esc> <C-\><C-n>
 
