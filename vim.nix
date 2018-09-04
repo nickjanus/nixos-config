@@ -40,6 +40,9 @@ pkgs.neovim.override {
           autocmd BufRead * normal zR
       augroup END
 
+      """ Don't open folds with block motions
+      set foldopen-=block
+
       " Map esc to exit terminal mode
       :tnoremap <Esc> <C-\><C-n>
 
