@@ -34,6 +34,7 @@ let
     efibootmgr
     elixir
     firefox
+    fwupd
     git
     git-lfs
     gnumake

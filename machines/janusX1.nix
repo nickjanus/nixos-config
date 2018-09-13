@@ -84,7 +84,10 @@
         tapping = false;
       };
       serverFlagsSection = ''
-        Option "BlankTime" "30"
+        Option "BlankTime" "10"
+        Option "StandbyTime" "20"
+        Option "SuspendTime" "20"
+        Option "OffTime" "0"
       '';
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
