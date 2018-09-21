@@ -122,6 +122,7 @@ pkgs.neovim.override {
           "multiple-cursors"
           "syntastic"
           "gitgutter"
+          "tabular"
           #"vim-json" uncomment when this makes it into stable
           "vim-airline-themes"
           "vim-elixir"
