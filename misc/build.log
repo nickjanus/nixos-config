@@ -1,0 +1,70 @@
+QMK Firmware 0.5.156
+[33;01mWARNING:[0m
+ Some git sub-modules are out of date or modified, please consider runnning:[1m
+ make git-submodule
+ You can ignore this warning if you are not compiling any ChibiOS keyboards,
+ or if you have modified the ChibiOS libraries yourself. 
+
+Making [1mergodox_ez[0m with keymap [1mf3fd2ebd999be8f3e9fb[0m
+
+avr-gcc (GCC) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Compiling: keyboards/ergodox_ez/twimaster.cCompiling: keyboards/ergodox_ez/keymaps/f3fd2ebd999be8f3e9fb/keymap.cCompiling: keyboards/ergodox_ez/ergodox_ez.cCompiling: keyboards/ergodox_ez/matrix.cCompiling: quantum/quantum.cCompiling: quantum/keymap_common.c [32;01m[OK][0m
+Compiling: quantum/keycode_config.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: quantum/process_keycode/process_leader.cCompiling: quantum/process_keycode/process_unicode.c [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: quantum/process_keycode/process_unicode_common.cCompiling: quantum/rgblight.cCompiling: ./drivers/avr/ws2812.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: quantum/led_tables.c [32;01m[OK][0m
+Compiling: ./tmk_core/common/host.cCompiling: ./tmk_core/common/keyboard.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/action_tapping.cCompiling: ./tmk_core/common/action.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/action_macro.c [32;01m[OK][0m
+Compiling: ./tmk_core/common/action_layer.cCompiling: ./tmk_core/common/action_util.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/print.cCompiling: ./tmk_core/common/debug.c [32;01m[OK][0m
+Compiling: ./tmk_core/common/util.c [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/eeconfig.cCompiling: ./tmk_core/common/report.cCompiling: ./tmk_core/common/avr/suspend.c [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/avr/bootloader.cCompiling: ./tmk_core/common/avr/timer.c [32;01m[OK][0m
+Assembling: ./tmk_core/common/avr/xprintf.SCompiling: ./tmk_core/common/magic.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/common/mousekey.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: ./tmk_core/protocol/lufa/lufa.cCompiling: ./tmk_core/common/command.c [32;01m[OK][0m
+Compiling: ./tmk_core/protocol/lufa/descriptor.cCompiling: ./tmk_core/protocol/lufa/outputselect.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Class/Common/HIDParser.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/Device_AVR8.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/EndpointStream_AVR8.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/Endpoint_AVR8.c [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/Pipe_AVR8.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/Host_AVR8.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/PipeStream_AVR8.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/USBController_AVR8.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/AVR8/USBInterrupt_AVR8.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/ConfigDescriptors.c [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/DeviceStandardReq.cCompiling: lib/lufa/LUFA/Drivers/USB/Core/Events.c [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/HostStandardReq.c [32;01m[OK][0m
+ [32;01m[OK][0m
+Compiling: lib/lufa/LUFA/Drivers/USB/Core/USBTask.c [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+ [32;01m[OK][0m
+Linking: .build/ergodox_ez_f3fd2ebd999be8f3e9fb.elf [32;01m[OK][0m
+Creating load file for Flash: .build/ergodox_ez_f3fd2ebd999be8f3e9fb.hex [32;01m[OK][0m
+
+Size after:
+   text	   data	    bss	    dec	    hex	filename
+      0	  25632	      0	  25632	   6420	ergodox_ez_f3fd2ebd999be8f3e9fb.hex
+
