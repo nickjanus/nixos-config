@@ -21,6 +21,7 @@
     arandr
     bluez # bluetoothctl
     confd
+    consul
     cmake
     docker_compose
     etcd
