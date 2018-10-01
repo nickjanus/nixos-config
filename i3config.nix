@@ -100,10 +100,10 @@ writeText "i3-config" (
     # bindsym $mod+d exec --no-startup-id ${i3}/bin/i3-dmenu-desktop
 
     # change focus
-    bindsym $mod+j focus left
-    bindsym $mod+k focus down
-    bindsym $mod+l focus up
-    bindsym $mod+semicolon focus right
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
 
     # alternatively, you can use the cursor keys:
     bindsym $mod+Left focus left
@@ -118,16 +118,13 @@ writeText "i3-config" (
     bindsym $mod+Shift+Right move right
 
     # move focused workspace
-    bindsym $mod+Shift+j move workspace to output left
-    bindsym $mod+Shift+k move workspace to output down
-    bindsym $mod+Shift+l move workspace to output up
-    bindsym $mod+Shift+semicolon move workspace to output right
+    bindsym $mod+Shift+h move workspace to output left
+    bindsym $mod+Shift+j move workspace to output down
+    bindsym $mod+Shift+k move workspace to output up
+    bindsym $mod+Shift+l move workspace to output right
 
-    # split in horizontal orientation
-    bindsym $mod+h split h
-
-    # split in vertical orientation
-    bindsym $mod+v split v
+    # toggle between horizontal/vertical splitting
+    bindsym $mod+v split toggle
 
     # enter fullscreen mode for the focused container
     bindsym $mod+f fullscreen toggle
