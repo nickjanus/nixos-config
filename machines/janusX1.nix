@@ -43,7 +43,6 @@
     ruby
     slack
     tcpdump
-    uqmi
     xorg.xdpyinfo
     xorg.xbacklight
     zoom-us
