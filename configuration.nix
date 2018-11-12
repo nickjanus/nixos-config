@@ -101,6 +101,7 @@ in {
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
+      open-dyslexic
       powerline-fonts
       ubuntu_font_family  # Ubuntu fonts
       unifont # some international languages
