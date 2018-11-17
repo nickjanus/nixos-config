@@ -25,6 +25,7 @@ let
 
   basePackages = with pkgs; [
     ack
+    alacritty
     arandr
     bind
     chromium
