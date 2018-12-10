@@ -1,7 +1,7 @@
-{ writeText, zsh-prezto, neovim, less, go }:
+{ pkgs, parameters }:
 
 let
-  self = writeText "zsh-config"
+  self = pkgs.writeText "zsh-config"
     ''
       # Color output (auto set to 'no' on dumb terminals).
       zstyle ':prezto:*:*' color 'yes'
@@ -45,8 +45,14 @@ let
       zstyle ':prezto:module:prompt' theme 'paradox'
 
       # Set the SSH identities to load into the agent.
-      zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa'
-
+  '' + (
+    if (parameters.machine == "janusx1") then ''
+      zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa' 'id_gitlab' 'internal_github' 'jump' 'droplet'
+    ''
+    else ''
+      zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa' 'id_gitlab'
+    ''
+  ) + ''
       # Set syntax highlighters.
       # By default, only the main highlighter is enabled.
       zstyle ':prezto:module:syntax-highlighting' highlighters \
@@ -69,17 +75,14 @@ let
       # Set the window title format.
       zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 
-      # Auto start screen sessions locally and in ssh sessions
-      zstyle ':prezto:module:screen:auto-start' remote 'yes'
-
       # Auto convert .... to ../..
       zstyle ':prezto:module:editor' dot-expansion 'yes'
 
       # -------------------------------------------------
 
-      export EDITOR='${neovim}/bin/nvim'
-      export VISUAL='${neovim}/bin/nvim'
-      export PAGER='${less}/bin/less -R'
+      export EDITOR='${pkgs.neovim}/bin/nvim'
+      export VISUAL='${pkgs.neovim}/bin/nvim'
+      export PAGER='${pkgs.less}/bin/less -R'
       export KEYTIMEOUT=1
 
       alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
@@ -87,7 +90,7 @@ let
       ### Work
       alias vpnup='nmcli connection up digitalocean'
       alias vpndown='nmcli connection down digitalocean'
-      export GOROOT='${go.out}/share/go'
+      export GOROOT='${pkgs.go.out}/share/go'
       export GOPATH='/home/nick/code/go'
       export PATH=$PATH':/home/nick/code/go/bin'
 
@@ -96,22 +99,22 @@ let
     '';
 in {
   environment_etc =
-    [ { source = "${zsh-prezto}/runcoms/zlogin";
+    [ { source = "${pkgs.zsh-prezto}/runcoms/zlogin";
         target = "zlogin";
       }
-      { source = "${zsh-prezto}/runcoms/zlogout";
+      { source = "${pkgs.zsh-prezto}/runcoms/zlogout";
         target = "zlogout";
       }
       { source = self;
         target = "zpreztorc";
       }
-      { source = "${zsh-prezto}/runcoms/zprofile";
+      { source = "${pkgs.zsh-prezto}/runcoms/zprofile";
         target = "zprofile.local";
       }
-      { source = "${zsh-prezto}/runcoms/zshenv";
+      { source = "${pkgs.zsh-prezto}/runcoms/zshenv";
         target = "zshenv.local";
       }
-      { source = "${zsh-prezto}/runcoms/zshrc";
+      { source = "${pkgs.zsh-prezto}/runcoms/zshrc";
         target = "zshrc.local";
       }
     ];
