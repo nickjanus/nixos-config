@@ -74,7 +74,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit pkgs; inherit parameters;
+    inherit (pkgs) writeText zsh-prezto neovim less go;
   };
 
 in {
