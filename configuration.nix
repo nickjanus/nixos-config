@@ -36,6 +36,7 @@ let
     elixir
     firefox
     fwupd
+    gcc
     git
     git-lfs
     gnumake
