@@ -28,12 +28,15 @@ let
     alacritty
     arandr
     bind
+    binutils
+    calibre
     chromium
     cmus
     direnv
     dmenu
     efibootmgr
     elixir
+    file
     firefox
     fwupd
     gcc
@@ -123,6 +126,8 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
 
+    adb.enable = true;
+
     chromium = {
       jre = false;
       enableGoogleTalkPlugin = true;
@@ -145,7 +150,7 @@ in {
   users.extraUsers.nick = {
     home = "/home/nick";
     description = "Nick Janus";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "adbusers" "networkmanager" "docker" ];
     isNormalUser = true;
     uid = 1000;
   };

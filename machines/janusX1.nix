@@ -23,6 +23,7 @@
     confd
     consul
     cmake
+    discord
     docker_compose
     etcd
     git-crypt
@@ -36,6 +37,7 @@
     powertop
     ruby
     slack
+    socat
     tcpdump
     xorg.xdpyinfo
     xorg.xbacklight
