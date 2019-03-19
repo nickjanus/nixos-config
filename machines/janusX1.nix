@@ -1,6 +1,8 @@
 { lib, config, pkgs, baseServices, basePackages}:
 
-{
+let
+  unstable = import <unstable> {}; # use unstable channel
+in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
     loader.systemd-boot.enable = true;
@@ -29,8 +31,9 @@
     git-crypt
     mysql57
     nmap
+    networkmanager
     networkmanagerapplet
-    openconnect
+    unstable.openconnect
     openjdk
     openssl
     plantuml
@@ -48,7 +51,7 @@
     hostName = "janusX1";
     networkmanager = {
       enable = true;
-      useDnsmasq = true;
+      useDnsmasq = false; #TODO Reenable once networkmanager can handle gp
     };
     extraHosts = ''
       10.42.0.10 hargw bucket01.hargw

@@ -3,6 +3,7 @@ This repo houses all of my nixos configuration for a work laptop and my home des
 
 ### Setup
 - Install nixos
+- Add the unstable channel to your machine and name it `unstable`
 - Backup `./hardware-configuration.nix`
 - Clone this repo into /etc/nixos
 - Decide on a name for the machine you're setting up and enter it in `./parameters.nix` like so:

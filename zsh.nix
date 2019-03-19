@@ -85,8 +85,8 @@ let
       alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
 
       ### Work
-      alias vpnup='nmcli connection up digitalocean'
-      alias vpndown='nmcli connection down digitalocean'
+      alias vpnup='sudo openconnect --protocol=gp -b -u njanus https://vpn-nyc3.digitalocean.com'
+      alias vpndown='sudo kill -s INT `pgrep openconnect`'
       alias cephcontainer='docker run --rm --name ceph \
            --network host \
            -e CEPH_DAEMON=demo \
