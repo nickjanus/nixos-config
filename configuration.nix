@@ -6,6 +6,7 @@
 
 let
   parameters = import ./parameters.nix;
+  unstable = import <unstable> {}; # use unstable channel
 
   baseServices = {
     locate.enable = true;
@@ -30,14 +31,14 @@ let
     bind
     binutils
     calibre
-    chromium
+    unstable.chromium
     cmus
     direnv
     dmenu
     efibootmgr
     elixir
     file
-    firefox
+    unstable.firefox
     fwupd
     gcc
     git
@@ -57,7 +58,6 @@ let
     lsof
     maim # screenshot tool
     neovim
-    nix-repl # repl for the nix language
     openssh
     pavucontrol
     s3cmd

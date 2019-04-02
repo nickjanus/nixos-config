@@ -51,7 +51,6 @@ in {
     hostName = "janusX1";
     networkmanager = {
       enable = true;
-      useDnsmasq = false; #TODO Reenable once networkmanager can handle gp
     };
     extraHosts = ''
       10.42.0.10 hargw bucket01.hargw
