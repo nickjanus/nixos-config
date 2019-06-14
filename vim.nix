@@ -32,7 +32,7 @@ pkgs.neovim.override {
       set backspace=indent,eol,start " Allows backspace on these character
       set clipboard=unnamedplus
 
-      setlocal spell
+      set spell
 
       " Folding
       set foldmethod=syntax
