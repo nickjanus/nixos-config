@@ -19,6 +19,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
+    ansible
     awscli
     arandr
     bluez # bluetoothctl
@@ -44,7 +45,6 @@ in {
     tcpdump
     xorg.xdpyinfo
     xorg.xbacklight
-    zoom-us
   ] ++ basePackages;
 
   networking = {
@@ -88,12 +88,6 @@ in {
         naturalScrolling = true;
         tapping = false;
       };
-      serverFlagsSection = ''
-        Option "BlankTime" "10"
-        Option "StandbyTime" "20"
-        Option "SuspendTime" "20"
-        Option "OffTime" "0"
-      '';
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
