@@ -62,6 +62,7 @@ let
     pavucontrol
     s3cmd
     screen
+    signal-desktop
     sysstat
     teensy-loader-cli
     terminator

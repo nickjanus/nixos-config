@@ -43,8 +43,11 @@ in {
     slack
     socat
     tcpdump
+    vlc
+    vokoscreen
     xorg.xdpyinfo
     xorg.xbacklight
+    zoom-us
   ] ++ basePackages;
 
   networking = {
