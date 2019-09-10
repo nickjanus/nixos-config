@@ -178,8 +178,8 @@ writeText "i3-config" (
         bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
         # Sreen brightness controls
-        bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 5 # increase screen brightness
-        bindsym XF86MonBrightnessDown exec ${xorg.xbacklight}/bin/xbacklight -dec 5 # decrease screen brightness
+        bindsym XF86MonBrightnessUp exec ${light}/bin/light -s sysfs/backlight/intel_backlight -A 5 # increase screen brightness 5%
+        bindsym XF86MonBrightnessDown exec ${light}/bin/light -s sysfs/backlight/intel_backlight -U 5 # decrease screen brightness by 5%
 
         # Start nm-applet
         exec --no-startup-id nm-applet --sm-disable

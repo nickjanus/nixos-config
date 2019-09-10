@@ -30,6 +30,7 @@ in {
     docker_compose
     etcd
     git-crypt
+    light
     mysql57
     nmap
     networkmanager
@@ -46,7 +47,6 @@ in {
     vlc
     vokoscreen
     xorg.xdpyinfo
-    xorg.xbacklight
     zoom-us
   ] ++ basePackages;
 
@@ -63,6 +63,7 @@ in {
 
   hardware = {
     bluetooth.enable = true;
+    brightnessctl.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;

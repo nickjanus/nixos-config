@@ -151,7 +151,13 @@ in {
   users.extraUsers.nick = {
     home = "/home/nick";
     description = "Nick Janus";
-    extraGroups = [ "wheel" "adbusers" "networkmanager" "docker" ];
+    extraGroups = [ 
+      "adbusers"
+      "docker"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
     isNormalUser = true;
     uid = 1000;
   };
