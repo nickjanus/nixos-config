@@ -127,8 +127,6 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
 
-    adb.enable = true;
-
     chromium = {
       jre = false;
       enableGoogleTalkPlugin = true;
@@ -152,7 +150,6 @@ in {
     home = "/home/nick";
     description = "Nick Janus";
     extraGroups = [ 
-      "adbusers"
       "docker"
       "networkmanager"
       "video"
