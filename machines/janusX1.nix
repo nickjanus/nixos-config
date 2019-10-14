@@ -27,9 +27,10 @@ in {
     consul
     cmake
     discord
-    docker_compose
+    unstable.docker_compose
     etcd
     git-crypt
+    glide
     light
     mysql57
     nmap
