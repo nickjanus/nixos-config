@@ -127,12 +127,6 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
 
-    chromium = {
-      jre = false;
-      enableGoogleTalkPlugin = true;
-      enablePepperPDF = true;
-    };
-
     packageOverrides = pkgs: rec {
       neovim = (import ./vim.nix);
     };
@@ -175,5 +169,5 @@ in {
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03";
+  system.stateVersion = "19.09";
 }
