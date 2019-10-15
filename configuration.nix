@@ -10,6 +10,11 @@ let
 
   baseServices = {
     locate.enable = true;
+
+    # Swap out systemd time daemon until it works
+    timesyncd.enable = false;
+    ntp.enable = true;
+
     xserver = {
       autorun = true;
       enable = true;
