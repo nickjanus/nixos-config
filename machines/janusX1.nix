@@ -22,7 +22,7 @@ in {
     ansible
     awscli
     arandr
-    bluez # bluetoothctl
+    # bluez # bluetoothctl
     confd
     consul
     cmake
@@ -63,7 +63,7 @@ in {
   };
 
   hardware = {
-    bluetooth.enable = true;
+    bluetooth.enable = false;
     brightnessctl.enable = true;
     pulseaudio = {
       enable = true;
