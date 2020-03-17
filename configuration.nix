@@ -51,7 +51,7 @@ let
     gnumake
     gnupg
     gnupg1compat
-    go
+    go_1_13
     gptfdisk
     htop
     i3
