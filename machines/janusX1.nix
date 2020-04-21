@@ -26,7 +26,6 @@ in {
     confd
     consul
     cmake
-    discord
     unstable.docker_compose
     etcd
     git-crypt
