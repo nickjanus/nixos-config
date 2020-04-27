@@ -41,6 +41,7 @@ let
     direnv
     dmenu
     efibootmgr
+    efivar
     elixir
     file
     unstable.firefox

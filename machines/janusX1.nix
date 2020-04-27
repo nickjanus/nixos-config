@@ -35,6 +35,7 @@ in {
     nmap
     networkmanager
     networkmanagerapplet
+    python3
     unstable.openconnect
     openjdk
     openssl
@@ -46,6 +47,7 @@ in {
     tcpdump
     vlc
     vokoscreen
+    wol
     xorg.xdpyinfo
     zoom-us
   ] ++ basePackages;
