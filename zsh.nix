@@ -83,6 +83,7 @@ let
       export KEYTIMEOUT=1
 
       alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
+      alias nas-up='wol a8:a1:59:08:45:e0'
 
       ### Work
       alias vpnup='sudo openconnect --protocol=gp -b -u njanus https://vpn-nyc3.digitalocean.com'
