@@ -111,7 +111,7 @@ in {
     zlogin = {
       source = "${zsh-prezto}/runcoms/zlogin";
     };
-    zlogout =  {
+    zlogout = {
       source = "${zsh-prezto}/runcoms/zlogout";
     };
     zpreztorc = {
