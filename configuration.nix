@@ -6,7 +6,6 @@
 
 let
   parameters = import ./parameters.nix;
-  unstable = import <unstable> {}; # use unstable channel
 
   baseServices = {
     locate.enable = true;
@@ -38,7 +37,6 @@ let
     bind
     binutils
     calibre
-    unstable.chromium
     cmus
     direnv
     dmenu
@@ -46,7 +44,6 @@ let
     efivar
     elixir
     file
-    unstable.firefox
     fwupd
     gcc
     git
