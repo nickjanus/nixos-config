@@ -27,9 +27,12 @@ pkgs.neovim.override {
       set showcmd
 
       set number
+      set cursorline
       set ruler
       set backspace=indent,eol,start " Allows backspace on these character
       set clipboard=unnamedplus
+
+      set spell
 
       " Folding
       set foldmethod=syntax

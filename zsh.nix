@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto, neovim, less, go }:
+{ writeText, zsh-prezto, neovim, less, go_1_13 }:
 
 let
   self = writeText "zsh-config"
@@ -83,11 +83,23 @@ let
       export KEYTIMEOUT=1
 
       alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
+      alias nas-up='wol a8:a1:59:08:45:e0'
 
       ### Work
-      alias vpnup='nmcli connection up digitalocean'
-      alias vpndown='nmcli connection down digitalocean'
-      export GOROOT='${go.out}/share/go'
+      alias vpnup='sudo openconnect --protocol=gp -b -u njanus https://vpn-nyc3.digitalocean.com'
+      alias vpndown='sudo kill -s INT `pgrep openconnect`'
+      alias cephcontainer='docker run --rm --name ceph \
+           --network host \
+           -e CEPH_DAEMON=demo \
+           -e DEMO_DAEMONS=mon,osd,mgr,mds,rgw \
+           -e MON_IP=127.0.0.1 \
+           -e CEPH_PUBLIC_NETWORK=0.0.0.0/0 \
+           -e CEPH_DEMO_UID=test_admin \
+           -e CEPH_DEMO_ACCESS_KEY=test-admin \
+           -e CEPH_DEMO_SECRET_KEY=zMTLJsb5oxW2XtH4xsJTkf0MgunWXreFbbdjkfPV \
+           -e RGW_CIVETWEB_PORT=7480 \
+           -d docker.internal.digitalocean.com/library/ceph:7f2db4f4e95b2c2d9592b670056ff55b5ee7b4f1'
+      export GOROOT='${go_1_13.out}/share/go'
       export GOPATH='/home/nick/code/go'
       export PATH=$PATH':/home/nick/code/go/bin'
 

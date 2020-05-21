@@ -1,6 +1,8 @@
 { lib, config, pkgs, baseServices, basePackages}:
 
-{
+let
+  unstable = import <unstable> {}; # use unstable channel
+in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
     loader.systemd-boot.enable = true;
@@ -17,27 +19,36 @@
   };
 
   environment.systemPackages = with pkgs; [
+    ansible
     awscli
     arandr
-    bluez # bluetoothctl
+    # bluez # bluetoothctl
     confd
+    consul
     cmake
-    docker_compose
+    unstable.docker_compose
     etcd
     git-crypt
+    glide
+    light
     mysql57
     nmap
+    networkmanager
     networkmanagerapplet
-    openconnect
+    python3
+    unstable.openconnect
     openjdk
     openssl
     plantuml
     powertop
     ruby
     slack
+    socat
     tcpdump
+    vlc
+    vokoscreen
+    wol
     xorg.xdpyinfo
-    xorg.xbacklight
     zoom-us
   ] ++ basePackages;
 
@@ -45,7 +56,6 @@
     hostName = "janusX1";
     networkmanager = {
       enable = true;
-      useDnsmasq = true;
     };
     extraHosts = ''
       10.42.0.10 hargw bucket01.hargw
@@ -54,7 +64,8 @@
   };
 
   hardware = {
-    bluetooth.enable = true;
+    bluetooth.enable = false;
+    brightnessctl.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;
@@ -83,12 +94,6 @@
         naturalScrolling = true;
         tapping = false;
       };
-      serverFlagsSection = ''
-        Option "BlankTime" "10"
-        Option "StandbyTime" "20"
-        Option "SuspendTime" "20"
-        Option "OffTime" "0"
-      '';
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };

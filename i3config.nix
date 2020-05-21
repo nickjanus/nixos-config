@@ -109,10 +109,10 @@ writeText "i3-config" (
     # bindsym $mod+d exec --no-startup-id ${i3}/bin/i3-dmenu-desktop
 
     # change focus
-    bindsym $mod+j focus left
-    bindsym $mod+k focus down
-    bindsym $mod+l focus up
-    bindsym $mod+semicolon focus right
+    bindsym $mod+h focus left
+    bindsym $mod+j focus down
+    bindsym $mod+k focus up
+    bindsym $mod+l focus right
 
     # alternatively, you can use the cursor keys:
     bindsym $mod+Left focus left
@@ -127,16 +127,13 @@ writeText "i3-config" (
     bindsym $mod+Shift+Right move right
 
     # move focused workspace
-    bindsym $mod+Shift+j move workspace to output left
-    bindsym $mod+Shift+k move workspace to output down
-    bindsym $mod+Shift+l move workspace to output up
-    bindsym $mod+Shift+semicolon move workspace to output right
+    bindsym $mod+Shift+h move workspace to output left
+    bindsym $mod+Shift+j move workspace to output down
+    bindsym $mod+Shift+k move workspace to output up
+    bindsym $mod+Shift+l move workspace to output right
 
-    # split in horizontal orientation
-    bindsym $mod+h split h
-
-    # split in vertical orientation
-    bindsym $mod+v split v
+    # toggle between horizontal/vertical splitting
+    bindsym $mod+v split toggle
 
     # enter fullscreen mode for the focused container
     bindsym $mod+f fullscreen toggle
@@ -190,8 +187,8 @@ writeText "i3-config" (
         bindsym XF86AudioMute exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
         # Sreen brightness controls
-        bindsym XF86MonBrightnessUp exec ${xorg.xbacklight}/bin/xbacklight -inc 10 # increase screen brightness
-        bindsym XF86MonBrightnessDown exec ${xorg.xbacklight}/bin/xbacklight -dec 10 # decrease screen brightness
+        bindsym XF86MonBrightnessUp exec ${light}/bin/light -s sysfs/backlight/intel_backlight -A 5 # increase screen brightness 5%
+        bindsym XF86MonBrightnessDown exec ${light}/bin/light -s sysfs/backlight/intel_backlight -U 5 # decrease screen brightness by 5%
 
         # Start nm-applet
         exec --no-startup-id nm-applet --sm-disable

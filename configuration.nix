@@ -6,9 +6,15 @@
 
 let
   parameters = import ./parameters.nix;
+  unstable = import <unstable> {}; # use unstable channel
 
   baseServices = {
     locate.enable = true;
+
+    # Swap out systemd time daemon until it works
+    timesyncd.enable = false;
+    ntp.enable = true;
+
     xserver = {
       autorun = true;
       enable = true;
@@ -26,23 +32,29 @@ let
 
   basePackages = with pkgs; [
     ack
+    alacritty
     arandr
     bat
     bind
-    chromium
+    binutils
+    calibre
+    unstable.chromium
     cmus
     direnv
     dmenu
     efibootmgr
+    efivar
     elixir
-    firefox
+    file
+    unstable.firefox
     fwupd
+    gcc
     git
     git-lfs
     gnumake
     gnupg
     gnupg1compat
-    go
+    go_1_13
     gptfdisk
     htop
     i3
@@ -58,6 +70,7 @@ let
     pavucontrol
     s3cmd
     screen
+    signal-desktop
     sysstat
     teensy-loader-cli
     terminator
@@ -74,7 +87,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto neovim less go;
+    inherit (pkgs) writeText zsh-prezto neovim less go_1_13;
   };
 
 in {
@@ -102,6 +115,7 @@ in {
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
+      open-dyslexic
       powerline-fonts
       ubuntu_font_family  # Ubuntu fonts
       unifont # some international languages
@@ -139,7 +153,12 @@ in {
   users.extraUsers.nick = {
     home = "/home/nick";
     description = "Nick Janus";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ 
+      "docker"
+      "networkmanager"
+      "video"
+      "wheel"
+    ];
     isNormalUser = true;
     uid = 1000;
   };
