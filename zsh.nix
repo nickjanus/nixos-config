@@ -45,7 +45,7 @@ let
       zstyle ':prezto:module:prompt' theme 'paradox'
 
       # Set the SSH identities to load into the agent.
-      zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa'
+      zstyle ':prezto:module:ssh:load' identities 'id_nas' 'id_github'
 
       # Set syntax highlighters.
       # By default, only the main highlighter is enabled.
