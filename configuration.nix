@@ -15,10 +15,11 @@ let
       layout = "us";
       windowManager.i3.enable = true;
       windowManager.i3.configFile = import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; };
-      windowManager.default = "i3";
-      displayManager.slim = {
-        enable = true;
-        defaultUser = "nick";
+      displayManager = {
+        defaultSession = "none+i3";
+        lightdm = {
+          enable = true;
+        };
       };
     };
   };
@@ -26,6 +27,7 @@ let
   basePackages = with pkgs; [
     ack
     arandr
+    bat
     bind
     chromium
     cmus
@@ -52,7 +54,6 @@ let
     lsof
     maim # screenshot tool
     neovim
-    nix-repl # repl for the nix language
     openssh
     pavucontrol
     s3cmd
@@ -108,9 +109,11 @@ in {
   };
 
   # Select internationalisation properties.
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
@@ -119,12 +122,6 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
-
-    chromium = {
-      jre = false;
-      enableGoogleTalkPlugin = true;
-      enablePepperPDF = true;
-    };
 
     packageOverrides = pkgs: rec {
       neovim = (import ./vim.nix);
@@ -149,11 +146,11 @@ in {
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
   systemd.services.lockOnClose = {
-    description = "Lock X session using slimlock";
+    description = "Lock X session using dm-tool";
     wantedBy = [ "sleep.target" ];
     serviceConfig = {
       User = "nick";
-      ExecStart = "${pkgs.slim}/bin/slimlock";
+      ExecStart = "${pkgs.lightdm}/bin/dm-tool lock";
     };
   };
 
@@ -163,5 +160,5 @@ in {
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.03";
+  system.stateVersion = "20.03";
 }

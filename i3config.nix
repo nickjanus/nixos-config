@@ -16,7 +16,7 @@ let
     order += "disk /"
   '' + (
     if (parameters.machine == "hydra") then ''
-      order += "ethernet enp11s0"
+      order += "wireless wlp0s29u1u4"
     ''
     else ''
       order += "wireless wlp4s0"
@@ -68,6 +68,15 @@ let
       path_exists VPN {
         # path exists when a VPN tunnel launched by nmcli/nm-applet is active
         path = "/proc/sys/net/ipv4/conf/tun0"
+      }
+    ''
+    else
+    ""
+  ) + (
+    if (parameters.machine == "hydra") then ''
+      wireless wlp0s29u1u4 {
+        format_up = " WiFi: %ip %quality %essid %bitrate "
+        format_down = " WiFi: (/) "
       }
     ''
     else
