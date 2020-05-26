@@ -35,6 +35,7 @@
     abcde
     cargo
     discord
+    gcc
     rustc
   ] ++ basePackages;
 

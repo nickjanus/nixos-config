@@ -16,7 +16,7 @@ let
     order += "disk /"
   '' + (
     if (parameters.machine == "hydra") then ''
-      order += "wireless wlp0s29u1u4"
+      order += "wireless wlp0s29u1u5"
     ''
     else ''
       order += "wireless wlp4s0"
@@ -74,7 +74,7 @@ let
     ""
   ) + (
     if (parameters.machine == "hydra") then ''
-      wireless wlp0s29u1u4 {
+      wireless wlp0s29u1u5 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
