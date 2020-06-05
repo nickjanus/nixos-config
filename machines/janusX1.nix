@@ -88,6 +88,7 @@ in {
       # Enable touchpad support.
       libinput = {
         enable = true;
+        dev = "/dev/input/event22";
         accelSpeed = "0.25";
         clickMethod = "clickfinger";
         middleEmulation = false;
