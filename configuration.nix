@@ -165,15 +165,6 @@ in {
   };
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
-  systemd.services.lockOnClose = {
-    description = "Lock X session using dm-tool";
-    wantedBy = [ "sleep.target" ];
-    serviceConfig = {
-      User = "nick";
-      ExecStart = "${pkgs.lightlocker}/bin/light-locker-command -l";
-    };
-  };
-
   virtualisation.docker.enable = true;
 
   # This value determines the NixOS release with which your system is to be
