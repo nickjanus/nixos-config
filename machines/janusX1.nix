@@ -36,8 +36,8 @@ in {
     nmap
     networkmanager
     networkmanagerapplet
+    openconnect
     python3
-    unstable.openconnect
     openjdk
     openssl
     plantuml

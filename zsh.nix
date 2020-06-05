@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto, neovim, less, go_1_13 }:
+{ writeText, zsh-prezto, neovim, less, go_1_13, openconnect }:
 
 let
   self = writeText "zsh-config"
@@ -86,7 +86,7 @@ let
       alias nas-up='wol a8:a1:59:08:45:e0'
 
       ### Work
-      alias vpnup='sudo openconnect --protocol=gp -b -u njanus https://vpn-nyc3.digitalocean.com'
+      alias vpnup='sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn'
       alias vpndown='sudo kill -s INT `pgrep openconnect`'
       alias cephcontainer='docker run --rm --name ceph \
            --network host \
