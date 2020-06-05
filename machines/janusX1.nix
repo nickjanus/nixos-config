@@ -9,13 +9,12 @@ in {
     loader.efi.canTouchEfiVariables = true;
     kernelParams = ["psmouse.synaptics_intertouch=0"];
 
-    initrd.luks.devices = [
-      {
-        name = "lvm";
+    initrd.luks.devices = {
+      "lvm" = {
         device = "/dev/nvme0n1p5";
         preLVM = true;
-      }
-    ];
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -23,6 +22,7 @@ in {
     awscli
     arandr
     # bluez # bluetoothctl
+    brightnessctl
     confd
     consul
     cmake
@@ -66,7 +66,6 @@ in {
 
   hardware = {
     bluetooth.enable = false;
-    brightnessctl.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;

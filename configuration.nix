@@ -63,6 +63,7 @@ let
     inotify-tools # used by phoenix
     irssi
     jq
+    lightlocker # screen locker for use with lightdm
     lsof
     maim # screenshot tool
     neovim
@@ -169,7 +170,7 @@ in {
     wantedBy = [ "sleep.target" ];
     serviceConfig = {
       User = "nick";
-      ExecStart = "${pkgs.lightdm}/bin/dm-tool lock";
+      ExecStart = "${pkgs.lightlocker}/bin/light-locker-command -l";
     };
   };
 
