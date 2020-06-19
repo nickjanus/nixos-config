@@ -55,6 +55,7 @@ in {
       };
     };
     xserver.enable = false;
+    nfs.server.enable = true;
     openssh.enable = true;
     wakeonlan.interfaces = [
       {
