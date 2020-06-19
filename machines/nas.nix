@@ -20,6 +20,7 @@ in {
     hdparm
     lshw
     # lsiutil # derivation currently broken
+    openiscsi
     pciutils
     sdparm
     sg3_utils
@@ -43,9 +44,9 @@ in {
 
   services = lib.recursiveUpdate baseServices {
     zfs = {
-      autoscrub = {
+      autoScrub = {
         enable = true;
-        interval = daily;
+        interval = "daily";
       };
       autoSnapshot.enable = false;
       trim.enable = false; # autotrim is enabled
