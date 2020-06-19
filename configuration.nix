@@ -65,6 +65,7 @@ let
     maim # screenshot tool
     neovim
     openssh
+    parted
     pavucontrol
     s3cmd
     screen

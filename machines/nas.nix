@@ -16,9 +16,12 @@ in {
   environment.systemPackages = with pkgs; [
     at
     ethtool
+    fio
+    hdparm
     lshw
     # lsiutil # derivation currently broken
     pciutils
+    sdparm
     sg3_utils
     smartmontools
     zfs
