@@ -3,6 +3,8 @@
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.zfs.forceImportAll = false;
+  boot.zfs.forceImportRoot = false;
 
   boot.initrd.luks.devices = {
     nixos = {

@@ -43,16 +43,12 @@ in {
 
   services = lib.recursiveUpdate baseServices {
     zfs = {
-      autoScrub = {
+      autoscrub = {
         enable = true;
-        interval = "Mon, 12:00";
-        pools = []; # srcub all pools
+        interval = daily;
       };
       autoSnapshot.enable = false;
-      trim = {
-        enable = true;
-        interval = "weekly";
-      };
+      trim.enable = false; # autotrim is enabled
     };
     xserver = {
       enable = false;
