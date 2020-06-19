@@ -54,7 +54,12 @@ in {
         interval = "weekly";
       };
     };
-    xserver.enable = false;
+    xserver = {
+      enable = false;
+      displayManager = {
+        lightdm.enable = false;
+      };
+    };
     nfs.server.enable = true;
     openssh.enable = true;
     wakeonlan.interfaces = [
