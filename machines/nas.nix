@@ -34,7 +34,17 @@ in {
     useDHCP = false;
     wireless.enable = false;
     interfaces.enp5s0.useDHCP = true;
-    firewall.allowedTCPPorts = [ 22 ];
+    firewall = {
+      allowedTCPPorts = [
+        22
+        111 # nfs
+        2049 # nfs
+      ];
+      allowedUDPPorts = [
+        111 # nfs
+        2049 # nfs
+      ];
+    };
   };
 
   hardware = {
