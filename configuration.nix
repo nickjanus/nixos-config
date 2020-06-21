@@ -64,6 +64,7 @@ let
     lsof
     maim # screenshot tool
     neovim
+    nfs-utils
     openssh
     parted
     pavucontrol
