@@ -65,6 +65,7 @@ let
     maim # screenshot tool
     neovim
     nfs-utils
+    obs-studio
     openssh
     parted
     pavucontrol
