@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto, neovim, less, go_1_13, openconnect }:
+{ writeText, zsh-prezto, neovim, less, go, openconnect }:
 
 let
   self = writeText "zsh-config"
@@ -99,7 +99,7 @@ let
            -e CEPH_DEMO_SECRET_KEY=zMTLJsb5oxW2XtH4xsJTkf0MgunWXreFbbdjkfPV \
            -e RGW_CIVETWEB_PORT=7480 \
            -d docker.internal.digitalocean.com/library/ceph:7f2db4f4e95b2c2d9592b670056ff55b5ee7b4f1'
-      export GOROOT='${go_1_13.out}/share/go'
+      export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/code/go'
       export PATH=$PATH':/home/nick/code/go/bin'
 

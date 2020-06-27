@@ -51,7 +51,7 @@ let
     gnumake
     gnupg
     gnupg1compat
-    go_1_13
+    go
     gptfdisk
     htop
     i3
@@ -64,6 +64,8 @@ let
     lsof
     maim # screenshot tool
     neovim
+    nfs-utils
+    obs-studio
     openssh
     parted
     pavucontrol
@@ -86,7 +88,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto neovim less go_1_13 openconnect;
+    inherit (pkgs) writeText zsh-prezto neovim less go openconnect;
   };
 
 in {

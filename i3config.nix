@@ -242,6 +242,8 @@ writeText "i3-config" (
 
     bindsym $mod+r mode "resize"
 
+    exec_always --no-startup-id /usr/bin/light-locker
+
     # Start i3bar to display a workspace bar (plus the system information i3status
     # finds out, if available)
     bar {
