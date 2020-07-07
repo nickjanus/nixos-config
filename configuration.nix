@@ -37,6 +37,7 @@ let
     bind
     binutils
     calibre
+    chromium
     cmus
     direnv
     dmenu
@@ -44,6 +45,7 @@ let
     efivar
     elixir
     file
+    firefox
     fwupd
     gcc
     git
