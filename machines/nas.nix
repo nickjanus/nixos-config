@@ -17,6 +17,7 @@ in {
     at
     ethtool
     fio
+    handbrake
     hdparm
     lshw
     # lsiutil # derivation currently broken
