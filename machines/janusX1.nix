@@ -31,17 +31,18 @@ in {
     etcd
     git-crypt
     glide
+    libwacom
     light
     mysql57
     nmap
     networkmanager
     networkmanagerapplet
     openconnect
-    python3
     openjdk
     openssl
     plantuml
     powertop
+    python3
     ruby
     slack
     socat
@@ -95,6 +96,9 @@ in {
         naturalScrolling = true;
         tapping = false;
       };
+
+      # Enable support for wacom tablet
+      wacom.enable = true
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
