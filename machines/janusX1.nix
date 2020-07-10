@@ -21,6 +21,7 @@ in {
     ansible
     awscli
     arandr
+    autorandr
     # bluez # bluetoothctl
     brightnessctl
     confd
@@ -85,6 +86,10 @@ in {
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   services = lib.recursiveUpdate baseServices {
+    autorandr = {
+      enable = true;
+      defaultTarget = "laptop";
+    };
     xserver = {
       dpi = 120;
 
