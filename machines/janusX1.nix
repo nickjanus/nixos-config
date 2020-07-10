@@ -29,8 +29,10 @@ in {
     discord
     unstable.docker_compose
     etcd
+    gimp
     git-crypt
     glide
+    krita
     libwacom
     light
     mysql57
@@ -98,7 +100,7 @@ in {
       };
 
       # Enable support for wacom tablet
-      wacom.enable = true
+      wacom.enable = true;
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
