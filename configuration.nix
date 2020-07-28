@@ -34,6 +34,7 @@ let
     alacritty
     arandr
     bat
+    bc
     bind
     binutils
     calibre

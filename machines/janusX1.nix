@@ -33,6 +33,7 @@ in {
     gimp
     git-crypt
     glide
+    grepcidr
     krita
     libwacom
     light
@@ -48,6 +49,7 @@ in {
     python3
     ruby
     slack
+    smartmontools
     socat
     tcpdump
     vlc
