@@ -1,4 +1,4 @@
-{ writeText, zsh-prezto, neovim, less, go_1_13 }:
+{ writeText, zsh-prezto, neovim, less, go, openconnect }:
 
 let
   self = writeText "zsh-config"
@@ -45,7 +45,7 @@ let
       zstyle ':prezto:module:prompt' theme 'paradox'
 
       # Set the SSH identities to load into the agent.
-      zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'github_rsa'
+      zstyle ':prezto:module:ssh:load' identities 'id_nas' 'id_github'
 
       # Set syntax highlighters.
       # By default, only the main highlighter is enabled.
@@ -83,9 +83,10 @@ let
       export KEYTIMEOUT=1
 
       alias ergodox-update='sudo teensy-loader-cli --mcu=atmega32u4 -v -w'
+      alias nas-up='wol a8:a1:59:08:45:e0'
 
       ### Work
-      alias vpnup='sudo openconnect --protocol=gp -b -u njanus https://vpn-nyc3.digitalocean.com'
+      alias vpnup='sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn'
       alias vpndown='sudo kill -s INT `pgrep openconnect`'
       alias cephcontainer='docker run --rm --name ceph \
            --network host \
@@ -98,7 +99,7 @@ let
            -e CEPH_DEMO_SECRET_KEY=zMTLJsb5oxW2XtH4xsJTkf0MgunWXreFbbdjkfPV \
            -e RGW_CIVETWEB_PORT=7480 \
            -d docker.internal.digitalocean.com/library/ceph:7f2db4f4e95b2c2d9592b670056ff55b5ee7b4f1'
-      export GOROOT='${go_1_13.out}/share/go'
+      export GOROOT='${go.out}/share/go'
       export GOPATH='/home/nick/code/go'
       export PATH=$PATH':/home/nick/code/go/bin'
 
@@ -106,24 +107,24 @@ let
       eval "$(direnv hook zsh)"
     '';
 in {
-  environment_etc =
-    [ { source = "${zsh-prezto}/runcoms/zlogin";
-        target = "zlogin";
-      }
-      { source = "${zsh-prezto}/runcoms/zlogout";
-        target = "zlogout";
-      }
-      { source = self;
-        target = "zpreztorc";
-      }
-      { source = "${zsh-prezto}/runcoms/zprofile";
-        target = "zprofile.local";
-      }
-      { source = "${zsh-prezto}/runcoms/zshenv";
-        target = "zshenv.local";
-      }
-      { source = "${zsh-prezto}/runcoms/zshrc";
-        target = "zshrc.local";
-      }
-    ];
+  environment_etc = {
+    zlogin = {
+      source = "${zsh-prezto}/runcoms/zlogin";
+    };
+    zlogout = {
+      source = "${zsh-prezto}/runcoms/zlogout";
+    };
+    zpreztorc = {
+      source = self;
+    };
+    "zprofile.local" = {
+      source = "${zsh-prezto}/runcoms/zprofile";
+    };
+    "zshenv.local" = {
+      source = "${zsh-prezto}/runcoms/zshenv";
+    };
+    "zshrc.local" = {
+      source = "${zsh-prezto}/runcoms/zshrc";
+    };
+  };
 }

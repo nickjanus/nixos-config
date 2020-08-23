@@ -6,7 +6,6 @@
 
 let
   parameters = import ./parameters.nix;
-  unstable = import <unstable> {}; # use unstable channel
 
   baseServices = {
     locate.enable = true;
@@ -21,10 +20,11 @@ let
       layout = "us";
       windowManager.i3.enable = true;
       windowManager.i3.configFile = import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; };
-      windowManager.default = "i3";
-      displayManager.slim = {
-        enable = true;
-        defaultUser = "nick";
+      displayManager = {
+        defaultSession = "none+i3";
+        lightdm = {
+          enable = true;
+        };
       };
     };
   };
@@ -33,17 +33,20 @@ let
     ack
     alacritty
     arandr
+    bat
+    bc
     bind
     binutils
     calibre
-    unstable.chromium
+    chromium
     cmus
     direnv
     dmenu
     efibootmgr
+    efivar
     elixir
     file
-    unstable.firefox
+    firefox
     fwupd
     gcc
     git
@@ -51,7 +54,7 @@ let
     gnumake
     gnupg
     gnupg1compat
-    go_1_13
+    go
     gptfdisk
     htop
     i3
@@ -60,10 +63,14 @@ let
     inotify-tools # used by phoenix
     irssi
     jq
+    lightlocker # screen locker for use with lightdm
     lsof
     maim # screenshot tool
     neovim
+    nfs-utils
+    obs-studio
     openssh
+    parted
     pavucontrol
     s3cmd
     screen
@@ -84,7 +91,7 @@ let
   ];
 
   zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto neovim less go_1_13;
+    inherit (pkgs) writeText zsh-prezto neovim less go openconnect;
   };
 
 in {
@@ -120,9 +127,11 @@ in {
   };
 
   # Select internationalisation properties.
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
   };
 
@@ -159,20 +168,11 @@ in {
   };
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
-  systemd.services.lockOnClose = {
-    description = "Lock X session using slimlock";
-    wantedBy = [ "sleep.target" ];
-    serviceConfig = {
-      User = "nick";
-      ExecStart = "${pkgs.slim}/bin/slimlock";
-    };
-  };
-
   virtualisation.docker.enable = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09";
+  system.stateVersion = "20.03";
 }

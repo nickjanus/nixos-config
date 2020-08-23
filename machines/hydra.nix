@@ -3,16 +3,21 @@
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.zfs.forceImportAll = false;
+  boot.zfs.forceImportRoot = false;
 
-  boot.initrd.luks.devices = [
-    {
-      name = "nixos";
+  boot.initrd.luks.devices = {
+    nixos = {
       device = "/dev/VolGroup/nixos";
       preLVM = false;
-    }
-  ];
+    };
+  };
 
-  networking.hostName = "nicknix";
+  networking = {
+    hostName = "nicknix";
+    wireless.enable = true;
+  };
+
 
   hardware = {
     pulseaudio = {
@@ -20,32 +25,20 @@
         support32Bit = true;
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    abcde
-    discord
-  ] ++ basePackages;
-
   services = lib.recursiveUpdate baseServices {
     xserver = {
-      videoDrivers = [ "nvidia" ];
-      displayManager.slim = {
-        theme = pkgs.fetchurl {
-          url    = "https://github.com/nickjanus/nixos-slim-theme/archive/2.1.tar.gz";
-          sha256 = "8b587bd6a3621b0f0bc2d653be4e2c1947ac2d64443935af32384bf1312841d7";
-        };
-      };
-      xrandrHeads = [
-        {
-          output = "DVI-D-0";
-          primary = true;
-          monitorConfig = '' Option "LeftOf" "DVI-I-1" '';
-        }
-        {
-          output = "DVI-I-1";
-          monitorConfig = '' Option "RightOf" "DVI-D-0" '';
-        }
+      videoDrivers = [
+      "amdgpu"
       ];
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    abcde
+    cargo
+    discord
+    gcc
+    rustc
+  ] ++ basePackages;
+
 }
