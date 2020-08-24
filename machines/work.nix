@@ -9,44 +9,52 @@ in {
     loader.efi.canTouchEfiVariables = true;
     kernelParams = ["psmouse.synaptics_intertouch=0"];
 
-    initrd.luks.devices = [
-      {
-        name = "nixos";
+    initrd.luks.devices = {
+      "nixos" = {
         device = "/dev/disk/by-uuid/433b9880-1f22-4ad7-afdf-b91c4a0f537e";
         preLVM = false;
-      }
-    ];
+      };
+    };
   };
 
   environment.systemPackages = with pkgs; [
     ansible
     awscli
     arandr
+    autorandr
     # bluez # bluetoothctl
+    brightnessctl
     confd
     consul
     cmake
     discord
     unstable.docker_compose
     etcd
+    gimp
     git-crypt
     glide
+    grepcidr
+    krita
+    libwacom
     light
     mysql57
     nmap
     networkmanager
     networkmanagerapplet
-    unstable.openconnect
+    openconnect
     openjdk
     openssl
     plantuml
     powertop
+    python3
     ruby
     slack
+    smartmontools
     socat
     tcpdump
     vlc
     vokoscreen
+    wol
     xorg.xdpyinfo
     zoom-us
   ] ++ basePackages;
@@ -69,7 +77,6 @@ in {
 
   hardware = {
     bluetooth.enable = false;
-    brightnessctl.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;
@@ -86,6 +93,10 @@ in {
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   services = lib.recursiveUpdate baseServices {
+    autorandr = {
+      enable = true;
+      defaultTarget = "laptop";
+    };
     xserver = {
       dpi = 120;
 
@@ -98,6 +109,10 @@ in {
         naturalScrolling = true;
         tapping = false;
       };
+
+
+      # Enable support for wacom tablet
+      wacom.enable = true;
 
       xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
