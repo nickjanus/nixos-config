@@ -57,7 +57,7 @@ in {
     # Disable writeback cache for hdds
     udev = {
       extraRules = ''
-        "ACTION=="add|change", KERNEL=="sd*[!0-9]", ATTR{queue/rotational}=="1", RUN+="${pkgs.sdparm}/bin/sdparm -c WCE /dev/%k"
+        ACTION=="add|change", KERNEL=="sd*[!0-9]", ENV{ID_ATA_ROTATION_RATE_RPM}=="7200", RUN+="${pkgs.sdparm}/bin/sdparm -c WCE /dev/%k"
       '';
       path = with pkgs; [
         sdparm
