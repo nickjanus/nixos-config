@@ -8,6 +8,8 @@ in {
     loader.efi.canTouchEfiVariables = true;
     supportedFilesystems = [ "zfs" ];
     zfs = {
+      extraPools = [ "tank" ];
+      devNodes = "/dev/disk/by-id/";
       forceImportAll = false;
       forceImportRoot = false;
     };
@@ -46,11 +48,6 @@ in {
         2049 # nfs
       ];
     };
-  };
-
-  hardware = {
-    # Enable gpu support
-    opengl.extraPackages = with pkgs;[ vaapiIntel ];
   };
 
   services = lib.recursiveUpdate baseServices {
