@@ -15,6 +15,33 @@ in {
     };
   };
 
+  docker-containers = {
+    pihole = {
+      image = "pihole/pihole:latest";
+      extraDockerOptions = [
+        "--detach"
+        "--dns=127.0.0.1 --dns=1.1.1.1"
+        "--hostname pi.hole"
+      ];
+      environment = {
+        "TZ" = "America/Boston";
+        "VIRTUAL_HOST" = "pi.hole";
+        "PROXY_LOCATION" = "pi.hole";
+        "ServerIP" = "127.0.0.1";
+      };
+      ports = [
+        "53:53/tcp"
+        "53:53/udp"
+        "80:80"
+        "443:443"
+      ];
+      volumes = [
+        "/opt/pihole/pihole/:/etc/pihole/"
+        "/opt/pihole/dnsmasq.d/:/etc/dnsmasq.d/"
+      ];
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     at
     ethtool
