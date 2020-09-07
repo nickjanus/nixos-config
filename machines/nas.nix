@@ -8,8 +8,6 @@ in {
     loader.efi.canTouchEfiVariables = true;
     supportedFilesystems = [ "zfs" ];
     zfs = {
-      extraPools = [ "tank" ];
-      devNodes = "/dev/disk/by-id/";
       forceImportAll = false;
       forceImportRoot = false;
     };
