@@ -67,10 +67,14 @@ in {
         22
         111 # nfs
         2049 # nfs
+        53 # pihole
+        80 # pihole
+        443 # pihole
       ];
       allowedUDPPorts = [
         111 # nfs
         2049 # nfs
+        53 # pihole
       ];
     };
   };
