@@ -106,6 +106,7 @@ in {
           inherit pkgs;
           inherit baseServices;
           inherit basePackages;
+          inherit parameters;
         }
       )
     ];

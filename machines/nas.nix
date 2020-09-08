@@ -1,4 +1,4 @@
-{ lib, config, pkgs, baseServices, basePackages}:
+{ lib, config, pkgs, baseServices, basePackages, parameters }:
 
 let
 in {
@@ -26,6 +26,7 @@ in {
         "VIRTUAL_HOST" = "pi.hole";
         "PROXY_LOCATION" = "pi.hole";
         "ServerIP" = "127.0.0.1";
+        "WEBPASSWORD" = parameters.pihole_password;
       };
       ports = [
         "53:53/tcp"
