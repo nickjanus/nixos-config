@@ -17,9 +17,9 @@ in {
     pihole = {
       image = "pihole/pihole:latest";
       extraDockerOptions = [
-        "--detach"
-        "--dns=127.0.0.1 --dns=1.1.1.1"
-        "--hostname pi.hole"
+        "--dns=127.0.0.1"
+        "--dns=1.1.1.1"
+        "--hostname=pi.hole"
       ];
       environment = {
         "TZ" = "America/Boston";
