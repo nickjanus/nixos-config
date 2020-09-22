@@ -1,4 +1,4 @@
-{ lib, config, pkgs, baseServices, basePackages}:
+{ lib, config, pkgs, baseServices, basePackages, parameters }:
 
 let
   unstable = import <unstable> {}; # use unstable channel
