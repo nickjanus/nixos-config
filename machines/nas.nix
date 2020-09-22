@@ -1,4 +1,4 @@
-{ lib, config, pkgs, baseServices, basePackages}:
+{ lib, config, pkgs, baseServices, basePackages, parameters }:
 
 let
 in {
@@ -10,6 +10,34 @@ in {
     zfs = {
       forceImportAll = false;
       forceImportRoot = false;
+    };
+  };
+
+  docker-containers = {
+    pihole = {
+      image = "pihole/pihole:latest";
+      extraDockerOptions = [
+        "--dns=127.0.0.1"
+        "--dns=1.1.1.1"
+        "--hostname=pi.hole"
+      ];
+      environment = {
+        "TZ" = "America/Boston";
+        "VIRTUAL_HOST" = "pi.hole";
+        "PROXY_LOCATION" = "pi.hole";
+        "ServerIP" = "127.0.0.1";
+        "WEBPASSWORD" = parameters.pihole_password;
+      };
+      ports = [
+        "53:53/tcp"
+        "53:53/udp"
+        "80:80"
+        "443:443"
+      ];
+      volumes = [
+        "/opt/pihole/pihole/:/etc/pihole/"
+        "/opt/pihole/dnsmasq.d/:/etc/dnsmasq.d/"
+      ];
     };
   };
 
@@ -40,20 +68,28 @@ in {
         22
         111 # nfs
         2049 # nfs
+        53 # pihole
+        80 # pihole
+        443 # pihole
       ];
       allowedUDPPorts = [
         111 # nfs
         2049 # nfs
+        53 # pihole
       ];
     };
   };
 
-  hardware = {
-    # Enable gpu support
-    opengl.extraPackages = with pkgs;[ vaapiIntel ];
-  };
-
   services = lib.recursiveUpdate baseServices {
+    # Disable writeback cache for hdds
+    udev = {
+      extraRules = ''
+        ACTION=="add|change", KERNEL=="sd*[!0-9]", ENV{ID_ATA_ROTATION_RATE_RPM}=="7200", RUN+="${pkgs.sdparm}/bin/sdparm -c WCE /dev/%k"
+      '';
+      path = with pkgs; [
+        sdparm
+      ];
+    };
     zfs = {
       autoScrub = {
         enable = true;
