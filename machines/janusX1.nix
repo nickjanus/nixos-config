@@ -98,7 +98,7 @@ in {
       # Enable touchpad support.
       libinput = {
         enable = true;
-        dev = "/dev/input/event22";
+        dev = "/dev/input/by-path/platform-i8042-serio-1-event-mouse";
         accelSpeed = "0.25";
         clickMethod = "clickfinger";
         middleEmulation = false;
