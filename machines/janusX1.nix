@@ -63,6 +63,7 @@ in {
     hostName = "janusX1";
     networkmanager = {
       enable = true;
+      wifi.powersave = false;
     };
     extraHosts = ''
       10.42.0.10 hargw bucket01.hargw
