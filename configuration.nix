@@ -63,6 +63,7 @@ let
     inotify-tools # used by phoenix
     irssi
     jq
+    kitty
     lightlocker # screen locker for use with lightdm
     lsof
     maim # screenshot tool
