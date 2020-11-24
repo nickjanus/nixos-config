@@ -13,20 +13,6 @@ let
     # Swap out systemd time daemon until it works
     timesyncd.enable = false;
     ntp.enable = true;
-
-    xserver = {
-      autorun = true;
-      enable = true;
-      layout = "us";
-      windowManager.i3.enable = true;
-      windowManager.i3.configFile = import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; };
-      displayManager = {
-        defaultSession = "none+i3";
-        lightdm = {
-          enable = true;
-        };
-      };
-    };
   };
 
   basePackages = with pkgs; [
@@ -41,10 +27,8 @@ let
     chromium
     cmus
     direnv
-    dmenu
     efibootmgr
     efivar
-    elixir
     file
     firefox
     fwupd
@@ -57,19 +41,12 @@ let
     go
     gptfdisk
     htop
-    i3
-    i3status
     imagemagick7
-    inotify-tools # used by phoenix
     irssi
     jq
-    kitty
-    lightlocker # screen locker for use with lightdm
     lsof
-    maim # screenshot tool
     neovim
     nfs-utils
-    obs-studio
     openssh
     parted
     pavucontrol
@@ -86,14 +63,11 @@ let
     vagrant
     wget
     xlibs.xev
-    xsel
     zsh
     zsh-prezto
   ];
 
-  zsh_config = import ./zsh.nix {
-    inherit (pkgs) writeText zsh-prezto neovim less go openconnect;
-  };
+  zsh_config = import ./zsh.nix {inherit pkgs; inherit config; inherit parameters;};
 
 in {
   imports =
@@ -153,6 +127,25 @@ in {
     ssh.forwardX11 = false;
     ssh.startAgent = true;
     zsh.enable = true;
+    chromium.extraOpts="--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    sway = {
+      enable = true;
+      extraPackages = with pkgs; [ 
+        bemenu
+        kanshi # autorandor replacement
+        kitty
+        grim # screen cap
+        i3status
+        light
+        mako
+        rxvt-unicode
+        swaylock
+        swayidle
+        wdisplays # arandr equivalent
+        wl-clipboard
+        xwayland
+      ];
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

@@ -95,18 +95,17 @@ writeText "i3-config" (
     floating_modifier $mod
 
     # start a terminal
-    bindsym $mod+Return exec ${i3}/bin/i3-sensible-terminal
+    bindsym $mod+Return exec ${kitty}/bin/kitty
 
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start dmenu (a program launcher)
-    bindsym $mod+d exec ${dmenu}/bin/dmenu_run -i
-
-    # There also is the (new) i3-dmenu-desktop which only displays applications
-    # shipping a .desktop file. It is a wrapper around dmenu, so you need that
-    # installed.
-    # bindsym $mod+d exec --no-startup-id ${i3}/bin/i3-dmenu-desktop
+    # start bmenu
+    bindsym $mod+d exec ${bemenu}/bin/bemenu-run -i
+    #set $uifont "Ubuntu 14"
+    #set $highlight #3daee9
+    #set $prompt #18b218
+    #bindsym $mod+d exec ${bemenu}/bin/bemenu-run --fn $uifont -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
 
     # change focus
     bindsym $mod+h focus left
@@ -210,9 +209,7 @@ writeText "i3-config" (
     #bindsym XF86AudioPause exec "mpc pause"
 
     # reload the configuration file
-    bindsym $mod+Shift+c reload
-    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-    bindsym $mod+Shift+r restart
+    bindsym $mod+Shift+r reload
     # exit i3 (logs you out of your X session)
     bindsym $mod+Shift+e exec "${i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 

@@ -20,12 +20,8 @@ in {
   environment.systemPackages = with pkgs; [
     ansible
     awscli
-    arandr
-    autorandr
     # bluez # bluetoothctl
-    brightnessctl
     confd
-    consul
     cmake
     discord
     unstable.docker_compose
@@ -36,7 +32,6 @@ in {
     grepcidr
     krita
     libwacom
-    light
     mysql57
     nmap
     networkmanager
@@ -45,7 +40,6 @@ in {
     openjdk
     openssl
     plantuml
-    powertop
     python3
     ruby
     slack
@@ -53,9 +47,7 @@ in {
     socat
     tcpdump
     vlc
-    vokoscreen
     wol
-    xorg.xdpyinfo
     zoom-us
   ] ++ basePackages;
 
