@@ -110,6 +110,9 @@ let
       # Enable wayland for firefox
       export MOZ_ENABLE_WAYLAND=1
 
+      # Run GTK+ apps on wayland
+      export GDK_BACKEND=wayland
+
       # If running from tty1 start sway
       if [ "$(tty)" = "/dev/tty1" ]; then
         exec ${pkgs.sway}/bin/sway -c ${import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; }}
