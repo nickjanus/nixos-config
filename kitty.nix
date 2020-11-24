@@ -526,7 +526,7 @@ confirm_os_window_close 0
 
 #: Tab bar {{{
 
-tab_bar_edge bottom
+tab_bar_edge top
 
 #: Which edge to show the tab bar on, top or bottom
 
@@ -534,7 +534,7 @@ tab_bar_margin_width 0.0
 
 #: The margin to the left and right of the tab bar (in pts)
 
-tab_bar_style fade
+tab_bar_style powerline
 
 #: The tab bar style, can be one of: fade, separator, powerline, or
 #: hidden. In the fade style, each tab's edges fade into the
@@ -1031,8 +1031,8 @@ map kitty_mod+enter new_window
 
 #: For more details, see launch.
 
-# map kitty_mod+n new_os_window
-# disabled as this is trivial in sway
+map kitty_mod+n no_op
+# disabled shortcut to create new window as this is trivial in sway
 
 #: Works like new_window above, except that it opens a top level OS
 #: kitty window. In particular you can use new_os_window_with_cwd to
@@ -1045,16 +1045,6 @@ map kitty_mod+f move_window_forward
 map kitty_mod+b move_window_backward
 map kitty_mod+` move_window_to_top
 map kitty_mod+r start_resizing_window
-map kitty_mod+1 first_window
-map kitty_mod+2 second_window
-map kitty_mod+3 third_window
-map kitty_mod+4 fourth_window
-map kitty_mod+5 fifth_window
-map kitty_mod+6 sixth_window
-map kitty_mod+7 seventh_window
-map kitty_mod+8 eighth_window
-map kitty_mod+9 ninth_window
-map kitty_mod+0 tenth_window
 #: }}}
 
 #: Tab management {{{
@@ -1085,6 +1075,16 @@ map kitty_mod+alt+t set_tab_title
 #: Layout management {{{
 
 map kitty_mod+l next_layout
+map kitty_mod+1 goto_layout grid
+map kitty_mod+2 goto_layout horizontal
+map kitty_mod+3 goto_layout vertical
+map kitty_mod+4 goto_layout splits
+map kitty_mod+5 goto_layout stack
+map kitty_mod+6 goto_layout tall
+map kitty_mod+7 no_op
+map kitty_mod+8 no_op
+map kitty_mod+9 no_op
+map kitty_mod+0 no_op
 
 #: You can also create shortcuts to switch to specific layouts::
 
