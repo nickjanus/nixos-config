@@ -984,8 +984,8 @@ map kitty_mod+up        scroll_line_up
 map kitty_mod+k         scroll_line_up
 map kitty_mod+down      scroll_line_down
 map kitty_mod+j         scroll_line_down
-map kitty_mod+page_up   scroll_page_up
-map kitty_mod+page_down scroll_page_down
+map page_up             scroll_page_up
+map page_down           scroll_page_down
 map kitty_mod+home      scroll_home
 map kitty_mod+end       scroll_end
 map kitty_mod+h         show_scrollback
@@ -1038,24 +1038,24 @@ map kitty_mod+n no_op
 #: kitty window. In particular you can use new_os_window_with_cwd to
 #: open a window with the current working directory.
 
-map kitty_mod+w close_window
-map kitty_mod+] next_window
-map kitty_mod+[ previous_window
-map kitty_mod+f move_window_forward
-map kitty_mod+b move_window_backward
-map kitty_mod+` move_window_to_top
-map kitty_mod+r start_resizing_window
+map kitty_mod+w   close_window
+map ctrl+tab      next_window
+map kitty_mod+tab previous_window
+map kitty_mod+f   move_window_forward
+map kitty_mod+b   move_window_backward
+map kitty_mod+`   move_window_to_top
+map kitty_mod+r   start_resizing_window
 #: }}}
 
 #: Tab management {{{
 
-map kitty_mod+right next_tab
-map kitty_mod+left  previous_tab
-map kitty_mod+t     new_tab
-map kitty_mod+q     close_tab
-map kitty_mod+.     move_tab_forward
-map kitty_mod+,     move_tab_backward
-map kitty_mod+alt+t set_tab_title
+map ctrl+page_down      next_tab
+map ctrl+page_up        previous_tab
+map kitty_mod+t         new_tab
+map kitty_mod+q         close_tab
+map kitty_mod+page_down move_tab_forward
+map kitty_mod+page_up   move_tab_backward
+map kitty_mod+alt+t     set_tab_title
 
 #: You can also create shortcuts to go to specific tabs, with 1 being
 #: the first tab, 2 the second tab and -1 being the previously active
@@ -1078,9 +1078,9 @@ map kitty_mod+l next_layout
 map kitty_mod+1 goto_layout grid
 map kitty_mod+2 goto_layout horizontal
 map kitty_mod+3 goto_layout vertical
-map kitty_mod+4 goto_layout splits
-map kitty_mod+5 goto_layout stack
-map kitty_mod+6 goto_layout tall
+map kitty_mod+4 goto_layout stack
+map kitty_mod+5 goto_layout tall
+map kitty_mod+6 no_op
 map kitty_mod+7 no_op
 map kitty_mod+8 no_op
 map kitty_mod+9 no_op
