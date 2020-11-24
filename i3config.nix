@@ -100,12 +100,12 @@ writeText "i3-config" (
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start bmenu
-    bindsym $mod+d exec ${bemenu}/bin/bemenu-run -i
-    #set $uifont "Ubuntu 14"
-    #set $highlight #3daee9
-    #set $prompt #18b218
-    #bindsym $mod+d exec ${bemenu}/bin/bemenu-run --fn $uifont -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
+    # start bemenu
+    #bindsym $mod+d exec ${bemenu}/bin/bemenu-run -i
+    set $uifont "Ubuntu 14"
+    set $highlight #3daee9
+    set $prompt #18b218
+    bindsym $mod+d exec ${bemenu}/bin/bemenu-run --fn $uifont -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
 
     # change focus
     bindsym $mod+h focus left
@@ -210,8 +210,6 @@ writeText "i3-config" (
 
     # reload the configuration file
     bindsym $mod+Shift+r reload
-    # exit i3 (logs you out of your X session)
-    bindsym $mod+Shift+e exec "${i3}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
     # resize window (you can also use the mouse for that)
     mode "resize" {
