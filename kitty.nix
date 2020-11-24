@@ -1,5 +1,7 @@
-# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+{pkgs}:
 
+pkgs.writeText "kitty.conf" (
+  ''
 #: Fonts {{{
 
 #: kitty has very powerful font management. You can configure
@@ -1230,3 +1232,5 @@ map kitty_mod+delete clear_terminal reset active
 #: }}}
 
 # }}}
+  ''
+)
