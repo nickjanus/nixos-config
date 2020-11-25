@@ -86,23 +86,9 @@ in {
       defaultTarget = "laptop";
     };
     xserver = {
-      dpi = 120;
-
-      # Enable touchpad support.
-      libinput = {
-        enable = true;
-        dev = "/dev/input/by-path/platform-i8042-serio-1-event-mouse";
-        accelSpeed = "0.25";
-        clickMethod = "clickfinger";
-        middleEmulation = false;
-        naturalScrolling = true;
-        tapping = false;
-      };
-
+      # TODO port libinput settings over to sway config
       # Enable support for wacom tablet
       wacom.enable = true;
-
-      xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
     };
   };
 }

@@ -3,6 +3,22 @@
 with pkgs;
 
 let
+  machineConfig = if (parameters.machine == "janusX1") then ''
+    input "2:7:SynPS/2_Synaptics_TouchPad" {
+      accel_profile adaptive
+      click_method clickfinger
+      dwt enabled
+      middle_emulation disabled
+      natural_scroll enabled
+      tap disabled
+    }
+
+    input "1:1:AT_Translated_Set_2_keyboard" {
+      xkb_options "altwin:prtsc_rwin, terminate:ctrl_alt_bksp"
+    }
+    ''
+    else
+    "";
   i3StatusBarConfig = ''
     general {
       colors = true
@@ -91,6 +107,8 @@ writeText "i3-config" (
     exec ${kanshi}/bin/kanshi
     exec ${mako}/bin/mako
     set $mod Mod4
+
+    ${machineConfig}
 
     # Font for window title bars
     font pango:Fira Mono 8
