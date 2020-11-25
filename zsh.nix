@@ -111,7 +111,7 @@ let
       export MOZ_ENABLE_WAYLAND=1
 
       # Run GTK+ apps on wayland
-      export GDK_BACKEND=wayland
+      #export GDK_BACKEND=wayland # breaks electron apps
 
       # If running from tty1 start sway
       if [ "$(tty)" = "/dev/tty1" ]; then
