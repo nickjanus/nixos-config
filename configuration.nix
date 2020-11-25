@@ -138,6 +138,7 @@ in {
         light
         mako
         rxvt-unicode
+        slurp # for screenshot selection
         swaylock
         swayidle
         wdisplays # arandr equivalent

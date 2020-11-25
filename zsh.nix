@@ -116,6 +116,7 @@ let
       # Configure zsh history explicitly
       export HISTFILE=/home/nick/.zhistory
 
+      alias grab='grim -g "$(slurp)"'
       # If running from tty1 start sway
       if [ "$(tty)" = "/dev/tty1" ]; then
         exec ${pkgs.sway}/bin/sway -c ${import ./sway.nix { inherit config; inherit pkgs; inherit parameters; }}
