@@ -55,7 +55,6 @@ let
     signal-desktop
     sysstat
     teensy-loader-cli
-    terminator
     terraform
     tmux
     tree
