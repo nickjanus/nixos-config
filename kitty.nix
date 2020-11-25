@@ -793,7 +793,7 @@ listen_on none
 #: control connections. Note that this will apply to all kitty
 #: instances. It can be overridden by the kitty --listen-on command
 #: line flag. This option accepts only UNIX sockets, such as
-#: unix:${TEMP}/mykitty or (on Linux) unix:@mykitty. Environment
+#: unix:$\{TEMP\}/mykitty or (on Linux) unix:@mykitty. Environment
 #: variables are expanded. If {kitty_pid} is present then it is
 #: replaced by the PID of the kitty process, otherwise the PID of the
 #: kitty process is appended to the value, with a hyphen. This option
@@ -808,7 +808,7 @@ listen_on none
 #: use::
 
 #:     env MYVAR1=a
-#:     env MYVAR2=${MYVAR1}/${HOME}/b
+#:     env MYVAR2=$\{MYVAR1\}/$\{HOME\}/b
 
 #: The value of MYVAR2 will be a/<path to home directory>/b.
 

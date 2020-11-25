@@ -115,7 +115,7 @@ let
 
       # If running from tty1 start sway
       if [ "$(tty)" = "/dev/tty1" ]; then
-        exec ${pkgs.sway}/bin/sway -c ${import ./i3config.nix { inherit config; inherit pkgs; inherit parameters; }}
+        exec ${pkgs.sway}/bin/sway -c ${import ./sway.nix { inherit config; inherit pkgs; inherit parameters; }}
       fi
     '';
 in {

@@ -82,6 +82,8 @@ let
     else
     ""
   );
+  kittyConf = import ./kitty.nix{inherit pkgs;};
+  kittyTheme = import ./kitty-solarized-theme.nix{inherit pkgs;};
 in
 
 writeText "i3-config" (
@@ -95,7 +97,7 @@ writeText "i3-config" (
     floating_modifier $mod
 
     # start a terminal
-    bindsym $mod+Return exec ${kitty}/bin/kitty
+    bindsym $mod+Return exec ${kitty}/bin/kitty -c ${kittyConf} -c ${kittyTheme}
 
     # kill focused window
     bindsym $mod+Shift+q kill
