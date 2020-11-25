@@ -404,7 +404,7 @@ initial_window_height 400
 #: suffix of "c" on the width/height values to have them interpreted
 #: as number of cells instead of pixels.
 
-enabled_layouts *
+enabled_layouts splits,grid,horizontal,vertical,stack,tall
 
 #: The enabled window layouts. A comma separated list of layout names.
 #: The special value all means all layouts. The first listed layout
@@ -963,7 +963,7 @@ map kitty_mod+c copy_to_clipboard
 map kitty_mod+v  paste_from_clipboard
 map kitty_mod+s  paste_from_selection
 map shift+insert paste_from_selection
-map kitty_mod+o  pass_selection_to_program
+# map kitty_mod+o  pass_selection_to_program
 
 #: You can also pass the contents of the current selection to any
 #: program using pass_selection_to_program. By default, the system's
@@ -1077,16 +1077,18 @@ map kitty_mod+alt+t     set_tab_title
 #: Layout management {{{
 
 map kitty_mod+l next_layout
-map kitty_mod+1 goto_layout grid
-map kitty_mod+2 goto_layout horizontal
-map kitty_mod+3 goto_layout vertical
-map kitty_mod+4 goto_layout stack
-map kitty_mod+5 goto_layout tall
-map kitty_mod+6 no_op
+map kitty_mod+2 goto_layout splits
+map kitty_mod+2 goto_layout grid
+map kitty_mod+3 goto_layout horizontal
+map kitty_mod+4 goto_layout vertical
+map kitty_mod+5 goto_layout stack
+map kitty_mod+6 goto_layout tall
 map kitty_mod+7 no_op
 map kitty_mod+8 no_op
 map kitty_mod+9 no_op
 map kitty_mod+0 no_op
+map kitty_mod+o launch --location=hsplit
+map kitty_mod+e launch --location=vsplit
 
 #: You can also create shortcuts to switch to specific layouts::
 
@@ -1123,7 +1125,7 @@ map kitty_mod+backspace change_font_size all 0
 #: external program or insert it into the terminal or copy it to the
 #: clipboard.
 
-map kitty_mod+e kitten hints
+# map kitty_mod+e kitten hints
 
 #: Open a currently visible URL using the keyboard. The program used
 #: to open the URL is specified in open_url_with.
