@@ -1076,6 +1076,8 @@ map kitty_mod+alt+t     set_tab_title
 
 #: Layout management {{{
 
+
+map kitty_mod+z rotate
 map kitty_mod+l next_layout
 map kitty_mod+2 goto_layout splits
 map kitty_mod+2 goto_layout grid
