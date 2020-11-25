@@ -113,6 +113,9 @@ let
       # Run GTK+ apps on wayland
       #export GDK_BACKEND=wayland # breaks electron apps
 
+      # Configure zsh history explicitly
+      export HISTFILE=/home/nick/.zhistory
+
       # If running from tty1 start sway
       if [ "$(tty)" = "/dev/tty1" ]; then
         exec ${pkgs.sway}/bin/sway -c ${import ./sway.nix { inherit config; inherit pkgs; inherit parameters; }}
