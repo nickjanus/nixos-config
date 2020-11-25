@@ -88,6 +88,7 @@ in
 
 writeText "i3-config" (
   ''
+    exec ${kanshi}/bin/kanshi &
     set $mod Mod4
 
     # Font for window title bars
