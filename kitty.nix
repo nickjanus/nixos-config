@@ -1089,8 +1089,8 @@ map kitty_mod+7 no_op
 map kitty_mod+8 no_op
 map kitty_mod+9 no_op
 map kitty_mod+0 no_op
-map kitty_mod+o launch --location=hsplit
-map kitty_mod+e launch --location=vsplit
+map kitty_mod+o launch --location=hsplit --cwd=current
+map kitty_mod+e launch --location=vsplit --cwd=current
 
 #: You can also create shortcuts to switch to specific layouts::
 
