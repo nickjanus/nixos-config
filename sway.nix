@@ -88,7 +88,8 @@ in
 
 writeText "i3-config" (
   ''
-    exec ${kanshi}/bin/kanshi &
+    exec ${kanshi}/bin/kanshi
+    exec ${mako}/bin/mako
     set $mod Mod4
 
     # Font for window title bars
@@ -239,8 +240,6 @@ writeText "i3-config" (
     }
 
     bindsym $mod+r mode "resize"
-
-    exec_always --no-startup-id /usr/bin/light-locker
 
     # Start i3bar to display a workspace bar (plus the system information i3status
     # finds out, if available)
