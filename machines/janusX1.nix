@@ -32,6 +32,7 @@ in {
     grepcidr
     krita
     libwacom
+    mtr
     mysql57
     nmap
     networkmanager
@@ -46,6 +47,8 @@ in {
     smartmontools
     socat
     tcpdump
+    terminator #temp
+    vault #temp
     vlc
     wol
     zoom-us
