@@ -25,8 +25,8 @@ in {
         "TZ" = "America/Boston";
         "VIRTUAL_HOST" = "pi.hole";
         "PROXY_LOCATION" = "pi.hole";
-        "ServerIP" = "127.0.0.1";
         "WEBPASSWORD" = parameters.pihole_password;
+        "PIHOLE_DNS_" = "1.1.1.1";
       };
       ports = [
         "53:53/tcp"
@@ -97,12 +97,6 @@ in {
       };
       autoSnapshot.enable = false;
       trim.enable = false; # autotrim is enabled
-    };
-    xserver = {
-      enable = false;
-      displayManager = {
-        lightdm.enable = false;
-      };
     };
     nfs.server.enable = true;
     openssh.enable = true;
