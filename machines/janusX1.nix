@@ -77,21 +77,11 @@ in {
     opengl.extraPackages = with pkgs;[ vaapiIntel ];
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.bash.enableCompletion = true;
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
   services = lib.recursiveUpdate baseServices {
-    autorandr = {
-      enable = true;
-      defaultTarget = "laptop";
-    };
-    xserver = {
-      # TODO port libinput settings over to sway config
-      # Enable support for wacom tablet
-      wacom.enable = true;
-    };
+    # TODO port libinput settings over to sway config
+    # Enable support for wacom tablet
+    #xserver = {
+    #  wacom.enable = true;
+    #};
   };
 }
