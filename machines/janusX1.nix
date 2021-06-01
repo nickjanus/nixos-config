@@ -79,9 +79,5 @@ in {
 
   services = lib.recursiveUpdate baseServices {
     # TODO port libinput settings over to sway config
-    # Enable support for wacom tablet
-    #xserver = {
-    #  wacom.enable = true;
-    #};
   };
 }

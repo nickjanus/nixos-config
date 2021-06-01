@@ -1,4 +1,4 @@
-{ lib, config, pkgs, baseServices, basePackages}:
+{ lib, config, pkgs, baseServices, basePackages, parameters}:
 
 let
   unstable = import <unstable> {}; # use unstable channel
@@ -20,9 +20,7 @@ in {
   environment.systemPackages = with pkgs; [
     ansible
     awscli
-    arandr
-    autorandr
-    # bluez # bluetoothctl
+    bluez # bluetoothctl
     brightnessctl
     confd
     consul
@@ -76,7 +74,7 @@ in {
   };
 
   hardware = {
-    bluetooth.enable = false;
+    bluetooth.enable = true;
     pulseaudio = {
       enable = true;
         support32Bit = true;
@@ -93,28 +91,6 @@ in {
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   services = lib.recursiveUpdate baseServices {
-    autorandr = {
-      enable = true;
-      defaultTarget = "laptop";
-    };
-    xserver = {
-      dpi = 120;
-
-      # Enable touchpad support.
-      libinput = {
-        enable = true;
-        accelSpeed = "0.25";
-        clickMethod = "clickfinger";
-        middleEmulation = false;
-        naturalScrolling = true;
-        tapping = false;
-      };
-
-
-      # Enable support for wacom tablet
-      wacom.enable = true;
-
-      xkbOptions = "altwin:prtsc_rwin, terminate:ctrl_alt_bksp";
-    };
+    # TODO port libinput settings over to sway config
   };
 }

@@ -34,12 +34,15 @@ let
     if (parameters.machine == "hydra") then ''
       order += "wireless wlp0s29u1u5"
     ''
-    else ''
-      order += "wireless wlp4s0"
-      order += "path_exists VPN"
-      order += "battery 0"
-    ''
-  ) + ''
+    else "") + (
+      if (parameters.machine == "work") then ''
+        order += "wireless wlp0s20f3"
+        order += "path_exists VPN"
+        order += "battery 0"
+      ''
+      else ""
+    ) +
+  ''
     order += "cpu_usage"
     order += "volume master"
     order += "tztime local"
@@ -69,8 +72,8 @@ let
       mixer_idx = 0
     }
   '' + (
-    if (parameters.machine == "janusX1") then ''
-      wireless wlp4s0 {
+    if (parameters.machine == "work") then ''
+      wireless wlp0s20f3 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
@@ -100,12 +103,14 @@ let
   );
   kittyConf = import ./kitty.nix{inherit pkgs;};
   kittyTheme = import ./kitty-solarized-theme.nix{inherit pkgs;};
+  terminatorConf = import ./terminator.nix{inherit pkgs;};
+  makoConf = import ./mako.nix{inherit pkgs;};
 in
 
 writeText "i3-config" (
   ''
     exec ${kanshi}/bin/kanshi
-    exec ${mako}/bin/mako
+    exec ${mako}/bin/mako -c ${makoConf}
     set $mod Mod4
 
     ${machineConfig}
@@ -126,7 +131,10 @@ writeText "i3-config" (
     floating_modifier $mod
 
     # start a terminal
-    bindsym $mod+Return exec ${kitty}/bin/kitty -c ${kittyConf} -c ${kittyTheme}
+    bindsym $mod+Return exec ${terminator}/bin/terminator -g ${terminatorConf}
+    # TODO requires additional config for remote hosts and line wrapping
+    # behaviour for large commands needs work
+    bindsym $mod+Shift+Return exec ${kitty}/bin/kitty -c ${kittyConf} -c ${kittyTheme}
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -209,7 +217,7 @@ writeText "i3-config" (
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
     '' + (
-      if (parameters.machine == "janusX1") then ''
+      if (parameters.machine == "work") then ''
         # Pulse Audio controls
         # run pactl list sinks
         bindsym XF86AudioRaiseVolume exec --no-startup-id ${config.hardware.pulseaudio.package}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume

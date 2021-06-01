@@ -18,13 +18,12 @@ let
   basePackages = with pkgs; [
     ack
     alacritty
-    arandr
     bat
     bc
     bind
     binutils
     calibre
-    chromium
+    google-chrome
     cmus
     direnv
     efibootmgr
@@ -115,6 +114,9 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+     "ffmpeg-2.8.17"
+   ];
 
     packageOverrides = pkgs: rec {
       neovim = (import ./vim.nix);
@@ -126,12 +128,12 @@ in {
     ssh.forwardX11 = false;
     ssh.startAgent = true;
     zsh.enable = true;
-    chromium.extraOpts="--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    #chromium.extraOpts="--enable-features=UseOzonePlatform --ozone-platform=wayland";
     sway = {
       enable = true;
       extraPackages = with pkgs; [ 
         bemenu
-        kanshi # autorandor replacement
+        kanshi # autorandr replacement
         kitty
         grim # screen cap
         i3status
