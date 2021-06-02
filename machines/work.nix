@@ -26,6 +26,7 @@ in {
     consul
     cmake
     discord
+    doctl
     unstable.docker_compose
     etcd
     gimp
