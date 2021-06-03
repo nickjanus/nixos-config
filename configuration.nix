@@ -17,6 +17,7 @@ let
 
   basePackages = with pkgs; [
     ack
+    ag
     alacritty
     bat
     bc
@@ -31,6 +32,7 @@ let
     file
     firefox
     fwupd
+    fzf
     gcc
     git
     git-lfs

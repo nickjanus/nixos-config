@@ -99,14 +99,22 @@ pkgs.neovim.override {
       " gitgutter settings
       let g:gitgutter_max_signs = 2000
 
-      " vim-multiple-cursors settings
-      nnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-      vnoremap <silent> <M-j> :MultipleCursorsFind <C-R>/<CR>
-
-      " ctrl-p settings
-      let g:ctrlp_max_files = 100000
-      let g:ctrlp_max_depth = 40
-      let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+      " fzf settings
+      nnoremap <silent> <leader>f :FZF<cr>
+      nnoremap <silent> <leader>F :Lines<cr>
+      let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
 
       " Clean up artifacts in neovim, see https://github.com/neovim/neovim/issues/5990
       let $VTE_VERSION="100"
@@ -117,18 +125,16 @@ pkgs.neovim.override {
       {
         names = [
           "airline"
-          "alchemist-vim"
-          "ctrlp"
           "fugitive"
+          "fzf-vim"
+          "fzfWrapper"
           "surround"
           "Solarized"
-          "multiple-cursors"
           "syntastic"
           "gitgutter"
           "tabular"
-          #"vim-json" uncomment when this makes it into stable
           "vim-airline-themes"
-          "vim-elixir"
+          "vim-json"
           "vim-jinja"
           "vim-nix"
           "vim-go"
