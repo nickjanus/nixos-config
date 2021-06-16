@@ -92,6 +92,5 @@ in {
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   services = lib.recursiveUpdate baseServices {
-    # TODO port libinput settings over to sway config
   };
 }

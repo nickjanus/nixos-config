@@ -89,7 +89,7 @@ in {
   environment.etc = zsh_config.environment_etc;
 
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     enableGhostscriptFonts = true;
     fonts = with pkgs; [
       corefonts  # Micrsoft free fonts
@@ -117,7 +117,6 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
     permittedInsecurePackages = [
-     "ffmpeg-2.8.17"
    ];
 
     packageOverrides = pkgs: rec {
@@ -173,5 +172,5 @@ in {
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.05";
 }
