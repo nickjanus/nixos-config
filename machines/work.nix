@@ -78,8 +78,12 @@ in {
     bluetooth.enable = true;
     pulseaudio = {
       enable = true;
-        support32Bit = true;
+      support32Bit = true;
+      package = pkgs.pulseaudioFull;
     };
+    firmware = [
+      pkgs.sof-firmware
+    ];
 
     # Enable gpu support
     opengl.extraPackages = with pkgs;[ vaapiIntel ];
