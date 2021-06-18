@@ -13,6 +13,7 @@ let
   };
 
   basePackages = with pkgs; [
+    ack
     ag
     bat
     bc
@@ -156,7 +157,7 @@ in {
         grab = "grim -g (slurp)";
         # Work
         vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
-        vpndown = "sudo kill -s INT pgrep openconnect";
+        vpndown = "sudo kill -s INT (pgrep openconnect)";
       };
     };
     sway = {
