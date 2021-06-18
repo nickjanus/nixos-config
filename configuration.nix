@@ -9,16 +9,11 @@ let
 
   baseServices = {
     locate.enable = true;
-
-    # Swap out systemd time daemon until it works
-    timesyncd.enable = false;
-    ntp.enable = true;
+    timesyncd.enable = true;
   };
 
   basePackages = with pkgs; [
-    ack
     ag
-    alacritty
     bat
     bc
     bind
@@ -33,9 +28,7 @@ let
     firefox
     fwupd
     fzf
-    gcc
     git
-    git-lfs
     gnumake
     gnupg
     gnupg1compat
@@ -43,7 +36,6 @@ let
     gptfdisk
     htop
     imagemagick7
-    irssi
     jq
     lsof
     neovim
@@ -53,21 +45,30 @@ let
     pavucontrol
     s3cmd
     screen
-    signal-desktop
     sysstat
     teensy-loader-cli
     terraform
     tmux
     tree
     unzip
-    vagrant
     wget
-    xlibs.xev
-    zsh
-    zsh-prezto
-  ];
+    zoxide
+    (
+      pkgs.writeTextFile {
+        name = "startsway";
+        destination = "/bin/startsway";
+        executable = true;
+        text = ''
+          #! /usr/bin/env bash
 
-  zsh_config = import ./zsh.nix {inherit pkgs; inherit config; inherit parameters;};
+          # first import environment variables from the login manager
+          systemctl --user import-environment
+          # then start the service
+          exec systemctl --user start sway.service
+        '';
+      }
+    )
+  ];
 
 in {
   imports =
@@ -86,7 +87,6 @@ in {
       )
     ];
 
-  environment.etc = zsh_config.environment_etc;
 
   fonts = {
     fontDir.enable = true;
@@ -95,9 +95,10 @@ in {
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
+      nerdfonts
       open-dyslexic
       powerline-fonts
-      ubuntu_font_family  # Ubuntu fonts
+      ubuntu_font_family
       unifont # some international languages
     ];
   };
@@ -124,12 +125,40 @@ in {
     };
   };
 
+  environment = {
+    etc = {
+      "sway/config".source = import ./sway.nix { inherit config; inherit pkgs; inherit parameters; };
+      "mako/config".source = import ./mako.nix { inherit pkgs; };
+      "fish/functions/fish_user_key_bindings.fish".source = ./fish_functions/fish_user_key_bindings.fish;
+    };
+  };
+
   # List services that you want to enable:
   programs = {
     ssh.forwardX11 = false;
     ssh.startAgent = true;
-    zsh.enable = true;
-    #chromium.extraOpts="--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    fish = {
+      enable = true;
+      shellInit = ''
+        set EDITOR ${pkgs.neovim}/bin/nvim
+        set VISUAL ${pkgs.neovim}/bin/nvim
+        set PAGER "${pkgs.less}/bin/less -R"
+
+        fish_vi_key_bindings
+        direnv hook fish | source
+      '';
+      interactiveShellInit = ''
+        startsway
+      '';
+      shellAbbrs = {
+        ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
+        nas-up = "wol a8:a1:59:08:45:e0";
+        grab = "grim -g (slurp)";
+        # Work
+        vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
+        vpndown = "sudo kill -s INT pgrep openconnect";
+      };
+    };
     sway = {
       enable = true;
       extraPackages = with pkgs; [ 
@@ -151,6 +180,53 @@ in {
     };
   };
 
+  systemd = {
+    user = {
+      targets = {
+        sway-session = {
+          description = "Sway compositor session";
+          documentation = [ "man:systemd.special(7)" ];
+          bindsTo = [ "graphical-session.target" ];
+          wants = [ "graphical-session-pre.target" ];
+          after = [ "graphical-session-pre.target" ];
+        };
+      };
+      services = {
+        sway = {
+          description = "Sway - Wayland window manager";
+          documentation = [ "man:sway(5)" ];
+          bindsTo = [ "graphical-session.target" ];
+          wants = [ "graphical-session-pre.target" ];
+          after = [ "graphical-session-pre.target" ];
+          # We explicitly unset PATH here, as we want it to be set by
+          # systemctl --user import-environment in startsway
+          environment.PATH = lib.mkForce null;
+          serviceConfig = {
+            Type = "simple";
+            ExecStart = ''
+              ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+            '';
+            Restart = "on-failure";
+            RestartSec = 1;
+            TimeoutStopSec = 10;
+          };
+        };
+        kanshi = {
+          description = "Kanshi output autoconfig ";
+          wantedBy = [ "graphical-session.target" ];
+          partOf = [ "graphical-session.target" ];
+          serviceConfig = {
+            ExecStart = ''
+              ${pkgs.kanshi}/bin/kanshi
+            '';
+            RestartSec = 5;
+            Restart = "always";
+          };
+        };
+      };
+    };
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.nick = {
     home = "/home/nick";
@@ -164,7 +240,7 @@ in {
     isNormalUser = true;
     uid = 1000;
   };
-  users.defaultUserShell = "/run/current-system/sw/bin/zsh";
+  users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
   virtualisation.docker.enable = true;
 

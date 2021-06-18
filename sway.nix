@@ -104,13 +104,11 @@ let
   kittyConf = import ./kitty.nix{inherit pkgs;};
   kittyTheme = import ./kitty-solarized-theme.nix{inherit pkgs;};
   terminatorConf = import ./terminator.nix{inherit pkgs;};
-  makoConf = import ./mako.nix{inherit pkgs;};
 in
 
 writeText "i3-config" (
   ''
-    exec ${kanshi}/bin/kanshi
-    exec ${mako}/bin/mako -c ${makoConf}
+    exec ${mako}/bin/mako
     set $mod Mod4
 
     ${machineConfig}

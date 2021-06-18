@@ -134,6 +134,7 @@ pkgs.neovim.override {
           "gitgutter"
           "tabular"
           "vim-airline-themes"
+          "vim-fish"
           "vim-json"
           "vim-jinja"
           "vim-nix"
