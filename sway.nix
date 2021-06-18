@@ -4,7 +4,7 @@ with pkgs;
 
 let
   machineConfig = if (parameters.machine == "janusX1" || parameters.machine == "work") then ''
-    input "2:7:SynPS/2_Synaptics_TouchPad" {
+    input type:touchpad {
       accel_profile adaptive
       click_method clickfinger
       dwt enabled
