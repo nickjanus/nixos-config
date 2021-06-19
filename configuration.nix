@@ -96,7 +96,6 @@ in {
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
-      nerdfonts
       open-dyslexic
       powerline-fonts
       ubuntu_font_family
