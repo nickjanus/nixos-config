@@ -147,6 +147,7 @@ in {
 
         fish_vi_key_bindings
         direnv hook fish | source
+        zoxide init fish | source
       '';
       interactiveShellInit = ''
         startsway
