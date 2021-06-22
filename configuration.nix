@@ -46,6 +46,7 @@ let
     pavucontrol
     s3cmd
     screen
+    spotify
     sysstat
     teensy-loader-cli
     terraform
@@ -128,7 +129,6 @@ in {
   environment = {
     etc = {
       "sway/config".source = import ./sway.nix { inherit config; inherit pkgs; inherit parameters; };
-      "mako/config".source = import ./mako.nix { inherit pkgs; };
       "fish/functions/fish_user_key_bindings.fish".source = ./fish_functions/fish_user_key_bindings.fish;
     };
   };
