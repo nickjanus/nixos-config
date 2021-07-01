@@ -55,7 +55,11 @@ in {
     wol
     xorg.xdpyinfo
     zoom-us
+    #(
+    #  pkgs.callPackage ./work/kolide.nix {}
+    #)
   ] ++ basePackages;
+
 
   networking = {
     hostName = "janusWork";
