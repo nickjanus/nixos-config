@@ -2,6 +2,7 @@
 
 let
   unstable = import <unstable> {}; # use unstable channel
+  kolide = pkgs.callPackage ./work/kolide.nix {};
 in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
@@ -27,6 +28,7 @@ in {
     cmake
     discord
     doctl
+    dpkg
     unstable.docker_compose
     etcd
     gimp
@@ -55,9 +57,8 @@ in {
     wol
     xorg.xdpyinfo
     zoom-us
-    #(
-    #  pkgs.callPackage ./work/kolide.nix {}
-    #)
+
+    kolide
   ] ++ basePackages;
 
 
@@ -97,5 +98,18 @@ in {
   };
 
   services = lib.recursiveUpdate baseServices {
+  };
+
+  systemd.services.kolide = {
+    description = "the kolide launcher";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${kolide}/usr/local/kolide-k2/bin/launcher -config ${kolide}/etc/kolide-k2/launcher.flags
+      '';
+      Restart = "on-failure";
+      RestartSec = 1;
+    };
   };
 }
