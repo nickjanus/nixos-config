@@ -9,7 +9,7 @@ in stdenv.mkDerivation {
   system = "x86_64-linux";
 
   inherit src;
-  #sourceRoot = ".";
+  sourceRoot = ".";
   unpackCmd = "dpkg-deb -x $src deb/";
 
   dontConfigure = true;
