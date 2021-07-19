@@ -1,6 +1,7 @@
 { lib, config, pkgs, baseServices, basePackages, parameters }:
 
 let
+  unstable = import <unstable> {}; # use unstable channel
 in {
   boot = {
     kernelModules = [ ];
@@ -43,6 +44,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     at
+    unstable.chia
     ethtool
     fio
     handbrake
