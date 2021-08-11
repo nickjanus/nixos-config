@@ -3,6 +3,7 @@
 let
   unstable = import <unstable> {}; # use unstable channel
   kolide = pkgs.callPackage ./work/kolide.nix {};
+  sentinelone = pkgs.callPackage ./work/sentinelone.nix {};
 in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
@@ -58,7 +59,9 @@ in {
     xorg.xdpyinfo
     zoom-us
 
+    # work packages
     kolide
+    sentinelone
   ] ++ basePackages;
 
 
@@ -112,4 +115,28 @@ in {
       RestartSec = 1;
     };
   };
+  systemd.services.sentinelone = {
+    description = "sentinelone agent";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${kolide}/usr/local/kolide-k2/bin/launcher -config ${kolide}/etc/kolide-k2/launcher.flags
+      '';
+      ExecStop = ''
+        ${kolide}/usr/local/kolide-k2/bin/launcher -config ${kolide}/etc/kolide-k2/launcher.flags
+      '';
+      Restart = "on-failure";
+      RestartSec = 1;
+    };
+  };
+
+  users.extraUsers.sentinelone = {
+    description = "User for sentinelone";
+    isNormalUser = true;
+    shell = "${pkgs.coreutils}/bin/true";
+  };
+  users.groups.sentinelone.members = [
+    "sentinelone"
+  ];
 }
