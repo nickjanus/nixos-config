@@ -7,9 +7,16 @@
 let
   parameters = import ./parameters.nix;
 
+  security.rtkit.enable = true;
   baseServices = {
     locate.enable = true;
     timesyncd.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
   basePackages = with pkgs; [
@@ -205,7 +212,7 @@ in {
           serviceConfig = {
             Type = "simple";
             ExecStart = ''
-              ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+              ${pkgs.sway}/bin/sway --debug
             '';
             Restart = "on-failure";
             RestartSec = 1;

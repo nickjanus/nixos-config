@@ -20,7 +20,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     ansible
-    awscli
+    awscli2
     bluez # bluetoothctl
     brightnessctl
     confd
@@ -80,11 +80,6 @@ in {
 
   hardware = {
     bluetooth.enable = true;
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
-    };
     firmware = [
       pkgs.sof-firmware
     ];
@@ -112,4 +107,7 @@ in {
       RestartSec = 1;
     };
   };
+
+  # enable screensharing in sway
+  xdg.portal.enable = true;
 }
