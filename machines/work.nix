@@ -3,7 +3,7 @@
 let
   unstable = import <unstable> {}; # use unstable channel
   kolide = pkgs.callPackage ./work/kolide.nix {};
-  sentinelone = pkgs.callPackage ./work/sentinelone.nix { inherit parameters; };
+  sentinelone = pkgs.callPackage ./work/sentinelone.nix {};
 in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
@@ -108,22 +108,6 @@ in {
       Type = "simple";
       ExecStart = ''
         ${kolide}/usr/local/kolide-k2/bin/launcher -config ${kolide}/etc/kolide-k2/launcher.flags
-      '';
-      Restart = "on-failure";
-      RestartSec = 1;
-    };
-  };
-
-  systemd.services.sentinelone = {
-    description = "sentinelone agent";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''
-        ${sentinelone}/opt/sentinelone/bin/sentinelctl control run
-      '';
-      ExecStop = ''
-        ${sentinelone}/opt/sentinelone/bin/sentinelctl control shutdown
       '';
       Restart = "on-failure";
       RestartSec = 1;
