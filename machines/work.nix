@@ -98,9 +98,6 @@ in {
   services = lib.recursiveUpdate baseServices {
   };
 
-  # enable screensharing in sway
-  xdg.portal.enable = true;
-
   systemd.services.kolide = {
     description = "the kolide launcher";
     wantedBy = [ "multi-user.target" ];

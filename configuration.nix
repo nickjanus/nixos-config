@@ -9,6 +9,7 @@ let
 
   security.rtkit.enable = true;
   baseServices = {
+    dbus.enable = true;
     locate.enable = true;
     timesyncd.enable = true;
     pipewire = {
@@ -187,6 +188,9 @@ in {
       ];
     };
   };
+
+  # enable screensharing in sway
+  xdg.portal.enable = true;
 
   systemd = {
     user = {
