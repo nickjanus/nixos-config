@@ -41,7 +41,6 @@ let
     gnumake
     gnupg
     gnupg1compat
-    go
     gptfdisk
     htop
     imagemagick7

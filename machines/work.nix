@@ -35,6 +35,7 @@ in {
     gimp
     git-crypt
     glide
+    unstable.go_1_17
     grepcidr
     krita
     libwacom
