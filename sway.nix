@@ -118,10 +118,11 @@ writeText "i3-config" (
     exec swayidle -w \
       timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
       timeout 600 'swaylock -f -c 000000' \
-      before-sleep 'swaylock -f -c 000000'
+      before-sleep 'swaylock -f -c 000000' \
+      lock 'swaylock -f -c 000000'
 
     # screen lock alt+shift+l
-    bindsym Mod1+Shift+l exec swaylock -f -c 000000
+    bindsym --release $mod+Shift+l exec loginctl lock-session
 
     # Font for window title bars
     font pango:Fira Mono 8
