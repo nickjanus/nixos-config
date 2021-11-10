@@ -16,6 +16,10 @@ let
     input "1:1:AT_Translated_Set_2_keyboard" {
       xkb_options "altwin:prtsc_rwin, terminate:ctrl_alt_bksp"
     }
+
+    input "1386:912:Wacom_Cintiq_16_Pen" {
+      map_to_output HDMI-A-1
+    }
     ''
     else
     "";

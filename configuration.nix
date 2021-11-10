@@ -61,6 +61,7 @@ let
     tree
     unzip
     wget
+    yq
     zoxide
     (
       pkgs.writeTextFile {
