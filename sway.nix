@@ -35,13 +35,20 @@ let
 
     order += "disk /"
   '' + (
-    if (parameters.machine == "hydra") then ''
-      order += "wireless wlp0s29u1u5"
-    ''
-    else "") + (
+      if (parameters.machine == "hydra") then ''
+        order += "wireless wlp0s29u1u5"
+      ''
+      else ""
+    ) + (
       if (parameters.machine == "work") then ''
         order += "wireless wlp0s20f3"
         order += "path_exists VPN"
+        order += "battery 0"
+      ''
+      else ""
+    ) + (
+      if (parameters.machine == "janusX1") then ''
+        order += "wireless wlp4s0"
         order += "battery 0"
       ''
       else ""
@@ -93,17 +100,29 @@ let
         path = "/proc/sys/net/ipv4/conf/tun0"
       }
     ''
-    else
-    ""
+    else ""
   ) + (
     if (parameters.machine == "hydra") then ''
-      wireless wlp0s29u1u5 {
+      wireless wlp4s0 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
     ''
-    else
-    ""
+    else ""
+  ) + (
+    if (parameters.machine == "janusX1") then ''
+      wireless wlp0s29u1u5 {
+        format_up = " WiFi: %ip %quality %essid %bitrate "
+        format_down = " WiFi: (/) "
+      }
+
+      battery 0 {
+        format = " Power: %status %percentage %remaining left "
+        path = "/sys/class/power_supply/BAT0/uevent"
+        low_threshold = 20
+      }
+    ''
+    else ""
   );
   kittyConf = import ./kitty.nix{inherit pkgs;};
   kittyTheme = import ./kitty-solarized-theme.nix{inherit pkgs;};
