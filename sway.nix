@@ -103,7 +103,7 @@ let
     else ""
   ) + (
     if (parameters.machine == "hydra") then ''
-      wireless wlp4s0 {
+      wireless wlp0s29u1u5 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
@@ -111,7 +111,7 @@ let
     else ""
   ) + (
     if (parameters.machine == "janusX1") then ''
-      wireless wlp0s29u1u5 {
+      wireless wlp4s0 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
