@@ -42,7 +42,6 @@
   };
 
   services = lib.recursiveUpdate baseServices {
-    blueman.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
