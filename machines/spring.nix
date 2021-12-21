@@ -41,15 +41,34 @@
     bluetooth.enable = true;
   };
 
+  programs.steam.enable = true;
+
   services = lib.recursiveUpdate baseServices {
+    zfs = {
+      autoScrub = {
+        enable = true;
+        interval = "weekly";
+      };
+      autoSnapshot.enable = false;
+    };
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-runtime"
+  ];
 
   environment.systemPackages = with pkgs; [
     abcde
     cargo
     discord
     gcc
+    lshw
+    pciutils
     rustc
+    usbutils
   ] ++ basePackages;
 
 }
+
