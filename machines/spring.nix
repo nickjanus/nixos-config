@@ -65,6 +65,7 @@
     discord
     gcc
     lshw
+    makemkv
     pciutils
     rustc
     usbutils
