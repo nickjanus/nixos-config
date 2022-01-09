@@ -132,20 +132,27 @@ in
 
 writeText "i3-config" (
   ''
+    # sets primary display for games
+    exec ${xwayland}/bin/xwayland force ${xorg.xrandr}/bin/xrandr --output XWAYLAND0 --primary
+
     exec ${mako}/bin/mako -c ${makoConf}
     set $mod Mod4
 
     ${machineConfig}
 
     # idle config
+    for_window [class=".*"] inhibit_idle fullscreen
+    for_window [app_id=".*"] inhibit_idle fullscreen
+
     exec swayidle -w \
-      timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-      timeout 600 'swaylock -f -c 000000' \
+      timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+      timeout 900 'swaylock -f -c 000000' \
+      timeout 1200 'systemctl suspend' \
       before-sleep 'swaylock -f -c 000000' \
       lock 'swaylock -f -c 000000'
 
     # screen lock alt+shift+l
-    bindsym --release $mod+Shift+l exec loginctl lock-session
+    bindsym --release $mod+Ctrl+l exec loginctl lock-session
 
     # Font for window title bars
     font pango:Fira Mono 8

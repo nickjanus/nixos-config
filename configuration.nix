@@ -38,6 +38,7 @@ let
     fwupd
     fzf
     git
+    gnome3.adwaita-icon-theme # icons for various applications
     gnumake
     gnupg
     gnupg1compat
@@ -143,6 +144,7 @@ in {
 
   # List services that you want to enable:
   programs = {
+    corectrl.enable = true;
     ssh.forwardX11 = false;
     ssh.startAgent = true;
     fish = {
@@ -161,8 +163,9 @@ in {
       '';
       shellAbbrs = {
         ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
-        nas-up = "wol a8:a1:59:08:45:e0";
         grab = "grim -g (slurp)";
+        xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
+
         # Work
         vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
         vpndown = "sudo kill -s INT (pgrep openconnect)";
@@ -244,6 +247,7 @@ in {
     home = "/home/nick";
     description = "Nick Janus";
     extraGroups = [ 
+      "corectrl"
       "docker"
       "networkmanager"
       "video"

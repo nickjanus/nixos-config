@@ -12,10 +12,7 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.zfsSupport = true;
   boot.loader.grub.copyKernels = true;
-
-  # swap these once booting in uefi
-  boot.loader.efi.canTouchEfiVariables = false;
-  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   boot.loader.grub.mirroredBoots = [
     { path = "/boot"; devices = [ "/dev/disk/by-uuid/4763-C9B8" ]; }
@@ -39,6 +36,7 @@
 
   hardware = {
     bluetooth.enable = true;
+    opengl.driSupport32Bit = true; # lutris support
   };
 
   programs.steam.enable = true;
@@ -59,16 +57,47 @@
     "steam-runtime"
   ];
 
+  # makemkv expects ccextractor to be in the same bin directory, using the
+  # working directory
+  nixpkgs.overlays = [
+    (self: super: {
+      makemkvEnv = super.pkgs.symlinkJoin {
+        name = "makemkv environment";
+        paths = with super.pkgs; [
+          makemkv
+          ccextractor
+        ];
+      };
+    })
+    (self: super: {
+      makemkvWrapper = super.pkgs.symlinkJoin {
+        name = "makemkv wrapper";
+        paths = [
+          super.makemkvEnv
+        ];
+        buildInputs = [
+          pkgs.makeWrapper
+        ];
+        postBuild = ''
+          wrapProgram $out/bin/makemkv --run 'cd ${super.makemkvEnv}/bin'
+        '';
+      };
+    })
+  ];
+ 
+
   environment.systemPackages = with pkgs; [
     abcde
     cargo
     discord
     gcc
     lshw
-    makemkv
+    lutris
+    makemkvWrapper
     pciutils
     rustc
     usbutils
+    xorg.xrandr
   ] ++ basePackages;
 
 }
