@@ -83,6 +83,24 @@
         '';
       };
     })
+    (self: super: 
+      let
+        unstable = import <unstable> {}; # use unstable channel
+      in {
+        minigalaxy = super.pkgs.symlinkJoin {
+          name = "patched minigalaxy";
+          paths = [
+            unstable.minigalaxy
+          ];
+          buildInputs = [
+            pkgs.makeWrapper
+          ];
+          postBuild = ''
+            wrapProgram $out/bin/minigalaxy --prefix PATH : ${lib.makeBinPath [ super.pkgs.wine ]}
+          '';
+        };
+      }
+    )
   ];
  
 
@@ -94,6 +112,7 @@
     lshw
     lutris
     makemkvWrapper
+    minigalaxy
     pciutils
     rustc
     usbutils
