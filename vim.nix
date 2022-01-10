@@ -59,7 +59,7 @@ pkgs.neovim.override {
       autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
       " txt
-      autocmd FileType text setlocal textwidth=80 ts=2 sts=2 sw=2 expandtab
+      autocmd FileType text setlocal formatoptions+=t textwidth=80 ts=2 sts=2 sw=2 expandtab
 
       " yaml
       autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
