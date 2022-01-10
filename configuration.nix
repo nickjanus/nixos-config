@@ -38,7 +38,6 @@ let
     fwupd
     fzf
     git
-    gnome3.adwaita-icon-theme # icons for various applications
     gnumake
     gnupg
     gnupg1compat
@@ -177,6 +176,7 @@ in {
         bemenu
         kanshi # autorandr replacement
         kitty
+        gnome3.adwaita-icon-theme # icons for various applications
         grim # screen cap
         i3status
         light
