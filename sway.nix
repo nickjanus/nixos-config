@@ -3,7 +3,7 @@
 with pkgs;
 
 let
-  machineConfig = if (parameters.machine == "janusX1" || parameters.machine == "work") then ''
+  machineConfig = if (parameters.machine == "janusX1") then ''
     input type:touchpad {
       accel_profile adaptive
       click_method clickfinger
@@ -35,15 +35,8 @@ let
 
     order += "disk /"
   '' + (
-      if (parameters.machine == "hydra") then ''
-        order += "wireless wlp0s29u1u5"
-      ''
-      else ""
-    ) + (
-      if (parameters.machine == "work") then ''
-        order += "wireless wlp0s20f3"
-        order += "path_exists VPN"
-        order += "battery 0"
+      if (parameters.machine == "spring") then ''
+        order += "ethernet enp56s0"
       ''
       else ""
     ) + (
@@ -58,7 +51,7 @@ let
     order += "volume master"
     order += "tztime local"
 
-    ethernet enp11s0 {
+    ethernet enp56s0 {
       format_up = " LAN: %ip %speed "
       format_down = " LAN: (/) "
     }
@@ -83,33 +76,6 @@ let
       mixer_idx = 0
     }
   '' + (
-    if (parameters.machine == "work") then ''
-      wireless wlp0s20f3 {
-        format_up = " WiFi: %ip %quality %essid %bitrate "
-        format_down = " WiFi: (/) "
-      }
-
-      battery 0 {
-        format = " Power: %status %percentage %remaining left "
-        path = "/sys/class/power_supply/BAT0/uevent"
-        low_threshold = 20
-      }
-
-      path_exists VPN {
-        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
-        path = "/proc/sys/net/ipv4/conf/tun0"
-      }
-    ''
-    else ""
-  ) + (
-    if (parameters.machine == "hydra") then ''
-      wireless wlp0s29u1u5 {
-        format_up = " WiFi: %ip %quality %essid %bitrate "
-        format_down = " WiFi: (/) "
-      }
-    ''
-    else ""
-  ) + (
     if (parameters.machine == "janusX1") then ''
       wireless wlp4s0 {
         format_up = " WiFi: %ip %quality %essid %bitrate "

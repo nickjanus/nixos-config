@@ -57,35 +57,10 @@
     "steam-runtime"
   ];
 
-  # makemkv expects ccextractor to be in the same bin directory, using the
-  # working directory
   nixpkgs.overlays = [
-    (self: super: {
-      makemkvEnv = super.pkgs.symlinkJoin {
-        name = "makemkv environment";
-        paths = with super.pkgs; [
-          makemkv
-          ccextractor
-        ];
-      };
-    })
-    (self: super: {
-      makemkvWrapper = super.pkgs.symlinkJoin {
-        name = "makemkv wrapper";
-        paths = [
-          super.makemkvEnv
-        ];
-        buildInputs = [
-          pkgs.makeWrapper
-        ];
-        postBuild = ''
-          wrapProgram $out/bin/makemkv --run 'cd ${super.makemkvEnv}/bin'
-        '';
-      };
-    })
     (self: super: 
       let
-        unstable = import <unstable> {}; # use unstable channel
+        unstable = import <unstable> {};
       in {
         minigalaxy = super.pkgs.symlinkJoin {
           name = "patched minigalaxy";
@@ -107,11 +82,12 @@
   environment.systemPackages = with pkgs; [
     abcde
     cargo
+    ccextractor # used by makemkv
     discord
     gcc
     lshw
     lutris
-    makemkvWrapper
+    makemkv
     minigalaxy
     pciutils
     rustc
