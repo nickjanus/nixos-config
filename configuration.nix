@@ -31,6 +31,7 @@ let
     google-chrome
     cmus
     direnv
+    dust # du alternative
     efibootmgr
     efivar
     file
@@ -38,10 +39,12 @@ let
     fwupd
     fzf
     git
+    glances # system pane of glass
     gnumake
     gnupg
     gnupg1compat
     gptfdisk
+    gtop
     htop
     imagemagick7
     jq
@@ -57,6 +60,7 @@ let
     sysstat
     teensy-loader-cli
     terraform
+    tldr # man page-like examples
     tmux
     tree
     unzip
