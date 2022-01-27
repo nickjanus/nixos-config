@@ -3,6 +3,10 @@
 let
   unstable = import <unstable> {}; # use unstable channel
 in {
+  imports = [
+    ./dynamic-dns.nix
+  ];
+
   boot = {
     kernelModules = [ ];
     loader.systemd-boot.enable = true;
@@ -42,9 +46,41 @@ in {
     };
   };
 
+  nixpkgs.overlays = [
+    (self: super: 
+      let
+        version = "1.3.0";
+      in {
+        digitalocean-dynamic-dns-ip = super.pkgs.buildGoModule {
+          inherit version;
+
+          pname = "digitalocean-dynamic-dns-ip";
+
+          src = pkgs.fetchFromGitHub {
+            owner = "anaganisk";
+            repo = "digitalocean-dynamic-dns-ip";
+            rev = "${version}";
+            sha256 = "0p2p8ag097w9xgi3vypqfac2q503yvz94rf94da309j3nvlk4y6g";
+          };
+
+          vendorSha256 = "1ygsmkzflx84wv35sc8s4dm7acslwydgg1f0dcbhcx9jcjvpnvw8";
+
+          runVend = true;
+
+          meta = with lib; {
+            description = "Dynamic DNS client that uses DigitalOcean's DNS API";
+            homepage = "https://github.com/anaganisk/digitalocean-dynamic-dns-ip";
+            license = licenses.mit;
+            #maintainers = with maintainers; [ nickjanus ];
+            #platforms = platforms.linux ++ platforms.darwin;
+          };
+        };
+      }
+    )
+  ];
+ 
   environment.systemPackages = with pkgs; [
     at
-    unstable.chia
     ethtool
     fio
     handbrake
@@ -80,6 +116,35 @@ in {
         53 # pihole
       ];
     };
+  };
+
+  programs.digitalocean-dynamic-dns-ip = {
+    enable = true;
+    conf = ''
+      {
+        "apikey": ${parameters.do_api_key},
+        "doPageSize": 20,
+        "useIPv4": true,
+        "useIPv6": false,
+        "domains": [
+          {
+            "domain": "nondesignated.com",
+            "records": [
+              {
+                "name": "@",
+                "type": "A",
+                "TTL": 60
+              },
+              {
+                "name": "*",
+                "type": "A",
+                "TTL": 60
+              }
+            ]
+          }
+        ]
+      }
+    '';
   };
 
   services = lib.recursiveUpdate baseServices {
