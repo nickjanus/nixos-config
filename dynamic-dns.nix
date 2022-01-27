@@ -2,7 +2,9 @@
 
 with lib;
 
-{
+let
+  cfg = config.programs.digitalocean-dynamic-dns-ip;
+in {
   options.programs.digitalocean-dynamic-dns-ip = {
     enable = mkEnableOption "digitalocean-dynamic-dns-ip";
 
@@ -16,7 +18,7 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ digitalocean-dynamic-dns-ip ];
+    environment.systemPackages = [ pkgs.digitalocean-dynamic-dns-ip ];
     systemd = {
       timers.digitalocean-dynamic-dns-ip-timer = {
         wantedBy = [ "timers.target" ];
@@ -26,7 +28,7 @@ with lib;
       services.digitalocean-dynamic-dns-ip-timer = {
         serviceConfig.Type = "oneshot";
         script = ''
-          ${digitalocean-dynamic-dns-ip}/bin/digitalocean-dynamic-ip ${pkgs.writeText(cfg.conf)}
+          ${pkgs.digitalocean-dynamic-dns-ip}/bin/digitalocean-dynamic-ip ${pkgs.writeText "do-dynamic-dns-conf" cfg.conf}
         '';
       };
     };

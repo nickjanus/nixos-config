@@ -9,6 +9,7 @@ in {
 
   boot = {
     kernelModules = [ ];
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
     supportedFilesystems = [ "zfs" ];
@@ -123,7 +124,7 @@ in {
     enable = true;
     conf = ''
       {
-        "apikey": ${parameters.do_api_key},
+        "apikey": ${parameters.do_api_token},
         "doPageSize": 20,
         "useIPv4": true,
         "useIPv6": false,
@@ -168,12 +169,6 @@ in {
     };
     nfs.server.enable = true;
     openssh.enable = true;
-    wakeonlan.interfaces = [
-      {
-        interface = "enp5s0";
-        method = "magicpacket";
-      }
-    ];
   };
 
   system.stateVersion = "21.05";
