@@ -3,7 +3,7 @@
 with pkgs;
 
 let
-  machineConfig = if (parameters.machine == "janusX1" || parameters.machine == "work") then ''
+  machineConfig = if (parameters.machine == "janusX1") then ''
     input type:touchpad {
       accel_profile adaptive
       click_method clickfinger
@@ -15,6 +15,10 @@ let
 
     input "1:1:AT_Translated_Set_2_keyboard" {
       xkb_options "altwin:prtsc_rwin, terminate:ctrl_alt_bksp"
+    }
+
+    input "1386:912:Wacom_Cintiq_16_Pen" {
+      map_to_output HDMI-A-1
     }
     ''
     else
@@ -31,13 +35,13 @@ let
 
     order += "disk /"
   '' + (
-    if (parameters.machine == "hydra") then ''
-      order += "wireless wlp0s29u1u5"
-    ''
-    else "") + (
-      if (parameters.machine == "work") then ''
-        order += "wireless wlp0s20f3"
-        order += "path_exists VPN"
+      if (parameters.machine == "spring") then ''
+        order += "ethernet enp56s0"
+      ''
+      else ""
+    ) + (
+      if (parameters.machine == "janusX1") then ''
+        order += "wireless wlp4s0"
         order += "battery 0"
       ''
       else ""
@@ -47,7 +51,7 @@ let
     order += "volume master"
     order += "tztime local"
 
-    ethernet enp11s0 {
+    ethernet enp56s0 {
       format_up = " LAN: %ip %speed "
       format_down = " LAN: (/) "
     }
@@ -72,8 +76,8 @@ let
       mixer_idx = 0
     }
   '' + (
-    if (parameters.machine == "work") then ''
-      wireless wlp0s20f3 {
+    if (parameters.machine == "janusX1") then ''
+      wireless wlp4s0 {
         format_up = " WiFi: %ip %quality %essid %bitrate "
         format_down = " WiFi: (/) "
       }
@@ -83,23 +87,8 @@ let
         path = "/sys/class/power_supply/BAT0/uevent"
         low_threshold = 20
       }
-
-      path_exists VPN {
-        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
-        path = "/proc/sys/net/ipv4/conf/tun0"
-      }
     ''
-    else
-    ""
-  ) + (
-    if (parameters.machine == "hydra") then ''
-      wireless wlp0s29u1u5 {
-        format_up = " WiFi: %ip %quality %essid %bitrate "
-        format_down = " WiFi: (/) "
-      }
-    ''
-    else
-    ""
+    else ""
   );
   kittyConf = import ./kitty.nix{inherit pkgs;};
   kittyTheme = import ./kitty-solarized-theme.nix{inherit pkgs;};
@@ -109,19 +98,27 @@ in
 
 writeText "i3-config" (
   ''
+    # sets primary display for games
+    exec ${xwayland}/bin/xwayland force ${xorg.xrandr}/bin/xrandr --output XWAYLAND0 --primary
+
     exec ${mako}/bin/mako -c ${makoConf}
     set $mod Mod4
 
     ${machineConfig}
 
     # idle config
+    for_window [class=".*"] inhibit_idle fullscreen
+    for_window [app_id=".*"] inhibit_idle fullscreen
+
     exec swayidle -w \
-      timeout 300 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-      timeout 600 'swaylock -f -c 000000' \
-      before-sleep 'swaylock -f -c 000000'
+      timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+      timeout 900 'swaylock -f -c 000000' \
+      timeout 1200 'systemctl suspend' \
+      before-sleep 'swaylock -f -c 000000' \
+      lock 'swaylock -f -c 000000'
 
     # screen lock alt+shift+l
-    bindsym Mod1+Shift+l exec swaylock -f -c 000000
+    bindsym --release $mod+Ctrl+l exec loginctl lock-session
 
     # Font for window title bars
     font pango:Fira Mono 8

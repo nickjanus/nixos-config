@@ -60,24 +60,22 @@ in {
       enable = true;
       wifi.powersave = false;
     };
-    extraHosts = ''
-      10.42.0.10 hargw bucket01.hargw
-      10.42.0.10 hargwwebsite bucket01.hargwwebsite
-    '';
   };
 
   hardware = {
     bluetooth.enable = false;
-    pulseaudio = {
-      enable = true;
-        support32Bit = true;
-    };
+    firmware = [
+      pkgs.sof-firmware
+    ];
 
     # Enable gpu support
     opengl.extraPackages = with pkgs;[ vaapiIntel ];
   };
 
   services = lib.recursiveUpdate baseServices {
-    # TODO port libinput settings over to sway config
+  };
+
+  programs = {
+    light.enable = true;
   };
 }

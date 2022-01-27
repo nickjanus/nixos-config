@@ -7,9 +7,17 @@
 let
   parameters = import ./parameters.nix;
 
+  security.rtkit.enable = true;
   baseServices = {
+    dbus.enable = true;
     locate.enable = true;
     timesyncd.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
   basePackages = with pkgs; [
@@ -23,6 +31,7 @@ let
     google-chrome
     cmus
     direnv
+    dust # du alternative
     efibootmgr
     efivar
     file
@@ -30,11 +39,12 @@ let
     fwupd
     fzf
     git
+    glances # system pane of glass
     gnumake
     gnupg
     gnupg1compat
-    go
     gptfdisk
+    gtop
     htop
     imagemagick7
     jq
@@ -50,10 +60,12 @@ let
     sysstat
     teensy-loader-cli
     terraform
+    tldr # man page-like examples
     tmux
     tree
     unzip
     wget
+    yq
     zoxide
     (
       pkgs.writeTextFile {
@@ -135,6 +147,7 @@ in {
 
   # List services that you want to enable:
   programs = {
+    corectrl.enable = true;
     ssh.forwardX11 = false;
     ssh.startAgent = true;
     fish = {
@@ -153,8 +166,9 @@ in {
       '';
       shellAbbrs = {
         ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
-        nas-up = "wol a8:a1:59:08:45:e0";
         grab = "grim -g (slurp)";
+        xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
+
         # Work
         vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
         vpndown = "sudo kill -s INT (pgrep openconnect)";
@@ -166,6 +180,7 @@ in {
         bemenu
         kanshi # autorandr replacement
         kitty
+        gnome3.adwaita-icon-theme # icons for various applications
         grim # screen cap
         i3status
         light
@@ -180,6 +195,9 @@ in {
       ];
     };
   };
+
+  # enable screensharing in sway
+  xdg.portal.enable = true;
 
   systemd = {
     user = {
@@ -205,7 +223,7 @@ in {
           serviceConfig = {
             Type = "simple";
             ExecStart = ''
-              ${pkgs.dbus}/bin/dbus-run-session ${pkgs.sway}/bin/sway --debug
+              ${pkgs.sway}/bin/sway --debug
             '';
             Restart = "on-failure";
             RestartSec = 1;
@@ -233,6 +251,7 @@ in {
     home = "/home/nick";
     description = "Nick Janus";
     extraGroups = [ 
+      "corectrl"
       "docker"
       "networkmanager"
       "video"
@@ -249,5 +268,5 @@ in {
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "21.05";
+  system.stateVersion = "21.11";
 }

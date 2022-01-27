@@ -58,7 +58,13 @@ pkgs.neovim.override {
       " go
       autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
+      " yaml
+      autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
       filetype plugin on    " Enable filetype-specific plugins
+
+      " indentLine
+      let g:indentLine_char = '⦙'
 
       " vim-colors-solarized
       set background=light
@@ -128,6 +134,7 @@ pkgs.neovim.override {
           "fugitive"
           "fzf-vim"
           "fzfWrapper"
+          "indentLine"
           "surround"
           "Solarized"
           "syntastic"

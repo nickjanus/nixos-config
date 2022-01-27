@@ -3,6 +3,7 @@
 let
   unstable = import <unstable> {}; # use unstable channel
   kolide = pkgs.callPackage ./work/kolide.nix {};
+  sentinelone = pkgs.callPackage ./work/sentinelone.nix {};
 in {
   boot = {
     kernelModules = [ "kvm-intel" "thinkpad_acpi" "thinkpad_hwmon" ];
@@ -20,7 +21,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     ansible
-    awscli
+    awscli2
     bluez # bluetoothctl
     brightnessctl
     confd
@@ -34,6 +35,7 @@ in {
     gimp
     git-crypt
     glide
+    unstable.go_1_17
     grepcidr
     krita
     libwacom
@@ -58,7 +60,9 @@ in {
     xorg.xdpyinfo
     zoom-us
 
+    # work packages
     kolide
+    sentinelone
   ] ++ basePackages;
 
 
@@ -66,6 +70,7 @@ in {
     hostName = "janusWork";
     networkmanager = {
       enable = true;
+      wifi.powersave = false;
     };
     extraHosts = ''
       10.42.0.10 hargw bucket01.hargw
@@ -80,11 +85,6 @@ in {
 
   hardware = {
     bluetooth.enable = true;
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      package = pkgs.pulseaudioFull;
-    };
     firmware = [
       pkgs.sof-firmware
     ];
@@ -112,4 +112,13 @@ in {
       RestartSec = 1;
     };
   };
+
+  users.extraUsers.sentinelone = {
+    description = "User for sentinelone";
+    isNormalUser = true;
+    shell = "${pkgs.coreutils}/bin/true";
+  };
+  users.groups.sentinelone.members = [
+    "sentinelone"
+  ];
 }

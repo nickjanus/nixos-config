@@ -1,4 +1,4 @@
-{ stdenv, autoPatchelfHook, dpkg, zlib }:
+{ stdenv, lib, autoPatchelfHook, dpkg, zlib }:
 let
 
   src = ./kolide_launcher.deb;
@@ -31,11 +31,11 @@ in stdenv.mkDerivation {
     sed -i "#autoupdate#d" $out/etc/kolide-k2/launcher.flags
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Kolide Launcher";
     homepage = https://www.kolide.com/launcher/;
     license = licenses.mit;
-    maintainers = with stdenv.lib.maintainers; [ ];
+    maintainers = with lib.maintainers; [ ];
     platforms = [ "x86_64-linux" ];
   };
 }
