@@ -95,5 +95,6 @@
     xorg.xrandr
   ] ++ basePackages;
 
+  system.stateVersion = "21.11";
 }
 

@@ -41,4 +41,5 @@
     rustc
   ] ++ basePackages;
 
+  system.stateVersion = "21.05";
 }

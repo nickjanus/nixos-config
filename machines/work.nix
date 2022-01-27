@@ -121,4 +121,6 @@ in {
   users.groups.sentinelone.members = [
     "sentinelone"
   ];
+
+  system.stateVersion = "21.05";
 }
