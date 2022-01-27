@@ -65,6 +65,7 @@ in {
     useDHCP = false;
     wireless.enable = false;
     interfaces.enp5s0.useDHCP = true;
+    interfaces.enp7s0.useDHCP = true;
     firewall = {
       allowedTCPPorts = [
         22
