@@ -4,7 +4,7 @@ let
   unstable = import <unstable> {}; # use unstable channel
 in {
   imports = [
-    ./dynamic-dns.nix
+    ../dynamic-dns.nix
   ];
 
   boot = {
