@@ -78,4 +78,6 @@ in {
   programs = {
     light.enable = true;
   };
+
+  system.stateVersion = "21.05";
 }
