@@ -124,7 +124,7 @@ in {
     enable = true;
     conf = ''
       {
-        "apikey": ${parameters.do_api_token},
+        "apikey": "${parameters.do_api_token}",
         "doPageSize": 20,
         "useIPv4": true,
         "useIPv6": false,
