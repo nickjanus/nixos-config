@@ -10,7 +10,6 @@ let
   security.rtkit.enable = true;
   baseServices = {
     dbus.enable = true;
-    locate.enable = true;
     timesyncd.enable = true;
     pipewire = {
       enable = true;
@@ -246,7 +245,6 @@ in {
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.nick = {
     home = "/home/nick";
     description = "Nick Janus";
@@ -258,6 +256,11 @@ in {
       "wheel"
     ];
     isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFYFRUEBS2XeaW6sgNhbguZ3500VhdDoiQFUWH0PFkbX nickjanus@janusX1"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDArVbqOscUP0BaduqIRpUdOGYkByV7cCoSWDTxOYq7j nick@winbox"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFOJR+pJwtAch8btM5dVsbybQrH/lYCg8AWoYhQvNIk nick@nondesignated.com"
+    ];
     uid = 1000;
   };
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
