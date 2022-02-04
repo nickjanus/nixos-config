@@ -63,6 +63,7 @@ let
     tmux
     tree
     unzip
+    vlc
     wget
     yq
     zoxide
