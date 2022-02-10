@@ -42,6 +42,10 @@
   programs.steam.enable = true;
 
   services = lib.recursiveUpdate baseServices {
+    printing = {
+      enable = true;
+      drivers = [ pkgs.foo2zjs ];
+    };
     zfs = {
       autoScrub = {
         enable = true;
