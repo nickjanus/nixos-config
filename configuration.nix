@@ -252,7 +252,9 @@ in {
     extraGroups = [ 
       "corectrl"
       "docker"
+      "lp"
       "networkmanager"
+      "scanner"
       "video"
       "wheel"
     ];

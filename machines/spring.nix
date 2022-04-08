@@ -37,6 +37,7 @@
   hardware = {
     bluetooth.enable = true;
     opengl.driSupport32Bit = true; # lutris support
+    sane.enable = true;
   };
 
   programs.steam.enable = true;
@@ -89,6 +90,7 @@
     ccextractor # used by makemkv
     discord
     gcc
+    gnome.simple-scan
     lshw
     lutris
     makemkv
