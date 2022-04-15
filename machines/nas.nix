@@ -19,10 +19,10 @@ in {
     };
   };
 
-  docker-containers = {
+  virtualisation.oci-containers.containers = {
     pihole = {
       image = "pihole/pihole:latest";
-      extraDockerOptions = [
+      extraOptions = [
         "--dns=127.0.0.1"
         "--dns=1.1.1.1"
         "--hostname=pi.hole"
@@ -37,8 +37,8 @@ in {
       ports = [
         "53:53/tcp"
         "53:53/udp"
-        "80:80"
-        "443:443"
+        "8090:80"
+        "8091:443"
       ];
       volumes = [
         "/opt/pihole/pihole/:/etc/pihole/"
