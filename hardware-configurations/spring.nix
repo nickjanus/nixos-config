@@ -31,6 +31,11 @@
       options = [ "zfsutil" ];
     };
 
+  fileSystems."/home/nick/nfs" =
+    { device = "192.168.1.2:/tank/encrypted/spring";
+      fsType = "nfs";
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4763-C9B8";
       fsType = "vfat";
