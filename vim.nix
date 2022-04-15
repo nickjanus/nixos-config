@@ -67,7 +67,7 @@ pkgs.neovim.override {
       let g:indentLine_char = '⦙'
 
       " vim-colors-solarized
-      set background=light
+      set background=dark
       colorscheme solarized
 
       " Those types
