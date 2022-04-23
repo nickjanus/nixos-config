@@ -31,7 +31,7 @@
       options = [ "zfsutil" ];
     };
 
-  fileSystems."/home/nick/nfs" =
+  fileSystems."/home/nick/nas" =
     { device = "192.168.1.2:/tank/encrypted/spring";
       fsType = "nfs";
     };
