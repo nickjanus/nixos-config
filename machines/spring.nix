@@ -2,7 +2,8 @@
 
 {
   # zfs things
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = pkgs.linuxZFS;
+  boot.extraModulePackages = [ pkgs.hid-fanatecff ];
   boot.kernelParams = [ "nohibernate" ];
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "0df78d94";
@@ -24,13 +25,6 @@
   networking.hostName = "spring"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
   networking.interfaces.enp56s0.useDHCP = true;
   networking.interfaces.enp58s0.useDHCP = true;
 
@@ -47,6 +41,7 @@
       enable = true;
       drivers = [ pkgs.foo2zjs ];
     };
+    udev.packages = [ pkgs.hid-fanatecff ];
     zfs = {
       autoScrub = {
         enable = true;
@@ -63,7 +58,7 @@
   ];
 
   nixpkgs.overlays = [
-    (self: super: 
+    (self: super:
       let
         unstable = import <unstable> {};
       in {
@@ -81,6 +76,20 @@
         };
       }
     )
+    (self: super:
+      let
+        kernel = config.boot.zfs.package.latestCompatibleLinuxPackages.kernel;
+      in {
+      linuxZFS = pkgs.linuxPackagesFor (kernel.override {
+        structuredExtraConfig = with lib.kernel; {
+          LEDS_CLASS = yes;
+        };
+        ignoreConfigErrors = true;
+      });
+    })
+    (self: super: {
+      hid-fanatecff = pkgs.callPackage ../hid-fanatecff.nix { kernelPackages = pkgs.linuxZFS; };
+    })
   ];
  
 
@@ -88,13 +97,14 @@
     abcde
     cargo
     ccextractor # used by makemkv
+    cntr # used with breakpointHook
     discord
     gcc
     gnome.simple-scan
     lshw
     lutris
     makemkv
-    minigalaxy
+    #minigalaxy #TODO remove from unstable
     pciutils
     rustc
     usbutils
