@@ -21,7 +21,6 @@ let
 
   basePackages = with pkgs; [
     ack
-    ag
     bat
     bc
     bind
@@ -30,7 +29,6 @@ let
     google-chrome
     cmus
     direnv
-    dust # du alternative
     efibootmgr
     efivar
     file
@@ -55,6 +53,7 @@ let
     pavucontrol
     s3cmd
     screen
+    silver-searcher
     spotify
     sysstat
     teensy-loader-cli
