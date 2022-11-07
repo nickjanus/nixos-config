@@ -21,6 +21,7 @@
   ];
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = true;
 
   networking.hostName = "spring"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -34,9 +35,13 @@
     sane.enable = true;
   };
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
 
   services = lib.recursiveUpdate baseServices {
+    fwupd.enable = true;
     printing = {
       enable = true;
       drivers = [ pkgs.foo2zjs ];
