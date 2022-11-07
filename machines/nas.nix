@@ -66,7 +66,7 @@ in {
 
           vendorSha256 = "1ygsmkzflx84wv35sc8s4dm7acslwydgg1f0dcbhcx9jcjvpnvw8";
 
-          runVend = true;
+          proxyVend = true;
 
           meta = with lib; {
             description = "Dynamic DNS client that uses DigitalOcean's DNS API";
