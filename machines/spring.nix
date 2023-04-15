@@ -104,6 +104,7 @@
     ccextractor # used by makemkv
     cntr # used with breakpointHook
     discord
+    gamescope
     gcc
     gnome.simple-scan
     lshw
