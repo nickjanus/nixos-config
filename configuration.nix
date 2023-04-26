@@ -322,6 +322,7 @@ in {
             solarized
             tabular
             vim-fish
+            vim-gh-line
             vim-gitgutter
             vim-json
             vim-jinja
