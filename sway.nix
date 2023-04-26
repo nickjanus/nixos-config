@@ -96,8 +96,12 @@ let
   makoConf = import ./mako.nix{inherit pkgs;};
 in
 
-writeText "i3-config" (
+writeText "sway-config" (
   ''
+    exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
     # sets primary display for games
     exec ${xwayland}/bin/xwayland force ${xorg.xrandr}/bin/xrandr --output XWAYLAND0 --primary
 
