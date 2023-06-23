@@ -7,6 +7,32 @@
 let
   parameters = import ./parameters.nix;
 
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text = let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'Dracula'
+      '';
+  };
+
   security.rtkit.enable = true;
   baseServices = {
     dbus.enable = true;
@@ -29,6 +55,7 @@ let
     google-chrome
     cmus
     direnv
+    dpkg
     efibootmgr
     efivar
     file
@@ -45,11 +72,14 @@ let
     htop
     imagemagick7
     jq
+    libnotify
     lsof
     neovim
     nfs-utils
+    nix-index
     openssh
     parted
+    patchelf
     pavucontrol
     s3cmd
     screen
@@ -74,8 +104,6 @@ let
         text = ''
           #! /usr/bin/env bash
 
-          # first import environment variables from the login manager
-          systemctl --user import-environment
           # then start the service
           exec systemctl --user start sway.service
         '';
@@ -137,6 +165,7 @@ in {
     etc = {
       "sway/config".source = import ./sway.nix { inherit config; inherit pkgs; inherit parameters; };
       "fish/functions/fish_user_key_bindings.fish".source = ./fish_functions/fish_user_key_bindings.fish;
+      "environment".source = ./etc-environment;
     };
   };
 
@@ -336,7 +365,12 @@ in {
   };
 
   # enable screensharing in sway
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   systemd = {
     user = {
