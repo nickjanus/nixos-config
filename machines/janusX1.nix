@@ -24,7 +24,7 @@ in {
     confd
     cmake
     discord
-    unstable.docker_compose
+    docker-compose
     etcd
     gimp
     git-crypt
@@ -33,7 +33,7 @@ in {
     krita
     libwacom
     mtr
-    mysql57
+    mysql
     nmap
     networkmanager
     networkmanagerapplet

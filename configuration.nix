@@ -58,6 +58,7 @@ let
     dpkg
     efibootmgr
     efivar
+    exa
     file
     firefox
     fwupd
@@ -192,10 +193,7 @@ in {
         ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
         grab = "grim -g (slurp)";
         xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
-
-        # Work
-        vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
-        vpndown = "sudo kill -s INT (pgrep openconnect)";
+        ls = "exa --group-directories-first --color=auto";
       };
     };
     sway = {
@@ -351,6 +349,7 @@ in {
             solarized
             tabular
             vim-fish
+            vim-gh-line
             vim-gitgutter
             vim-json
             vim-jinja
