@@ -105,6 +105,9 @@ let
         text = ''
           #! /usr/bin/env bash
 
+          # first import environment variables from the login manager
+          systemctl --user import-environment DISPLAY WAYLAND_DISPLAY PATH
+
           # then start the service
           exec systemctl --user start sway.service
         '';
@@ -215,6 +218,7 @@ in {
         wl-clipboard
         xwayland
       ];
+      wrapperFeatures.gtk = true;
     };
     neovim = {
       enable = true;
