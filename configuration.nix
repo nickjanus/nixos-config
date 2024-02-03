@@ -58,7 +58,7 @@ let
     dpkg
     efibootmgr
     efivar
-    exa
+    eza
     file
     firefox
     fwupd
@@ -95,6 +95,7 @@ let
     unzip
     vlc
     wget
+    xxd
     yq
     zoxide
     (
@@ -136,7 +137,7 @@ in {
   fonts = {
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
@@ -196,7 +197,7 @@ in {
         ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
         grab = "grim -g (slurp)";
         xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
-        ls = "exa --group-directories-first --color=auto";
+        ls = "eza --group-directories-first --color=auto";
       };
     };
     sway = {
