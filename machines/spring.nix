@@ -2,8 +2,6 @@
 
 {
   # zfs things
-  boot.kernelPackages = pkgs.linuxZFS;
-  boot.extraModulePackages = [ pkgs.hid-fanatecff ];
   boot.kernelParams = [ "nohibernate" ];
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "0df78d94";
@@ -57,7 +55,6 @@
       enable = true;
       drivers = [ pkgs.foo2zjs ];
     };
-    udev.packages = [ pkgs.hid-fanatecff ];
     zfs = {
       autoScrub = {
         enable = true;
@@ -73,55 +70,18 @@
     "steam-runtime"
   ];
 
-  nixpkgs.overlays = [
-    (self: super:
-      let
-        unstable = import <unstable> {};
-      in {
-        minigalaxy = super.pkgs.symlinkJoin {
-          name = "patched minigalaxy";
-          paths = [
-            unstable.minigalaxy
-          ];
-          buildInputs = [
-            pkgs.makeWrapper
-          ];
-          postBuild = ''
-            wrapProgram $out/bin/minigalaxy --prefix PATH : ${lib.makeBinPath [ super.pkgs.wine ]}
-          '';
-        };
-      }
-    )
-    (self: super:
-      let
-        kernel = config.boot.zfs.package.latestCompatibleLinuxPackages.kernel;
-      in {
-      linuxZFS = pkgs.linuxPackagesFor (kernel.override {
-        structuredExtraConfig = with lib.kernel; {
-          LEDS_CLASS = yes;
-        };
-        ignoreConfigErrors = true;
-      });
-    })
-    (self: super: {
-      hid-fanatecff = pkgs.callPackage ../hid-fanatecff.nix { kernelPackages = pkgs.linuxZFS; };
-    })
-  ];
- 
-
   environment.systemPackages = with pkgs; [
     abcde
     cargo
-    ccextractor # used by makemkv
+    # ccextractor # used by makemkv
     cntr # used with breakpointHook
     discord
     gamescope
     gcc
-    gnome.simple-scan
+    simple-scan
     lshw
     lutris
     makemkv
-    #minigalaxy #TODO remove from unstable
     pciutils
     protontricks
     rustc
