@@ -150,6 +150,8 @@ in {
   };
 
   services = lib.recursiveUpdate baseServices {
+    nfs.server.enable = true;
+    openssh.enable = true;
     # Disable writeback cache for hdds
     udev = {
       extraRules = ''
@@ -167,8 +169,6 @@ in {
       autoSnapshot.enable = false;
       trim.enable = false; # autotrim is enabled
     };
-    nfs.server.enable = true;
-    openssh.enable = true;
   };
 
   system.stateVersion = "21.05";
