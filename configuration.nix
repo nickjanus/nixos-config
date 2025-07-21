@@ -36,6 +36,7 @@ let
   security.rtkit.enable = true;
   baseServices = {
     dbus.enable = true;
+    ddccontrol.enable = true;
     timesyncd.enable = true;
     pipewire = {
       enable = true;
@@ -71,7 +72,7 @@ let
     gptfdisk
     gtop
     htop
-    imagemagick7
+    imagemagick
     jq
     libnotify
     lsof
@@ -82,6 +83,7 @@ let
     parted
     patchelf
     pavucontrol
+    p7zip
     s3cmd
     screen
     silver-searcher
@@ -198,6 +200,8 @@ in {
         grab = "grim -g (slurp)";
         xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
         ls = "eza --group-directories-first --color=auto";
+        pair_airpods = "bluetoothctl connect 38:C4:3A:13:7D:39";
+        pair_shure = "bluetoothctl connect 00:0E:DD:73:71:6E";
       };
     };
     sway = {
@@ -206,7 +210,7 @@ in {
         bemenu
         kanshi # autorandr replacement
         kitty
-        gnome3.adwaita-icon-theme # icons for various applications
+        gnome.adwaita-icon-theme # icons for various applications
         grim # screen cap
         i3status
         light
@@ -380,7 +384,7 @@ in {
     user = {
       targets = {
         sway-session = {
-          description = "Sway compositor session";
+          description = "sway compositor session";
           documentation = [ "man:systemd.special(7)" ];
           bindsTo = [ "graphical-session.target" ];
           wants = [ "graphical-session-pre.target" ];

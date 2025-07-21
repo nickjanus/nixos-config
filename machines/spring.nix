@@ -32,11 +32,23 @@
     bluetooth.enable = true;
     opengl.driSupport32Bit = true; # lutris support
     sane.enable = true;
+    xpadneo.enable = true;
   };
 
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
+    gamescopeSession = {
+      enable = true;
+      args = [
+        "-H 3840"
+        "-W 2160"
+        "-h 1920"
+        "-w 1080"
+        "-S integer"
+        "-r 120"
+      ];
+    };
   };
 
   services = lib.recursiveUpdate baseServices {
@@ -111,6 +123,7 @@
     makemkv
     #minigalaxy #TODO remove from unstable
     pciutils
+    protontricks
     rustc
     usbutils
     waypipe
