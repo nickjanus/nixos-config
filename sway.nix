@@ -96,8 +96,16 @@ let
   makoConf = import ./mako.nix{inherit pkgs;};
 in
 
-writeText "i3-config" (
+writeText "sway-config" (
   ''
+    # for shorter gtk+ application startup https://llandy3d.github.io/sway-on-ubuntu/extra/
+    exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    exec hash dbus-update-activation-environment 2>/dev/null && \
+      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+    exec dbus-sway-environment
+    exec configure-gtk
+
     # sets primary display for games
     exec ${xwayland}/bin/xwayland force ${xorg.xrandr}/bin/xrandr --output XWAYLAND0 --primary
 
@@ -110,12 +118,19 @@ writeText "i3-config" (
     for_window [class=".*"] inhibit_idle fullscreen
     for_window [app_id=".*"] inhibit_idle fullscreen
 
+    # makes firefox window behave more normally
+    for_window [title="\ -\ Sharing\ Indicator$"] floating enable, sticky enable
+
     exec swayidle -w \
-      timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-      timeout 900 'swaylock -f -c 000000' \
+      timeout 600 'swaylock -f -c 000000' resume 'swaymsg "output * dpms on"' \
       timeout 1200 'systemctl suspend' \
       before-sleep 'swaylock -f -c 000000' \
+      after-resume 'swaymsg "output * dpms on"' \
       lock 'swaylock -f -c 000000'
+
+    # enable 10 Bit Color
+    exec swaymsg output DP-1 render_bit_depth 10
+    exec swaymsg output DP-3 render_bit_depth 10
 
     # screen lock alt+shift+l
     bindsym --release $mod+Ctrl+l exec loginctl lock-session
@@ -275,6 +290,7 @@ writeText "i3-config" (
     # Start i3bar to display a workspace bar (plus the system information i3status
     # finds out, if available)
     bar {
+            mode hide
             font pango:Fira Mono 9
             status_command ${i3status}/bin/i3status -c ${
               writeText "i3status-config" i3StatusBarConfig

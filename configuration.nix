@@ -7,9 +7,36 @@
 let
   parameters = import ./parameters.nix;
 
+  dbus-sway-environment = pkgs.writeTextFile {
+    name = "dbus-sway-environment";
+    destination = "/bin/dbus-sway-environment";
+    executable = true;
+
+    text = ''
+      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+    '';
+  };
+
+  configure-gtk = pkgs.writeTextFile {
+    name = "configure-gtk";
+    destination = "/bin/configure-gtk";
+    executable = true;
+    text = let
+      schema = pkgs.gsettings-desktop-schemas;
+      datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+    in ''
+      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'Dracula'
+      '';
+  };
+
   security.rtkit.enable = true;
   baseServices = {
     dbus.enable = true;
+    ddccontrol.enable = true;
     timesyncd.enable = true;
     pipewire = {
       enable = true;
@@ -29,8 +56,10 @@ let
     google-chrome
     cmus
     direnv
+    dpkg
     efibootmgr
     efivar
+    eza
     file
     firefox
     fwupd
@@ -43,14 +72,18 @@ let
     gptfdisk
     gtop
     htop
-    imagemagick7
+    imagemagick
     jq
+    libnotify
     lsof
     neovim
     nfs-utils
+    nix-index
     openssh
     parted
+    patchelf
     pavucontrol
+    p7zip
     s3cmd
     screen
     silver-searcher
@@ -64,6 +97,7 @@ let
     unzip
     vlc
     wget
+    xxd
     yq
     zoxide
     (
@@ -75,7 +109,8 @@ let
           #! /usr/bin/env bash
 
           # first import environment variables from the login manager
-          systemctl --user import-environment
+          systemctl --user import-environment DISPLAY WAYLAND_DISPLAY PATH
+
           # then start the service
           exec systemctl --user start sway.service
         '';
@@ -104,7 +139,7 @@ in {
   fonts = {
     fontDir.enable = true;
     enableGhostscriptFonts = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       corefonts  # Micrsoft free fonts
       fira # monospaced
       inconsolata  # monospaced
@@ -131,16 +166,13 @@ in {
     allowUnfree = true;
     permittedInsecurePackages = [
    ];
-
-    packageOverrides = pkgs: rec {
-      neovim = (import ./vim.nix);
-    };
   };
 
   environment = {
     etc = {
       "sway/config".source = import ./sway.nix { inherit config; inherit pkgs; inherit parameters; };
       "fish/functions/fish_user_key_bindings.fish".source = ./fish_functions/fish_user_key_bindings.fish;
+      "environment".source = ./etc-environment;
     };
   };
 
@@ -167,10 +199,9 @@ in {
         ergodox-update = "sudo teensy-loader-cli --mcu=atmega32u4 -v -w";
         grab = "grim -g (slurp)";
         xprimary = "xrandr --output (xrandr --listactivemonitors | grep 2560 | cut -f 6 -d ' ') --primary";
-
-        # Work
-        vpnup = "sudo openconnect --background --protocol=gp -b -u njanus --csd-wrapper ${pkgs.openconnect}/libexec/openconnect/hipreport.sh https://vpn-nyc3.digitalocean.com/ssl-vpn";
-        vpndown = "sudo kill -s INT (pgrep openconnect)";
+        ls = "eza --group-directories-first --color=auto";
+        pair_airpods = "bluetoothctl connect 38:C4:3A:13:7D:39";
+        pair_shure = "bluetoothctl connect 00:0E:DD:73:71:6E";
       };
     };
     sway = {
@@ -179,7 +210,7 @@ in {
         bemenu
         kanshi # autorandr replacement
         kitty
-        gnome3.adwaita-icon-theme # icons for various applications
+        gnome.adwaita-icon-theme # icons for various applications
         grim # screen cap
         i3status
         light
@@ -192,17 +223,168 @@ in {
         wl-clipboard
         xwayland
       ];
+      wrapperFeatures.gtk = true;
+    };
+    neovim = {
+      enable = true;
+      viAlias = true;
+      vimAlias = true;
+      configure = {
+        customRC = ''
+          syntax enable
+
+          """ My settings:
+          " tab with two spaces
+          set nobackup
+          set noswapfile
+          set tabstop=2
+          set shiftwidth=2
+          set softtabstop=2
+          set expandtab
+          set smartcase
+          set autoindent
+          set nostartofline
+          set hlsearch      " highlight search terms
+          set incsearch     " show search matches as you type
+
+          set mouse=a
+          set cmdheight=2
+
+          set wildmenu
+          set showcmd
+
+          set number
+          set cursorline
+          set ruler
+          set backspace=indent,eol,start " Allows backspace on these character
+          set clipboard=unnamedplus
+
+          set spell
+
+          " Folding
+          set foldmethod=syntax
+
+          """ Keep all folds open when a file is opened
+          augroup OpenAllFoldsOnFileOpen
+              autocmd!
+              autocmd BufRead * normal zR
+          augroup END
+
+          """ Don't open folds with block motions
+          set foldopen-=block
+
+          " Map esc to exit terminal mode
+          :tnoremap <Esc> <C-\><C-n>
+
+          " php
+          autocmd Filetype php setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
+          " ruby
+          autocmd FileType ruby compiler ruby
+
+          " go
+          autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+          " yaml
+          autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+          filetype plugin on    " Enable filetype-specific plugins
+
+          " indentLine
+          let g:indentLine_char = '⦙'
+
+          " neosolarized
+          let g:neosolarized_contrast = "normal"
+          set background=dark
+          colorscheme solarized
+
+          " Those types
+          if has("user_commands")
+            command! -bang -nargs=? -complete=file E e<bang> <args>
+            command! -bang -nargs=? -complete=file W w<bang> <args>
+            command! -bang -nargs=? -complete=file Wq wq<bang> <args>
+            command! -bang -nargs=? -complete=file WQ wq<bang> <args>
+            command! -bang Wa wa<bang>
+            command! -bang WA wa<bang>
+            command! -bang Q q<bang>
+            command! -bang QA qa<bang>
+            command! -bang Qa qa<bang>
+          endif
+
+          " Relative numbering
+          function! NumberToggle()
+            if(&relativenumber == 1)
+              set nornu
+              set number
+            else
+              set rnu
+            endif
+          endfunc
+
+          " Toggle between normal and relative numbering.
+          nnoremap <leader>r :call NumberToggle()<cr>
+
+          " gitgutter settings
+          let g:gitgutter_max_signs = 2000
+
+          " fzf settings
+          nnoremap <silent> <leader>f :FZF<cr>
+          nnoremap <silent> <leader>F :Lines<cr>
+          let g:fzf_colors =
+          \ { 'fg':      ['fg', 'Normal'],
+          \ 'bg':      ['bg', 'Normal'],
+          \ 'hl':      ['fg', 'Comment'],
+          \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+          \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+          \ 'hl+':     ['fg', 'Statement'],
+          \ 'info':    ['fg', 'PreProc'],
+          \ 'prompt':  ['fg', 'Conditional'],
+          \ 'pointer': ['fg', 'Exception'],
+          \ 'marker':  ['fg', 'Keyword'],
+          \ 'spinner': ['fg', 'Label'],
+          \ 'header':  ['fg', 'Comment'] }
+
+          " Clean up artifacts in neovim, see https://github.com/neovim/neovim/issues/5990
+          let $VTE_VERSION="100"
+        '';
+        packages.myVimPackage = with pkgs.vimPlugins; {
+          start = [ 
+            ale
+            fugitive
+            fzf-vim
+            fzfWrapper
+            indentLine
+            NeoSolarized
+            solarized
+            tabular
+            vim-fish
+            vim-gh-line
+            vim-gitgutter
+            vim-json
+            vim-jinja
+            vim-nix
+            vim-go
+            zoxide-vim
+          ];
+        };
+
+      };
     };
   };
 
   # enable screensharing in sway
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   systemd = {
     user = {
       targets = {
         sway-session = {
-          description = "Sway compositor session";
+          description = "sway compositor session";
           documentation = [ "man:systemd.special(7)" ];
           bindsTo = [ "graphical-session.target" ];
           wants = [ "graphical-session-pre.target" ];
@@ -222,7 +404,7 @@ in {
           serviceConfig = {
             Type = "simple";
             ExecStart = ''
-              ${pkgs.sway}/bin/sway --debug
+              ${pkgs.sway}/bin/sway
             '';
             Restart = "on-failure";
             RestartSec = 1;

@@ -1,3 +1,4 @@
 hardware-configuration.nix
 parameters.nix
 result
+*.deb

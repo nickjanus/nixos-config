@@ -10,7 +10,6 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.zfsSupport = true;
   boot.loader.grub.copyKernels = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -21,6 +20,7 @@
   ];
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = true;
 
   networking.hostName = "spring"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -32,11 +32,27 @@
     bluetooth.enable = true;
     opengl.driSupport32Bit = true; # lutris support
     sane.enable = true;
+    xpadneo.enable = true;
   };
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    gamescopeSession = {
+      enable = true;
+      args = [
+        "-H 3840"
+        "-W 2160"
+        "-h 1920"
+        "-w 1080"
+        "-S integer"
+        "-r 120"
+      ];
+    };
+  };
 
   services = lib.recursiveUpdate baseServices {
+    fwupd.enable = true;
     printing = {
       enable = true;
       drivers = [ pkgs.foo2zjs ];
@@ -99,6 +115,7 @@
     ccextractor # used by makemkv
     cntr # used with breakpointHook
     discord
+    gamescope
     gcc
     gnome.simple-scan
     lshw
@@ -106,9 +123,12 @@
     makemkv
     #minigalaxy #TODO remove from unstable
     pciutils
+    protontricks
     rustc
     usbutils
-    xorg.xrandr
+    waypipe
+    xorg.xrandr # used by gaming shortcut
+    zoom
   ] ++ basePackages;
 
   system.stateVersion = "21.11";

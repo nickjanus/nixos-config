@@ -1,0 +1,4 @@
+# Firefox use wayland
+MOZ_ENABLE_WAYLAND DEFAULT=1
+# make firefox aware of wayland instance when launched from x11
+MOZ_DBUS_REMOTE DEFAULT=1
