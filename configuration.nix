@@ -210,7 +210,7 @@ in {
         bemenu
         kanshi # autorandr replacement
         kitty
-        gnome.adwaita-icon-theme # icons for various applications
+        adwaita-icon-theme # icons for various applications
         grim # screen cap
         i3status
         light
