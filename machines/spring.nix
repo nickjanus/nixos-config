@@ -78,6 +78,7 @@
     discord
     gamescope
     gcc
+    handbrake
     simple-scan
     lshw
     lutris
